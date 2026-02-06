@@ -92,9 +92,9 @@
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
+            width: 65px;
+            height: 65px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -105,6 +105,17 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        /* Waving animation */
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
         }
 
         .logo h1 {
@@ -263,64 +274,6 @@
             justify-content: center;
         }
 
-        /* Multi-Platform Toggle */
-        .multi-platform-section {
-            background: linear-gradient(135deg, rgba(0, 145, 226, 0.08) 0%, rgba(0, 128, 96, 0.08) 100%);
-            border: 1px solid rgba(0, 145, 226, 0.3);
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 24px;
-        }
-
-        .multi-platform-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .multi-platform-header h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--info);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .multi-platform-grid {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .multi-platform-chip {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .multi-platform-chip:hover {
-            border-color: var(--info);
-        }
-
-        .multi-platform-chip.selected {
-            background: var(--info);
-            color: white;
-            border-color: var(--info);
-        }
-
-        .multi-platform-chip input {
-            display: none;
-        }
 
         /* Search Card */
         .search-card {
@@ -366,8 +319,27 @@
         }
 
         .form-label .help-icon {
-            cursor: help;
-            opacity: 0.5;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+        }
+
+        .form-label .help-icon:hover {
+            opacity: 1;
+        }
+
+        /* Multi-select dropdown */
+        select[multiple] {
+            min-height: 100px;
+        }
+
+        select[multiple] option {
+            padding: 8px 12px;
+        }
+
+        select[multiple] option:checked {
+            background: linear-gradient(0deg, var(--primary) 0%, var(--primary) 100%);
+            color: white;
         }
 
         .form-input, .form-select {
@@ -561,6 +533,157 @@
             font-weight: 500;
             text-decoration: underline;
             margin-left: 4px;
+        }
+
+        /* GitHub Filters */
+        .github-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .github-filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+        }
+
+        .github-filter-option:hover {
+            border-color: var(--github);
+        }
+
+        .github-filter-option input[type="checkbox"] {
+            accent-color: var(--github);
+            width: 16px;
+            height: 16px;
+        }
+
+        .github-filter-option input[type="checkbox"]:checked + span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Seniority Chips */
+        .seniority-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .seniority-chip {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .seniority-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .seniority-chip.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Candidate Signals Section */
+        .signals-section {
+            background: linear-gradient(135deg, rgba(0, 145, 226, 0.08) 0%, rgba(0, 128, 96, 0.08) 100%);
+            border: 1px solid rgba(0, 145, 226, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .signals-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .signals-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--info);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signals-badge {
+            background: var(--info);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .signals-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            margin-top: 12px;
+        }
+
+        .signals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .signal-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .signal-option:hover {
+            border-color: var(--info);
+        }
+
+        .signal-option.selected {
+            border-color: var(--info);
+            background: rgba(0, 145, 226, 0.1);
+        }
+
+        .signal-checkbox {
+            margin-top: 2px;
+            accent-color: var(--info);
+        }
+
+        .signal-option-content h5 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .signal-option-content p {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
         }
 
         /* Diversity Section */
@@ -797,16 +920,6 @@
             box-shadow: 0 4px 12px rgba(92, 106, 196, 0.4);
         }
 
-        .btn-multi {
-            background: linear-gradient(135deg, var(--info) 0%, var(--primary) 100%);
-            color: white;
-        }
-
-        .btn-multi:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 145, 226, 0.4);
-        }
-
         .btn-small {
             padding: 8px 14px;
             font-size: 12px;
@@ -888,30 +1001,120 @@
             border-color: var(--success);
         }
 
-        /* Multi-Platform Results */
-        .multi-results {
-            margin-top: 16px;
-        }
-
-        .multi-result-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .query-textarea {
+            width: 100%;
+            min-height: 80px;
             padding: 12px;
-            background: var(--surface-dark);
+            padding-right: 80px;
+            margin-top: 8px;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            margin-bottom: 8px;
+            resize: vertical;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .multi-result-info {
+        .query-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+        }
+
+        .query-textarea:hover {
+            border-color: var(--primary-light);
+        }
+
+        .query-edit-hint {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
         }
 
-        .multi-result-platform {
-            font-weight: 600;
+        .query-edit-hint svg {
+            opacity: 0.7;
+        }
+
+        /* AI Optimize Section */
+        .ai-optimize-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .ai-optimize-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .ai-optimized-result {
+            margin-top: 16px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(92, 106, 196, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 1px solid rgba(92, 106, 196, 0.2);
+            border-radius: 10px;
+        }
+
+        .ai-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .ai-result-header h4 {
             font-size: 14px;
+            font-weight: 600;
+            color: #5C6AC4;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .ai-optimized-query {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            word-break: break-word;
+            margin-bottom: 12px;
+        }
+
+        .ai-explanation {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .ai-explanation strong {
+            color: var(--text-primary);
+        }
+
+        .btn-ai.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .btn-ai.loading svg {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Suggestions Panel */
@@ -920,7 +1123,7 @@
             border: 1px solid rgba(92, 106, 196, 0.2);
             border-radius: 10px;
             padding: 16px;
-            margin-top: 16px;
+            margin-bottom: 24px;
         }
 
         .suggestions-panel h4 {
@@ -1000,6 +1203,67 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+        }
+
+        .tone-btn.ai-tone {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tone-btn.ai-tone:hover {
+            background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+            transform: translateY(-1px);
+        }
+
+        .ai-email-options {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .ai-email-options.hidden {
+            display: none;
+        }
+
+        .ai-email-options .form-label {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .ai-email-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .ai-email-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ai-email-options .btn-ai {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .ai-email-options .btn-ai:hover {
+            background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+        }
+
+        .ai-email-options .btn-ai.loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
 
         .email-template {
@@ -1192,9 +1456,14 @@
         }
 
         .modal-header img {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 80px;
+            height: 80px;
+            border-radius: 14px;
+        }
+
+        .modal-overlay.visible .modal-header img {
+            animation: wave 1.5s ease-in-out;
+            transform-origin: 70% 70%;
         }
 
         .modal-header h2 {
@@ -1229,6 +1498,110 @@
 
         .modal-body {
             padding: 28px;
+        }
+
+        .guide-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .guide-divider::before,
+        .guide-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .guide-divider span {
+            padding: 0 12px;
+        }
+
+        /* Boolean Section in Guide */
+        .guide-boolean-section {
+            background: linear-gradient(135deg, rgba(216, 44, 13, 0.05) 0%, rgba(255, 184, 0, 0.05) 100%);
+            border: 1px solid rgba(216, 44, 13, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 8px;
+        }
+
+        .guide-boolean-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .guide-boolean-header h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D82C0D;
+            margin: 0;
+        }
+
+        .guide-boolean-intro {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .guide-boolean-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .guide-boolean-item {
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .guide-boolean-item code {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .guide-boolean-item span {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .guide-boolean-example {
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+        }
+
+        .guide-boolean-example strong {
+            color: var(--text-primary);
+        }
+
+        .guide-boolean-example code {
+            display: block;
+            margin-top: 6px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        @media (max-width: 500px) {
+            .guide-boolean-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .guide-step {
@@ -1446,6 +1819,8 @@
             }
         }
     </style>
+    <!-- Quick Client for Database -->
+    <script src="/client/quick.js"></script>
 </head>
 <body>
     <header class="header">
@@ -1504,60 +1879,13 @@
                 <button class="template-btn" onclick="loadTemplate('devops')">
                     <span class="emoji">☁️</span> DevOps / SRE
                 </button>
+                <button class="template-btn" onclick="loadTemplate('data-engineer')">
+                    <span class="emoji">🔧</span> Data Engineer
+                </button>
             </div>
         </div>
 
-        <!-- Multi-Platform Search -->
-        <div class="multi-platform-section">
-            <div class="multi-platform-header">
-                <h4>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7"/>
-                        <rect x="14" y="3" width="7" height="7"/>
-                        <rect x="14" y="14" width="7" height="7"/>
-                        <rect x="3" y="14" width="7" height="7"/>
-                    </svg>
-                    Multi-Platform Search
-                </h4>
-                <span style="font-size: 12px; color: var(--text-secondary);">Select multiple platforms to search at once</span>
-            </div>
-            <div class="multi-platform-grid">
-                <label class="multi-platform-chip selected" onclick="toggleMultiPlatform(this, 'linkedin')">
-                    <input type="checkbox" checked value="linkedin">
-                    🔗 LinkedIn
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'github')">
-                    <input type="checkbox" value="github">
-                    🐙 GitHub
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'stackoverflow')">
-                    <input type="checkbox" value="stackoverflow">
-                    📚 Stack Overflow
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'twitter')">
-                    <input type="checkbox" value="twitter">
-                    🐦 X / Twitter
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'scholar')">
-                    <input type="checkbox" value="scholar">
-                    🎓 Google Scholar
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'dribbble')">
-                    <input type="checkbox" value="dribbble">
-                    🏀 Dribbble
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'behance')">
-                    <input type="checkbox" value="behance">
-                    🎨 Behance
-                </label>
-                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'kaggle')">
-                    <input type="checkbox" value="kaggle">
-                    📊 Kaggle
-                </label>
-            </div>
-        </div>
-
-        <!-- Platform Selection (Single) -->
+        <!-- Platform Selection -->
         <div class="platform-tabs">
             <button class="platform-tab linkedin active" data-platform="linkedin">
                 <div class="platform-icon">
@@ -1637,9 +1965,25 @@
                 <div class="form-group">
                     <label class="form-label">
                         Job Title / Role
-                        <span class="help-icon" title="Enter the job title you're looking for">ℹ️</span>
+                        <span class="help-icon" onclick="showFieldHelp('jobTitle')" title="Click for tips">ℹ️</span>
                     </label>
                     <input type="text" class="form-input" id="jobTitle" placeholder="e.g., Software Engineer, Product Manager" oninput="updateSearchTips()">
+                </div>
+
+                <!-- Seniority Level -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Seniority Level
+                        <span class="help-icon" onclick="showFieldHelp('seniority')" title="Click for tips">ℹ️</span>
+                    </label>
+                    <div class="seniority-chips" id="seniorityChips">
+                        <button type="button" class="seniority-chip" data-level="entry" onclick="toggleSeniority(this)">Entry/Junior</button>
+                        <button type="button" class="seniority-chip" data-level="mid" onclick="toggleSeniority(this)">Mid-Level</button>
+                        <button type="button" class="seniority-chip selected" data-level="senior" onclick="toggleSeniority(this)">Senior</button>
+                        <button type="button" class="seniority-chip" data-level="staff" onclick="toggleSeniority(this)">Staff</button>
+                        <button type="button" class="seniority-chip" data-level="principal" onclick="toggleSeniority(this)">Principal</button>
+                        <button type="button" class="seniority-chip" data-level="director" onclick="toggleSeniority(this)">Director+</button>
+                    </div>
                 </div>
 
                 <!-- Location -->
@@ -1648,21 +1992,20 @@
                     <input type="text" class="form-input" id="location" placeholder="e.g., San Francisco, Toronto, Remote" oninput="updateSearchTips()">
                 </div>
 
-                <!-- Country (LinkedIn) -->
-                <div class="form-group linkedin-field">
-                    <label class="form-label">Country</label>
-                    <select class="form-select" id="country">
-                        <option value="">All Countries</option>
-                        <option value="us">United States</option>
-                        <option value="ca" selected>Canada</option>
-                        <option value="uk">United Kingdom</option>
-                        <option value="de">Germany</option>
-                        <option value="fr">France</option>
-                        <option value="au">Australia</option>
-                        <option value="in">India</option>
-                        <option value="sg">Singapore</option>
-                        <option value="nl">Netherlands</option>
-                        <option value="ie">Ireland</option>
+                <!-- Country (All Platforms) -->
+                <div class="form-group">
+                    <label class="form-label">Country (Ctrl/Cmd+click for multiple)</label>
+                    <select class="form-select" id="country" multiple size="4">
+                        <option value="ca" selected>🇨🇦 Canada</option>
+                        <option value="us">🇺🇸 United States</option>
+                        <option value="uk">🇬🇧 United Kingdom</option>
+                        <option value="de">🇩🇪 Germany</option>
+                        <option value="fr">🇫🇷 France</option>
+                        <option value="au">🇦🇺 Australia</option>
+                        <option value="in">🇮🇳 India</option>
+                        <option value="sg">🇸🇬 Singapore</option>
+                        <option value="nl">🇳🇱 Netherlands</option>
+                        <option value="ie">🇮🇪 Ireland</option>
                     </select>
                 </div>
 
@@ -1687,6 +2030,21 @@
                 <div class="form-group github-field kaggle-field hidden">
                     <label class="form-label">Programming Languages / Skills</label>
                     <input type="text" class="form-input" id="skills" placeholder="e.g., Python, React, Kubernetes">
+                </div>
+
+                <!-- GitHub-specific: Hireable Filter -->
+                <div class="form-group github-field hidden">
+                    <label class="form-label">GitHub Profile Filters</label>
+                    <div class="github-filters">
+                        <label class="github-filter-option">
+                            <input type="checkbox" id="githubHireable" checked>
+                            <span>🟢 Hireable (has "available for hire" enabled)</span>
+                        </label>
+                        <label class="github-filter-option">
+                            <input type="checkbox" id="githubActiveContributor">
+                            <span>📊 Active (10+ repos, 5+ followers)</span>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Research Area (Scholar) -->
@@ -1793,6 +2151,72 @@
                 </div>
             </div>
 
+            <!-- Candidate Signals Section -->
+            <div class="signals-section">
+                <div class="signals-header" onclick="toggleSignalsSection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        Candidate Activity Signals
+                        <span class="signals-badge">NEW</span>
+                    </h4>
+                    <svg class="collapse-icon" id="signalsIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="signalsContent">
+                    <p class="signals-description">
+                        Find candidates showing signs of being open to new opportunities (passive vs active signals).
+                    </p>
+                    <div class="signals-grid">
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="open_to_work" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>🟢 Open to Work</h5>
+                                <p>LinkedIn "Open to Work" badge, actively looking</p>
+                            </div>
+                        </label>
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="recent_change" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>🔄 Recent Job Change</h5>
+                                <p>Changed roles in last 6-18 months (may be open again)</p>
+                            </div>
+                        </label>
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="speaker" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>🎤 Conference Speaker</h5>
+                                <p>Speaks at conferences, high visibility talent</p>
+                            </div>
+                        </label>
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="content_creator" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>✍️ Content Creator</h5>
+                                <p>Writes blogs, creates videos, thought leadership</p>
+                            </div>
+                        </label>
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="open_source" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>🔓 Open Source Contributor</h5>
+                                <p>Active GitHub contributions, maintainer</p>
+                            </div>
+                        </label>
+                        <label class="signal-option" onclick="toggleSignalOption(this)">
+                            <input type="checkbox" value="layoff" class="signal-checkbox">
+                            <div class="signal-option-content">
+                                <h5>📋 Recently Laid Off</h5>
+                                <p>Affected by recent tech layoffs, actively seeking</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <!-- Diversity Sourcing Section -->
             <div class="diversity-section">
                 <div class="diversity-header" onclick="toggleDiversitySection()">
@@ -1876,15 +2300,6 @@
                     </svg>
                     Generate Search
                 </button>
-                <button class="btn btn-multi" id="multiSearchBtn" onclick="openMultiPlatformSearch()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7"/>
-                        <rect x="14" y="3" width="7" height="7"/>
-                        <rect x="14" y="14" width="7" height="7"/>
-                        <rect x="3" y="14" width="7" height="7"/>
-                    </svg>
-                    Search All Platforms
-                </button>
                 <button class="btn btn-ai" id="aiSuggest" onclick="getAISuggestions()">
                     AI Suggestions
                 </button>
@@ -1929,25 +2344,58 @@
                     </svg>
                     Copy
                 </button>
-                <span id="queryText"></span>
-            </div>
-
-            <!-- Multi-Platform Results -->
-            <div class="multi-results hidden" id="multiResults">
-                <h4 style="margin: 16px 0 12px; font-size: 14px;">Open in Multiple Platforms:</h4>
-                <div id="multiResultsList"></div>
-            </div>
-
-            <!-- AI Suggestions -->
-            <div class="suggestions-panel hidden" id="suggestionsPanel">
-                <h4>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <textarea id="queryText" class="query-textarea" rows="4" oninput="updateCurrentQuery(this.value)" placeholder="Your search query will appear here..."></textarea>
+                <p class="query-edit-hint">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
                     </svg>
-                    AI-Suggested Similar Titles (click to add)
-                </h4>
-                <div class="suggestion-chips" id="suggestionChips"></div>
+                    You can edit this query before opening
+                </p>
             </div>
+
+            <!-- AI Optimize Button -->
+            <div class="ai-optimize-section">
+                <button class="btn btn-ai" onclick="optimizeQueryWithAI()" id="aiOptimizeBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span id="aiOptimizeBtnText">AI Optimize Query</span>
+                </button>
+                <span class="ai-optimize-hint">Let AI analyze and improve your search</span>
+            </div>
+
+            <!-- AI Optimized Result -->
+            <div class="ai-optimized-result hidden" id="aiOptimizedResult">
+                <div class="ai-result-header">
+                    <h4>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        AI-Optimized Query
+                    </h4>
+                    <button class="btn btn-primary btn-small" onclick="useOptimizedQuery()">
+                        Use This Query
+                    </button>
+                </div>
+                <div class="ai-optimized-query" id="aiOptimizedQuery"></div>
+                <div class="ai-explanation" id="aiExplanation"></div>
+            </div>
+        </div>
+
+        <!-- AI Suggestions -->
+        <div class="suggestions-panel hidden" id="suggestionsPanel">
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                AI-Suggested Similar Titles (click to add)
+            </h4>
+            <div class="suggestion-chips" id="suggestionChips"></div>
         </div>
 
         <!-- Email Generator -->
@@ -1964,6 +2412,35 @@
                 <button class="tone-btn" data-tone="casual" onclick="setEmailTone('casual')">Casual</button>
                 <button class="tone-btn" data-tone="enthusiastic" onclick="setEmailTone('enthusiastic')">Enthusiastic</button>
                 <button class="tone-btn" data-tone="concise" onclick="setEmailTone('concise')">Concise</button>
+                <button class="tone-btn ai-tone" data-tone="ai" onclick="generateAIEmail()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    AI Generate
+                </button>
+            </div>
+            <div class="ai-email-options hidden" id="aiEmailOptions">
+                <label class="form-label">Customize AI Email (optional)</label>
+                <div class="ai-email-inputs">
+                    <input type="text" class="form-input" id="candidateName" placeholder="Candidate's name (optional)">
+                    <input type="text" class="form-input" id="specificSkill" placeholder="Specific skill to mention (optional)">
+                    <select class="form-select" id="aiEmailTone">
+                        <option value="professional">Professional tone</option>
+                        <option value="friendly">Friendly tone</option>
+                        <option value="enthusiastic">Enthusiastic tone</option>
+                        <option value="brief">Brief & direct</option>
+                    </select>
+                </div>
+                <button class="btn btn-ai btn-small" onclick="generateAIEmailWithOptions()" id="aiEmailBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span id="aiEmailBtnText">Generate with AI</span>
+                </button>
             </div>
             <div class="email-template" id="emailTemplate"></div>
             <div class="email-actions">
@@ -2039,7 +2516,7 @@
 
     <footer class="footer">
         <p>Built with 💚 for Shopify Hiring Managers | Hosted on <a href="https://quick.shopify.io" target="_blank">Quick</a></p>
-        <p style="margin-top: 8px;">Need help? Reach out in <a href="https://shopify.slack.com/archives/C0962U5ENF8" target="_blank">#quick</a></p>
+        <p style="margin-top: 8px;">Need help? Reach out to your recruiter</p>
     </footer>
 
     <!-- How to Use Guide Modal -->
@@ -2056,11 +2533,59 @@
                 <button class="modal-close" onclick="closeGuide()">&times;</button>
             </div>
             <div class="modal-body">
+                <!-- Boolean Cheat Sheet - IMPORTANT -->
+                <div class="guide-boolean-section">
+                    <div class="guide-boolean-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D82C0D" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <h4>Master Boolean Search - It's Essential!</h4>
+                    </div>
+                    <p class="guide-boolean-intro">Boolean operators are the foundation of effective sourcing. Without them, your searches won't find the right candidates. Learn these basics:</p>
+                    
+                    <div class="guide-boolean-grid">
+                        <div class="guide-boolean-item">
+                            <code>"exact phrase"</code>
+                            <span>Search for exact words together</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>OR</code>
+                            <span>Match either term (more results)</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>AND</code>
+                            <span>Must contain both terms</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>-exclude</code>
+                            <span>Remove unwanted results</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>(grouping)</code>
+                            <span>Group terms together</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>site:linkedin.com/in/</code>
+                            <span>X-Ray search LinkedIn</span>
+                        </div>
+                    </div>
+
+                    <div class="guide-boolean-example">
+                        <strong>Example:</strong> <code>site:linkedin.com/in/ ("Software Engineer" OR "Developer") AND Python -recruiter</code>
+                    </div>
+                </div>
+
+                <div class="guide-divider">
+                    <span>How to use this tool</span>
+                </div>
+
                 <div class="guide-step">
                     <div class="step-number">1</div>
                     <div class="step-content">
-                        <h4>Choose Your Platform(s)</h4>
-                        <p>Select where you want to search for candidates. Use the <strong>Multi-Platform Search</strong> section to search multiple sites at once, or click individual platform tabs for a focused search.</p>
+                        <h4>Choose Your Platform</h4>
+                        <p>Select where you want to search for candidates using the platform tabs. Each platform is optimized for different types of roles.</p>
                         <div class="tip">💡 LinkedIn is great for most roles. Try GitHub for developers and Dribbble/Behance for designers.</div>
                     </div>
                 </div>
@@ -2094,7 +2619,7 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <h4>Generate & Search</h4>
-                        <p>Click <strong>Generate Search</strong> to create your boolean query, then <strong>Open in Google</strong> to see results. Use <strong>Search All Platforms</strong> to open multiple tabs at once.</p>
+                        <p>Click <strong>Generate Search</strong> to create your boolean query, then <strong>Open in Google</strong> to see results. You can switch platforms using the tabs at the top.</p>
                     </div>
                 </div>
 
@@ -2144,7 +2669,7 @@
         // State
         let currentPlatform = 'linkedin';
         let currentQuery = '';
-        let savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
+        let savedSearches = [];
         let selectedSimilarTitles = [];
         let searchCount = parseInt(localStorage.getItem('talentScoutSearchCount') || '0');
         let isDarkMode = localStorage.getItem('talentScoutDarkMode') === 'true';
@@ -2152,6 +2677,38 @@
         let currentJobTitle = '';
         let selectedCompanyLists = [];
         let selectedCompanies = [];
+
+        // Quick Database for shared saved searches
+        let searchesDB = null;
+        
+        async function initDatabase() {
+            try {
+                if (typeof quick !== 'undefined' && quick.db) {
+                    searchesDB = quick.db.collection('saved_searches');
+                    await loadSavedSearches();
+                } else {
+                    // Fallback to localStorage if not on Quick
+                    savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
+                    renderSavedSearches();
+                }
+            } catch (error) {
+                console.error('Database init error:', error);
+                savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
+                renderSavedSearches();
+            }
+        }
+
+        async function loadSavedSearches() {
+            try {
+                if (searchesDB) {
+                    const results = await searchesDB.find();
+                    savedSearches = results.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    renderSavedSearches();
+                }
+            } catch (error) {
+                console.error('Load searches error:', error);
+            }
+        }
 
         // Company lists
         const companyLists = {
@@ -2163,18 +2720,47 @@
             'ai': ['OpenAI', 'Anthropic', 'Cohere', 'Scale AI', 'Hugging Face', 'Stability AI', 'Midjourney', 'Runway']
         };
 
+
+        // Seniority level prefixes for boolean search
+        const seniorityPrefixes = {
+            'entry': ['Junior', 'Entry', 'Associate', 'I ', ' I"', 'New Grad'],
+            'mid': ['Mid', 'II ', ' II"', 'Level 2', 'Intermediate'],
+            'senior': ['Senior', 'Sr', 'III', 'Lead', 'Level 3'],
+            'staff': ['Staff', 'IV', 'Level 4', 'Principal'],
+            'principal': ['Principal', 'Distinguished', 'V ', 'Fellow', 'Architect'],
+            'director': ['Director', 'VP', 'Vice President', 'Head of', 'Chief', 'CTO', 'CIO', 'CDO']
+        };
+
+        // Candidate activity signals for sourcing
+        const candidateSignals = {
+            'open_to_work': ['"open to work"', '"looking for"', '"seeking"', '"available for"', '"open to opportunities"', '#opentowork'],
+            'recent_change': ['"started new position"', '"joined"', '"new role"', '"excited to announce"', '"just started"'],
+            'speaker': ['"speaker"', '"keynote"', '"conference"', '"presented at"', '"panelist"', '"tech talk"', 'TEDx'],
+            'content_creator': ['"blog"', '"author"', '"writes about"', '"newsletter"', '"YouTube"', '"podcast"', '"technical writing"'],
+            'open_source': ['"open source"', '"maintainer"', '"contributor"', '"GitHub"', '"OSS"', '"Apache"', '"CNCF"'],
+            'layoff': ['"laid off"', '"affected by layoffs"', '"looking for next"', '#opentowork', '"recently departed"', '"exploring opportunities"']
+        };
+
+        let selectedSeniorityLevels = ['senior'];
+        let selectedSignals = [];
+
         // Job title synonyms database
         const jobTitleSynonyms = {
-            'software engineer': ['software developer', 'programmer', 'full stack developer', 'backend engineer', 'frontend engineer', 'web developer', 'full-stack engineer'],
-            'product manager': ['product owner', 'pm', 'product lead', 'product director', 'technical product manager', 'senior product manager'],
-            'data scientist': ['machine learning engineer', 'ml engineer', 'data analyst', 'ai engineer', 'research scientist', 'applied scientist'],
-            'designer': ['ux designer', 'ui designer', 'product designer', 'visual designer', 'interaction designer', 'ux/ui designer', 'senior designer'],
-            'devops': ['site reliability engineer', 'sre', 'platform engineer', 'infrastructure engineer', 'cloud engineer', 'devops engineer'],
-            'engineering manager': ['engineering lead', 'tech lead', 'development manager', 'software engineering manager', 'eng manager', 'director of engineering'],
-            'data engineer': ['data platform engineer', 'analytics engineer', 'etl developer', 'big data engineer', 'senior data engineer'],
-            'security engineer': ['cybersecurity engineer', 'infosec engineer', 'application security engineer', 'security analyst', 'appsec engineer'],
-            'mobile developer': ['ios developer', 'android developer', 'mobile engineer', 'react native developer', 'flutter developer', 'swift developer'],
-            'qa engineer': ['quality assurance engineer', 'test engineer', 'sdet', 'automation engineer', 'quality engineer', 'test automation engineer']
+            'software engineer': ['software developer', 'programmer', 'full stack developer', 'backend engineer', 'frontend engineer', 'web developer', 'full-stack engineer', 'senior software engineer', 'staff software engineer', 'principal engineer', 'platform engineer'],
+            'product manager': ['product owner', 'pm', 'product lead', 'product director', 'technical product manager', 'senior product manager', 'group product manager', 'principal product manager'],
+            'data scientist': ['machine learning engineer', 'ml engineer', 'data analyst', 'ai engineer', 'research scientist', 'applied scientist', 'senior data scientist', 'staff data scientist', 'product data scientist'],
+            'designer': ['ux designer', 'ui designer', 'product designer', 'visual designer', 'interaction designer', 'ux/ui designer', 'senior designer', 'staff designer', 'design lead'],
+            'devops': ['site reliability engineer', 'sre', 'platform engineer', 'infrastructure engineer', 'cloud engineer', 'devops engineer', 'senior devops engineer', 'staff sre'],
+            'engineering manager': ['engineering lead', 'tech lead', 'development manager', 'software engineering manager', 'eng manager', 'director of engineering', 'senior engineering manager', 'vp engineering'],
+            'data engineer': ['data platform engineer', 'analytics engineer', 'etl developer', 'big data engineer', 'senior data engineer', 'staff data engineer', 'data infrastructure engineer'],
+            'security engineer': ['cybersecurity engineer', 'infosec engineer', 'application security engineer', 'security analyst', 'appsec engineer', 'senior security engineer', 'staff security engineer'],
+            'mobile developer': ['ios developer', 'android developer', 'mobile engineer', 'react native developer', 'flutter developer', 'swift developer', 'senior mobile engineer', 'staff mobile engineer'],
+            'qa engineer': ['quality assurance engineer', 'test engineer', 'sdet', 'automation engineer', 'quality engineer', 'test automation engineer', 'senior qa engineer'],
+            'frontend': ['frontend engineer', 'frontend developer', 'ui developer', 'react developer', 'vue developer', 'javascript developer', 'senior frontend engineer'],
+            'backend': ['backend engineer', 'backend developer', 'server engineer', 'api developer', 'senior backend engineer', 'staff backend engineer'],
+            'recruiter': ['talent acquisition', 'technical recruiter', 'sourcer', 'recruiting coordinator', 'talent partner', 'senior recruiter'],
+            'product analyst': ['business analyst', 'data analyst', 'analytics manager', 'senior product analyst', 'insights analyst'],
+            'technical writer': ['documentation engineer', 'content developer', 'docs writer', 'senior technical writer']
         };
 
         // Diversity search terms
@@ -2230,12 +2816,31 @@ Shopify`
 
         // Templates
         const templates = {
-            'software-engineer': { jobTitle: 'Software Engineer', location: 'Toronto', includeKeywords: 'Ruby, Python, React', excludeKeywords: 'recruiter, HR' },
+            'software-engineer': { 
+                jobTitle: 'Software Engineer', 
+                location: 'Toronto', 
+                includeKeywords: 'Ruby, Python, Go, React, microservices', 
+                excludeKeywords: 'recruiter, HR',
+                customQuery: 'site:linkedin.com/in/ ("Software Engineer" OR "Senior Software Engineer" OR "Staff Software Engineer" OR "Backend Engineer" OR "Full Stack Engineer" OR "Platform Engineer") AND (Ruby OR Python OR Go OR Java OR "Ruby on Rails" OR React) AND ("system design" OR "microservices" OR "distributed systems" OR "scalable systems" OR architecture) AND (SaaS OR "e-commerce" OR fintech OR "tech company") AND ("cross-functional" OR "product development" OR mentorship OR "technical leadership")'
+            },
             'product-manager': { jobTitle: 'Product Manager', location: 'Toronto', includeKeywords: 'SaaS, B2B, e-commerce', excludeKeywords: 'recruiter, sales' },
             'designer': { jobTitle: 'Product Designer', location: 'Toronto', includeKeywords: 'Figma, user research, design systems', excludeKeywords: 'graphic design, print' },
-            'data-scientist': { jobTitle: 'Data Scientist', location: 'Toronto', includeKeywords: 'Python, machine learning, SQL', excludeKeywords: 'recruiter, intern' },
+            'data-scientist': { 
+                jobTitle: 'Data Scientist', 
+                location: 'Toronto', 
+                includeKeywords: 'Python, SQL, experimentation, A/B testing, product analytics', 
+                excludeKeywords: 'recruiter, intern',
+                customQuery: 'site:linkedin.com/in/ ("Data Scientist" OR "Product Data Scientist" OR "Senior Data Scientist" OR "Staff Data Scientist" OR "Product Analytics") AND (Python OR SQL) AND (experimentation OR "A/B testing" OR "product analytics" OR "metrics" OR "KPI") AND ("data storytelling" OR "stakeholder" OR "business impact" OR "product development") AND (e-commerce OR SaaS OR "tech company" OR fintech OR marketplace)'
+            },
             'engineering-manager': { jobTitle: 'Engineering Manager', location: 'Toronto', includeKeywords: 'leadership, agile, team', excludeKeywords: 'recruiter, consultant' },
-            'devops': { jobTitle: 'DevOps Engineer', location: 'Toronto', includeKeywords: 'Kubernetes, AWS, CI/CD', excludeKeywords: 'recruiter, junior' }
+            'devops': { jobTitle: 'DevOps Engineer', location: 'Toronto', includeKeywords: 'Kubernetes, AWS, CI/CD', excludeKeywords: 'recruiter, junior' },
+            'data-engineer': { 
+                jobTitle: 'Data Engineer', 
+                location: 'Toronto', 
+                includeKeywords: 'SQL, Python, dbt, BigQuery, Snowflake, Airflow', 
+                excludeKeywords: 'recruiter, intern',
+                customQuery: 'site:linkedin.com/in/ ("Data Engineer" OR "Analytics Engineer" OR "Analytical Engineer" OR "BI Engineer" OR "Data Platform Engineer") AND (SQL AND Python) AND (dbt OR "data modeling" OR "dimensional modeling" OR "data transformation") AND (BigQuery OR Snowflake OR Redshift OR "data warehouse") AND (Airflow OR Composer OR "data pipeline" OR orchestration) AND ("data architecture" OR "Star Schema" OR Kimball OR "data quality" OR governance)'
+            }
         };
 
         const countryCodes = { 'us': 'United States', 'ca': 'Canada', 'uk': 'United Kingdom', 'de': 'Germany', 'fr': 'France', 'au': 'Australia', 'in': 'India', 'sg': 'Singapore', 'nl': 'Netherlands', 'ie': 'Ireland' };
@@ -2294,8 +2899,7 @@ Shopify`
         }
 
         // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSavedSearches();
+        document.addEventListener('DOMContentLoaded', async () => {
             setupPlatformTabs();
             updateStats();
             if (isDarkMode) {
@@ -2303,6 +2907,8 @@ Shopify`
                 updateDarkModeIcon();
             }
             checkFirstVisit();
+            // Initialize database and load saved searches
+            await initDatabase();
         });
 
         function setupPlatformTabs() {
@@ -2324,16 +2930,6 @@ Shopify`
 
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('emailSection').classList.add('hidden');
-        }
-
-        function toggleMultiPlatform(element, platform) {
-            element.classList.toggle('selected');
-        }
-
-        function getSelectedMultiPlatforms() {
-            const selected = [];
-            document.querySelectorAll('.multi-platform-chip input:checked').forEach(input => selected.push(input.value));
-            return selected;
         }
 
         function toggleCompanyList(element, listName) {
@@ -2424,7 +3020,19 @@ Shopify`
             document.getElementById('includeKeywords').value = template.includeKeywords || '';
             document.getElementById('excludeKeywords').value = template.excludeKeywords || '';
             updateSearchTips();
-            generateSearch();
+            
+            // Use custom query if available, otherwise generate normally
+            if (template.customQuery) {
+                currentJobTitle = template.jobTitle || '';
+                currentQuery = template.customQuery;
+                displayQuery(currentQuery);
+                generateEmailTemplate();
+                searchCount++;
+                localStorage.setItem('talentScoutSearchCount', searchCount.toString());
+                updateStats();
+            } else {
+                generateSearch();
+            }
         }
 
         function getSelectedDiversityTerms() {
@@ -2440,34 +3048,247 @@ Shopify`
             element.classList.toggle('selected');
         }
 
+        function toggleSeniority(element) {
+            const level = element.dataset.level;
+            element.classList.toggle('selected');
+            
+            if (element.classList.contains('selected')) {
+                if (!selectedSeniorityLevels.includes(level)) {
+                    selectedSeniorityLevels.push(level);
+                }
+            } else {
+                selectedSeniorityLevels = selectedSeniorityLevels.filter(l => l !== level);
+            }
+            updateSearchTips();
+        }
+
+        function toggleSignalsSection() {
+            const content = document.getElementById('signalsContent');
+            const icon = document.getElementById('signalsIcon');
+            content.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+
+        function toggleSignalOption(element) {
+            element.classList.toggle('selected');
+            const checkbox = element.querySelector('.signal-checkbox');
+            const value = checkbox.value;
+            
+            if (element.classList.contains('selected')) {
+                checkbox.checked = true;
+                if (!selectedSignals.includes(value)) {
+                    selectedSignals.push(value);
+                }
+            } else {
+                checkbox.checked = false;
+                selectedSignals = selectedSignals.filter(s => s !== value);
+            }
+        }
+
+        function getSelectedSignalTerms() {
+            const terms = [];
+            selectedSignals.forEach(signal => {
+                if (candidateSignals[signal]) {
+                    terms.push(...candidateSignals[signal]);
+                }
+            });
+            return terms;
+        }
+
+        // Specialized GitHub search builder - uses GitHub's native search, not Google X-Ray
+        // GitHub's search is much more effective at finding developer profiles
+        function buildGitHubQuery(jobTitle, location, skills, includeKeywords, excludeKeywords) {
+            // Build GitHub native search query using their search qualifiers
+            // See: https://docs.github.com/en/search-github/searching-on-github/searching-users
+            let queryParts = [];
+            queryParts.push('type:user'); // Only search for users, not orgs
+            
+            // Add hireable filter if checked
+            const githubHireable = document.getElementById('githubHireable')?.checked;
+            if (githubHireable) {
+                queryParts.push('is:hireable');
+            }
+            
+            // Add programming languages/skills using GitHub's language qualifier
+            if (skills) {
+                const skillList = skills.split(',').map(s => s.trim()).filter(s => s);
+                // GitHub supports language: qualifier for user's repo languages
+                skillList.forEach(skill => {
+                    queryParts.push(`language:${skill.replace(/\s+/g, '-')}`);
+                });
+            }
+            
+            // Add location using GitHub's location qualifier
+            if (location) {
+                queryParts.push(`location:"${location}"`);
+            }
+            
+            // Handle countries - use location qualifier
+            const countrySelect = document.getElementById('country');
+            const selectedCountries = Array.from(countrySelect.selectedOptions).map(opt => opt.value);
+            if (selectedCountries.length > 0 && !location) {
+                // Only add country if no specific location
+                const countryNames = selectedCountries
+                    .filter(c => countryCodes[c])
+                    .map(c => countryCodes[c]);
+                if (countryNames.length === 1) {
+                    queryParts.push(`location:"${countryNames[0]}"`);
+                } else if (countryNames.length > 1) {
+                    // GitHub search doesn't support OR for location, use first one
+                    queryParts.push(`location:"${countryNames[0]}"`);
+                }
+            }
+            
+            // Add job title / bio keywords using fullname or general search
+            if (jobTitle) {
+                // GitHub searches user bio, name, and readme with plain text
+                queryParts.push(`"${jobTitle}"`);
+            }
+            
+            // Add include keywords to search bio/readme
+            if (includeKeywords) {
+                const keywords = includeKeywords.split(',').map(k => k.trim()).filter(k => k);
+                keywords.forEach(kw => {
+                    queryParts.push(`"${kw}"`);
+                });
+            }
+            
+            // Add repos qualifier based on activity preference
+            const githubActiveContributor = document.getElementById('githubActiveContributor')?.checked;
+            if (githubActiveContributor) {
+                queryParts.push('repos:>10'); // Users with more than 10 repos
+                queryParts.push('followers:>5'); // With some followers
+            }
+            
+            // Add selected companies to search (company field or bio)
+            if (selectedCompanies.length > 0) {
+                // Take first company for GitHub search
+                queryParts.push(`"${selectedCompanies[0]}"`);
+            }
+            
+            const query = queryParts.join(' ');
+            
+            // Store the GitHub-native query for display, but we'll generate a special URL
+            return query;
+        }
+        
+        // Check if current platform uses native search (not Google)
+        function usesNativeSearch(platform) {
+            return platform === 'github';
+        }
+        
+        // Get the native search URL for platforms that support it
+        function getNativeSearchUrl(platform, query) {
+            if (platform === 'github') {
+                // GitHub's native user search URL
+                return `https://github.com/search?q=${encodeURIComponent(query)}&type=users`;
+            }
+            return null;
+        }
+
         function buildQuery(platform) {
             const jobTitle = document.getElementById('jobTitle').value.trim();
             const location = document.getElementById('location').value.trim();
             const includeKeywords = document.getElementById('includeKeywords').value.trim();
             const excludeKeywords = document.getElementById('excludeKeywords').value.trim();
+            const skills = document.getElementById('skills').value.trim();
+
+            // Special handling for GitHub to find developer profiles like Octohunt
+            if (platform === 'github') {
+                return buildGitHubQuery(jobTitle, location, skills, includeKeywords, excludeKeywords);
+            }
 
             let query = platformSites[platform] || platformSites['linkedin'];
 
             if (jobTitle) {
-                let titles = [`"${jobTitle}"`];
-                if (platform === 'linkedin' && document.getElementById('includeSimilar').checked) {
+                let titles = [];
+                const baseTitle = jobTitle;
+                
+                // Apply seniority level prefixes
+                if (selectedSeniorityLevels.length > 0) {
+                    selectedSeniorityLevels.forEach(level => {
+                        const prefixes = seniorityPrefixes[level] || [];
+                        // Add the base title with seniority prefixes
+                        if (level === 'mid') {
+                            // Mid-level often doesn't have a prefix, just the title
+                            titles.push(`"${baseTitle}"`);
+                        }
+                        prefixes.forEach(prefix => {
+                            // Handle prefixes that go before vs after
+                            if (prefix.endsWith(' ')) {
+                                titles.push(`"${prefix}${baseTitle}"`);
+                            } else if (prefix.startsWith(' ')) {
+                                titles.push(`"${baseTitle}${prefix}"`);
+                            } else {
+                                titles.push(`"${prefix} ${baseTitle}"`);
+                            }
+                        });
+                    });
+                } else {
+                    titles.push(`"${baseTitle}"`);
+                }
+                
+                if (document.getElementById('includeSimilar').checked) {
                     const lowerTitle = jobTitle.toLowerCase();
+                    let foundMatch = false;
+                    
+                    // Check each synonym group for matches
                     for (const [key, synonyms] of Object.entries(jobTitleSynonyms)) {
-                        if (lowerTitle.includes(key) || synonyms.some(s => lowerTitle.includes(s))) {
-                            synonyms.forEach(syn => { if (!titles.includes(`"${syn}"`)) titles.push(`"${syn}"`); });
+                        // Check if entered title contains the key OR key contains the entered title
+                        // Also check if any synonym matches
+                        const keyMatches = lowerTitle.includes(key) || key.includes(lowerTitle);
+                        const synonymMatches = synonyms.some(s => 
+                            lowerTitle.includes(s.toLowerCase()) || s.toLowerCase().includes(lowerTitle)
+                        );
+                        
+                        if (keyMatches || synonymMatches) {
+                            // Add the key if not already present
+                            if (!titles.includes(`"${key}"`)) titles.push(`"${key}"`);
+                            // Add all synonyms
+                            synonyms.forEach(syn => { 
+                                if (!titles.includes(`"${syn}"`)) titles.push(`"${syn}"`); 
+                            });
+                            foundMatch = true;
                             break;
                         }
                     }
+                    
+                    // If no match found, add common variations based on selected seniority
+                    if (!foundMatch && jobTitle.length > 3 && selectedSeniorityLevels.length === 0) {
+                        const variations = [
+                            `Senior ${jobTitle}`,
+                            `Staff ${jobTitle}`,
+                            `Lead ${jobTitle}`
+                        ];
+                        variations.forEach(v => {
+                            if (!titles.includes(`"${v}"`)) titles.push(`"${v}"`);
+                        });
+                    }
                 }
                 selectedSimilarTitles.forEach(title => { if (!titles.includes(`"${title}"`)) titles.push(`"${title}"`); });
+                
+                // Deduplicate titles
+                titles = [...new Set(titles)];
                 query += ' (' + titles.join(' OR ') + ')';
             }
 
             if (location) query += ` "${location}"`;
 
+            // Handle multiple countries from multi-select dropdown (all platforms)
+            const countrySelect = document.getElementById('country');
+            const selectedOptions = Array.from(countrySelect.selectedOptions).map(opt => opt.value);
+            if (selectedOptions.length > 0) {
+                const countryTerms = selectedOptions
+                    .filter(c => countryCodes[c])
+                    .map(c => `"${countryCodes[c]}"`);
+                if (countryTerms.length === 1) {
+                    query += ` ${countryTerms[0]}`;
+                } else if (countryTerms.length > 1) {
+                    query += ` (${countryTerms.join(' OR ')})`;
+                }
+            }
+
             if (platform === 'linkedin') {
-                const country = document.getElementById('country').value;
-                if (country && countryCodes[country]) query += ` "${countryCodes[country]}"`;
                 const currentEmployer = document.getElementById('currentEmployer').value.trim();
                 if (currentEmployer) {
                     const employers = currentEmployer.split(',').map(e => `"${e.trim()}"`).join(' OR ');
@@ -2475,7 +3296,7 @@ Shopify`
                 }
             }
 
-            // Add selected companies
+            // Add selected companies (from Target Companies)
             if (selectedCompanies.length > 0) {
                 const companyQuery = selectedCompanies.map(c => `"${c}"`).join(' OR ');
                 query += ` (${companyQuery})`;
@@ -2484,6 +3305,13 @@ Shopify`
             if (includeKeywords) {
                 const keywords = includeKeywords.split(',').map(k => `"${k.trim()}"`).join(' ');
                 query += ` ${keywords}`;
+            }
+
+            // Add candidate activity signals
+            const signalTerms = getSelectedSignalTerms();
+            if (signalTerms.length > 0) {
+                const signalQuery = signalTerms.join(' OR ');
+                query += ` (${signalQuery})`;
             }
 
             const diversitySelected = getSelectedDiversityTerms();
@@ -2509,73 +3337,139 @@ Shopify`
             localStorage.setItem('talentScoutSearchCount', searchCount.toString());
             updateStats();
             updateSearchTips();
+            updateOpenButton();
+        }
+        
+        function updateOpenButton() {
+            const btn = document.getElementById('openSearchBtn');
+            if (usesNativeSearch(currentPlatform)) {
+                const platformLabel = platformNames[currentPlatform] || currentPlatform;
+                btn.innerHTML = `
+                    Open in ${platformLabel}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                        <polyline points="15,3 21,3 21,9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                `;
+            } else {
+                btn.innerHTML = `
+                    Open in Google
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                        <polyline points="15,3 21,3 21,9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                `;
+            }
         }
 
-        function openMultiPlatformSearch() {
-            const platforms = getSelectedMultiPlatforms();
-            if (platforms.length === 0) {
-                alert('Please select at least one platform in the Multi-Platform Search section.');
+        // AI Query Optimization
+        let optimizedQuery = '';
+
+        async function optimizeQueryWithAI() {
+            if (!currentQuery) {
+                alert('Please generate a search query first.');
                 return;
             }
 
-            currentJobTitle = document.getElementById('jobTitle').value.trim();
+            const btn = document.getElementById('aiOptimizeBtn');
+            const btnText = document.getElementById('aiOptimizeBtnText');
             
-            // Generate queries for all selected platforms
-            const queries = {};
-            platforms.forEach(platform => {
-                queries[platform] = buildQuery(platform);
-            });
+            // Show loading state
+            btn.classList.add('loading');
+            btnText.textContent = 'Optimizing...';
 
-            // Display multi-results
-            currentQuery = queries[platforms[0]];
-            displayQuery(currentQuery);
-            
-            const multiResults = document.getElementById('multiResults');
-            const multiResultsList = document.getElementById('multiResultsList');
-            
-            multiResultsList.innerHTML = platforms.map(platform => `
-                <div class="multi-result-item">
-                    <div class="multi-result-info">
-                        <span style="font-size: 18px;">${getPlatformIcon(platform)}</span>
-                        <span class="multi-result-platform">${platformNames[platform]}</span>
-                    </div>
-                    <button class="btn btn-primary btn-small" onclick="openPlatformSearch('${platform}')">
-                        Open
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                            <polyline points="15,3 21,3 21,9"/>
-                            <line x1="10" y1="14" x2="21" y2="3"/>
-                        </svg>
-                    </button>
-                </div>
-            `).join('');
-            
-            multiResults.classList.remove('hidden');
-            generateEmailTemplate();
-            
-            searchCount++;
-            localStorage.setItem('talentScoutSearchCount', searchCount.toString());
-            updateStats();
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI not available - please deploy to Quick first');
+                }
 
-            // Open all platforms in new tabs
-            platforms.forEach((platform, index) => {
-                setTimeout(() => {
-                    const url = `https://www.google.com/search?q=${encodeURIComponent(queries[platform])}`;
-                    window.open(url, '_blank');
-                }, index * 300);
-            });
+                const jobTitle = document.getElementById('jobTitle').value.trim();
+                const platform = currentPlatform;
+
+                const prompt = `You are an expert at Boolean search queries for recruiting. 
+                
+Analyze this search query and improve it to find better candidates:
+
+Current Query: ${currentQuery}
+
+Job Title: ${jobTitle}
+Platform: ${platform}
+
+Please provide:
+1. An improved Boolean search query that will find more relevant candidates
+2. Keep the site: operator for the platform
+3. Add relevant skills, technologies, or keywords that are commonly associated with this role
+4. Use proper Boolean operators (AND, OR, NOT, quotes for exact phrases)
+5. Make sure the query is not too long (under 500 characters ideally)
+
+Respond in this exact format:
+QUERY: [your optimized query here]
+EXPLANATION: [2-3 sentences explaining what you improved]`;
+
+                const response = await quick.ai.ask(prompt);
+                
+                // Parse the response
+                const queryMatch = response.match(/QUERY:\s*(.+?)(?=EXPLANATION:|$)/s);
+                const explanationMatch = response.match(/EXPLANATION:\s*(.+)/s);
+
+                if (queryMatch) {
+                    optimizedQuery = queryMatch[1].trim();
+                    document.getElementById('aiOptimizedQuery').textContent = optimizedQuery;
+                    document.getElementById('aiExplanation').innerHTML = explanationMatch 
+                        ? `<strong>What AI improved:</strong> ${explanationMatch[1].trim()}`
+                        : '<strong>Query optimized by AI</strong>';
+                    document.getElementById('aiOptimizedResult').classList.remove('hidden');
+                } else {
+                    // If parsing fails, use the whole response as the query
+                    optimizedQuery = response.trim();
+                    document.getElementById('aiOptimizedQuery').textContent = optimizedQuery;
+                    document.getElementById('aiExplanation').innerHTML = '<strong>Query optimized by AI</strong>';
+                    document.getElementById('aiOptimizedResult').classList.remove('hidden');
+                }
+
+            } catch (error) {
+                console.error('AI optimization error:', error);
+                alert('AI optimization failed: ' + error.message);
+            } finally {
+                btn.classList.remove('loading');
+                btnText.textContent = 'AI Optimize Query';
+            }
+        }
+
+        function useOptimizedQuery() {
+            if (optimizedQuery) {
+                currentQuery = optimizedQuery;
+                document.getElementById('queryText').value = optimizedQuery;
+                document.getElementById('aiOptimizedResult').classList.add('hidden');
+                // Scroll to the query
+                document.getElementById('queryDisplay').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function openPlatformSearch(platform) {
             const query = buildQuery(platform);
-            const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            let url;
+            
+            // Use native search for platforms that support it (like GitHub)
+            if (usesNativeSearch(platform)) {
+                url = getNativeSearchUrl(platform, query);
+            } else {
+                url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            }
+            
             window.open(url, '_blank');
         }
 
         function displayQuery(query) {
-            document.getElementById('queryText').textContent = query;
+            document.getElementById('queryText').value = query;
             document.getElementById('resultsSection').classList.remove('hidden');
             document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function updateCurrentQuery(value) {
+            currentQuery = value;
         }
 
         function generateEmailTemplate() {
@@ -2596,13 +3490,96 @@ Shopify`
 
         function regenerateEmail() {
             const variations = {
-                professional: [`Dear [Candidate Name],\n\nYour profile caught my attention while researching talented ${currentJobTitle}s. At Shopify, we're constantly seeking exceptional individuals.\n\nWould you be available for a brief conversation?\n\nWarm regards,\n[Your Name]\nShopify`],
-                casual: [`Hey [Candidate Name]!\n\nJust saw your profile and thought — this person would be awesome at Shopify! Want to grab a virtual coffee?\n\n[Your Name]\nShopify`],
-                enthusiastic: [`Hi [Candidate Name]!\n\nWOW — your ${currentJobTitle} experience is incredible! I couldn't pass up the opportunity to reach out.\n\nLet's chat?\n\n[Your Name]\nShopify`],
-                concise: [`[Candidate Name],\n\nHiring ${currentJobTitle}s at Shopify. Saw your background — interested?\n\n[Your Name]`]
+                professional: [
+                    `Dear [Candidate Name],\n\nYour profile caught my attention while researching talented ${currentJobTitle}s. At Shopify, we're constantly seeking exceptional individuals.\n\nWould you be available for a brief conversation?\n\nWarm regards,\n[Your Name]\nShopify`,
+                    `Hello [Candidate Name],\n\nI hope this message finds you well. I came across your profile and was impressed by your experience as a ${currentJobTitle}.\n\nShopify is currently expanding our team, and I believe your background aligns well with our needs. Would you be open to exploring this opportunity?\n\nBest regards,\n[Your Name]\nShopify`,
+                    `Dear [Candidate Name],\n\nI'm reaching out from Shopify's Talent team. Your ${currentJobTitle} experience and career trajectory are exactly what we look for.\n\nI'd welcome the chance to discuss how your skills could contribute to our mission of making commerce better for everyone.\n\nLooking forward to connecting,\n[Your Name]\nShopify`,
+                    `Hi [Candidate Name],\n\nYour background as a ${currentJobTitle} stood out to me during my search for exceptional talent. At Shopify, we're building the future of commerce and are always looking for people like you.\n\nWould you have 15 minutes for a quick call this week?\n\nBest,\n[Your Name]\nShopify`
+                ],
+                casual: [
+                    `Hey [Candidate Name]!\n\nJust saw your profile and thought — this person would be awesome at Shopify! Want to grab a virtual coffee?\n\n[Your Name]\nShopify`,
+                    `Hi [Candidate Name]!\n\nI stumbled across your profile and had to reach out. Your ${currentJobTitle} work looks really impressive!\n\nWe're hiring at Shopify and I think you'd be a great fit. Open to chatting?\n\nCheers,\n[Your Name]\nShopify`,
+                    `Hey there!\n\nSaw your profile and got excited — your ${currentJobTitle} experience is exactly what we need at Shopify.\n\nNo pressure, but would love to tell you about what we're building. Coffee chat?\n\n[Your Name]\nShopify`,
+                    `Hi [Candidate Name]!\n\nQuick note — your background caught my eye and I think Shopify could be a great next step for you.\n\nWant to hear more? I promise to keep it brief!\n\n[Your Name]\nShopify`
+                ],
+                enthusiastic: [
+                    `Hi [Candidate Name]!\n\nWOW — your ${currentJobTitle} experience is incredible! I couldn't pass up the opportunity to reach out.\n\nLet's chat?\n\n[Your Name]\nShopify`,
+                    `Hey [Candidate Name]!\n\nI'm so excited to reach out! Your work as a ${currentJobTitle} is seriously impressive, and I immediately thought of Shopify.\n\nWe're doing amazing things here and I'd LOVE to tell you about it. Are you up for a call?\n\n[Your Name]\nShopify`,
+                    `Hi [Candidate Name]!\n\nOkay, I have to be honest — your profile made my day! Finding talented ${currentJobTitle}s like you is exactly why I love my job.\n\nShopify would be lucky to have you. Can we talk?\n\n[Your Name]\nShopify`,
+                    `[Candidate Name]!\n\nJust found your profile and I'm genuinely thrilled! Your ${currentJobTitle} journey is exactly the kind of story we love at Shopify.\n\nI'd be SO happy to share what we're working on. Interested?\n\n[Your Name]\nShopify`
+                ],
+                concise: [
+                    `[Candidate Name],\n\nHiring ${currentJobTitle}s at Shopify. Saw your background — interested?\n\n[Your Name]`,
+                    `Hi [Candidate Name],\n\nShopify. ${currentJobTitle} role. Your profile fits. Quick call?\n\n[Your Name]`,
+                    `[Candidate Name],\n\nImpressive ${currentJobTitle} background. We're hiring at Shopify. Worth a conversation?\n\n[Your Name]`,
+                    `Hi,\n\nSaw your profile. Looking for ${currentJobTitle}s at Shopify. Open to chat?\n\n[Your Name]`
+                ]
             };
             const toneVariations = variations[currentEmailTone];
-            document.getElementById('emailTemplate').textContent = toneVariations[Math.floor(Math.random() * toneVariations.length)];
+            const randomVariation = toneVariations[Math.floor(Math.random() * toneVariations.length)];
+            document.getElementById('emailTemplate').textContent = randomVariation;
+        }
+
+        // AI Email Generation
+        function generateAIEmail() {
+            // Toggle AI options panel
+            const aiOptions = document.getElementById('aiEmailOptions');
+            aiOptions.classList.toggle('hidden');
+            
+            // Deselect other tone buttons
+            document.querySelectorAll('.tone-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tone-btn.ai-tone').classList.add('active');
+        }
+
+        async function generateAIEmailWithOptions() {
+            const candidateName = document.getElementById('candidateName').value.trim() || '[Candidate Name]';
+            const specificSkill = document.getElementById('specificSkill').value.trim();
+            const tone = document.getElementById('aiEmailTone').value;
+            
+            const btn = document.getElementById('aiEmailBtn');
+            const btnText = document.getElementById('aiEmailBtnText');
+            
+            // Show loading state
+            btn.classList.add('loading');
+            btnText.textContent = 'Generating...';
+            
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI not available - please deploy to Quick first');
+                }
+                
+                const prompt = `Write a recruiting outreach email for a ${currentJobTitle} position at Shopify.
+
+Context:
+- Candidate name: ${candidateName}
+- Job title being recruited for: ${currentJobTitle}
+- Tone: ${tone}
+${specificSkill ? `- Specific skill to mention: ${specificSkill}` : ''}
+
+Requirements:
+- Keep it concise (under 150 words)
+- Be genuine and personable, not generic
+- Mention Shopify and what makes it an exciting place to work
+- Include a clear call to action
+- Use the specified tone (${tone})
+- Sign off with [Your Name] as a placeholder
+
+Write only the email, no explanations or subject lines.`;
+
+                const result = await quick.ai.ask(prompt);
+                
+                if (result && result.trim()) {
+                    document.getElementById('emailTemplate').textContent = result.trim();
+                } else {
+                    throw new Error('AI returned empty response');
+                }
+            } catch (error) {
+                console.error('AI email generation error:', error);
+                alert(error.message || 'Failed to generate AI email. Please try again.');
+            } finally {
+                btn.classList.remove('loading');
+                btnText.textContent = 'Generate with AI';
+            }
         }
 
         function copyEmail() {
@@ -2610,7 +3587,13 @@ Shopify`
         }
 
         function openSearch() {
-            window.open(`https://www.google.com/search?q=${encodeURIComponent(currentQuery)}`, '_blank');
+            let url;
+            if (usesNativeSearch(currentPlatform)) {
+                url = getNativeSearchUrl(currentPlatform, currentQuery);
+            } else {
+                url = `https://www.google.com/search?q=${encodeURIComponent(currentQuery)}`;
+            }
+            window.open(url, '_blank');
         }
 
         function copyQuery() {
@@ -2636,14 +3619,23 @@ Shopify`
                 }
             }
             if (suggestions.length === 0) {
-                if (jobTitle.includes('engineer')) suggestions = ['software engineer', 'senior engineer', 'staff engineer'];
-                else if (jobTitle.includes('developer')) suggestions = ['software developer', 'web developer', 'full stack developer'];
-                else if (jobTitle.includes('manager')) suggestions = ['engineering manager', 'product manager', 'project manager'];
+                if (jobTitle.includes('engineer')) suggestions = ['software engineer', 'senior engineer', 'staff engineer', 'principal engineer'];
+                else if (jobTitle.includes('developer')) suggestions = ['software developer', 'web developer', 'full stack developer', 'senior developer'];
+                else if (jobTitle.includes('manager')) suggestions = ['engineering manager', 'product manager', 'project manager', 'technical program manager'];
+                else if (jobTitle.includes('design')) suggestions = ['product designer', 'ux designer', 'ui designer', 'visual designer', 'senior designer'];
+                else if (jobTitle.includes('data')) suggestions = ['data scientist', 'data analyst', 'data engineer', 'analytics engineer'];
+                else if (jobTitle.includes('analyst')) suggestions = ['business analyst', 'data analyst', 'product analyst', 'systems analyst'];
+                else suggestions = ['senior ' + jobTitle, 'lead ' + jobTitle, 'staff ' + jobTitle, 'principal ' + jobTitle];
             }
             suggestions = [...new Set(suggestions)].filter(s => s.toLowerCase() !== jobTitle);
             const panel = document.getElementById('suggestionsPanel');
-            document.getElementById('suggestionChips').innerHTML = suggestions.map(s => `<button class="suggestion-chip" onclick="addSuggestion('${s}')">${s}</button>`).join('');
+            if (suggestions.length > 0) {
+                document.getElementById('suggestionChips').innerHTML = suggestions.map(s => `<button class="suggestion-chip" onclick="addSuggestion('${s}')">${s}</button>`).join('');
+            } else {
+                document.getElementById('suggestionChips').innerHTML = '<span style="color: var(--text-secondary); font-size: 13px;">No suggestions available for this title.</span>';
+            }
             panel.classList.remove('hidden');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         function addSuggestion(title) {
@@ -2673,10 +3665,34 @@ Shopify`
 
         function clearForm() {
             document.querySelectorAll('.form-input, .form-select').forEach(el => {
-                if (el.tagName === 'SELECT') el.value = el.id === 'country' ? 'ca' : '';
-                else el.value = '';
+                el.value = '';
             });
             document.getElementById('includeSimilar').checked = true;
+            
+            // Reset countries to just Canada
+            const countrySelect = document.getElementById('country');
+            Array.from(countrySelect.options).forEach(opt => {
+                opt.selected = opt.value === 'ca';
+            });
+            
+            // Reset seniority to just Senior
+            document.querySelectorAll('.seniority-chip').forEach(chip => {
+                chip.classList.toggle('selected', chip.dataset.level === 'senior');
+            });
+            selectedSeniorityLevels = ['senior'];
+            
+            // Reset GitHub filters
+            const githubHireable = document.getElementById('githubHireable');
+            const githubActiveContributor = document.getElementById('githubActiveContributor');
+            const githubHasWebsite = document.getElementById('githubHasWebsite');
+            if (githubHireable) githubHireable.checked = true;
+            if (githubActiveContributor) githubActiveContributor.checked = false;
+            if (githubHasWebsite) githubHasWebsite.checked = false;
+            
+            // Reset signals
+            document.querySelectorAll('.signal-checkbox').forEach(cb => { cb.checked = false; cb.closest('.signal-option').classList.remove('selected'); });
+            selectedSignals = [];
+            
             document.querySelectorAll('.diversity-checkbox').forEach(cb => { cb.checked = false; cb.closest('.diversity-option').classList.remove('selected'); });
             document.querySelectorAll('.company-list-card').forEach(c => c.classList.remove('selected'));
             selectedCompanyLists = [];
@@ -2686,35 +3702,92 @@ Shopify`
             updateSelectedTitles();
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('emailSection').classList.add('hidden');
+            document.getElementById('aiEmailOptions').classList.add('hidden');
             document.getElementById('suggestionsPanel').classList.add('hidden');
-            document.getElementById('multiResults').classList.add('hidden');
             document.getElementById('searchTips').classList.remove('visible');
+            
+            // Reset AI email inputs
+            document.getElementById('candidateName').value = '';
+            document.getElementById('specificSkill').value = '';
+            document.getElementById('aiEmailTone').value = 'professional';
+            
+            // Reset tone buttons
+            document.querySelectorAll('.tone-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.tone-btn[data-tone="professional"]').classList.add('active');
+            currentEmailTone = 'professional';
+            
             currentQuery = '';
             currentJobTitle = '';
         }
 
-        function saveSearch() {
+        async function saveSearch() {
             if (!currentQuery) return;
-            savedSearches.unshift({ id: Date.now(), platform: currentPlatform, title: document.getElementById('jobTitle').value.trim() || 'Untitled Search', query: currentQuery, timestamp: new Date().toISOString() });
-            if (savedSearches.length > 10) savedSearches = savedSearches.slice(0, 10);
-            localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
-            renderSavedSearches();
-            updateStats();
+            const searchData = {
+                platform: currentPlatform,
+                title: document.getElementById('jobTitle').value.trim() || 'Untitled Search',
+                query: currentQuery,
+                savedBy: 'anonymous',
+                // Save all form fields for restoration
+                formData: {
+                    jobTitle: document.getElementById('jobTitle').value.trim(),
+                    location: document.getElementById('location').value.trim(),
+                    selectedCountries: Array.from(document.getElementById('country').selectedOptions).map(opt => opt.value),
+                    currentEmployer: document.getElementById('currentEmployer').value.trim(),
+                    education: document.getElementById('education').value.trim(),
+                    skills: document.getElementById('skills').value.trim(),
+                    tags: document.getElementById('tags').value.trim(),
+                    bio: document.getElementById('bio').value.trim(),
+                    includeKeywords: document.getElementById('includeKeywords').value.trim(),
+                    excludeKeywords: document.getElementById('excludeKeywords').value.trim(),
+                    includeSimilar: document.getElementById('includeSimilar').checked,
+                    selectedCompanies: [...selectedCompanies],
+                    selectedSimilarTitles: [...selectedSimilarTitles],
+                    selectedSeniorityLevels: [...selectedSeniorityLevels],
+                    selectedSignals: [...selectedSignals],
+                    githubHireable: document.getElementById('githubHireable')?.checked,
+                    githubActiveContributor: document.getElementById('githubActiveContributor')?.checked,
+                    githubHasWebsite: document.getElementById('githubHasWebsite')?.checked
+                }
+            };
+            
+            try {
+                if (searchesDB) {
+                    // Get current user info if available
+                    if (typeof quick !== 'undefined' && quick.id && quick.id.fullName) {
+                        searchData.savedBy = quick.id.fullName;
+                    }
+                    await searchesDB.create(searchData);
+                    await loadSavedSearches();
+                } else {
+                    // Fallback to localStorage
+                    savedSearches.unshift({ id: Date.now(), ...searchData, timestamp: new Date().toISOString() });
+                    if (savedSearches.length > 20) savedSearches = savedSearches.slice(0, 20);
+                    localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
+                    renderSavedSearches();
+                }
+                updateStats();
+            } catch (error) {
+                console.error('Save search error:', error);
+                alert('Failed to save search. Please try again.');
+            }
         }
 
         function renderSavedSearches() {
             const container = document.getElementById('savedSearchesList');
             if (savedSearches.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No saved searches yet.</p>';
+                container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No saved searches yet. Generate a search and click "Save" to add it here!</p>';
                 return;
             }
             container.innerHTML = savedSearches.map(s => `
-                <div class="saved-search-item" onclick="loadSavedSearch(${s.id})">
+                <div class="saved-search-item" onclick="loadSavedSearch('${s.id}')">
                     <div class="saved-search-info">
                         <div class="saved-search-platform">${getPlatformIcon(s.platform)}</div>
-                        <span class="saved-search-text">${s.title}</span>
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span class="saved-search-text">${s.title}</span>
+                            <span style="font-size: 11px; color: var(--text-secondary);">by ${s.savedBy || 'anonymous'}</span>
+                        </div>
                     </div>
-                    <button class="saved-search-delete" onclick="event.stopPropagation(); deleteSavedSearch(${s.id})">
+                    <button class="saved-search-delete" onclick="event.stopPropagation(); deleteSavedSearch('${s.id}')" title="Delete">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
                     </button>
                 </div>
@@ -2727,15 +3800,108 @@ Shopify`
         }
 
         function loadSavedSearch(id) {
-            const search = savedSearches.find(s => s.id === id);
-            if (search) { switchPlatform(search.platform); currentQuery = search.query; displayQuery(search.query); }
+            const search = savedSearches.find(s => s.id === id || s.id === parseInt(id));
+            if (search) { 
+                // Switch to the saved platform
+                switchPlatform(search.platform);
+                
+                // Restore form fields if we have them
+                if (search.formData) {
+                    document.getElementById('jobTitle').value = search.formData.jobTitle || '';
+                    document.getElementById('location').value = search.formData.location || '';
+                    document.getElementById('currentEmployer').value = search.formData.currentEmployer || '';
+                    document.getElementById('education').value = search.formData.education || '';
+                    document.getElementById('skills').value = search.formData.skills || '';
+                    document.getElementById('tags').value = search.formData.tags || '';
+                    document.getElementById('bio').value = search.formData.bio || '';
+                    document.getElementById('includeKeywords').value = search.formData.includeKeywords || '';
+                    document.getElementById('excludeKeywords').value = search.formData.excludeKeywords || '';
+                    document.getElementById('includeSimilar').checked = search.formData.includeSimilar !== false;
+                    
+                    // Restore selected countries
+                    if (search.formData.selectedCountries) {
+                        const countrySelect = document.getElementById('country');
+                        Array.from(countrySelect.options).forEach(opt => {
+                            opt.selected = search.formData.selectedCountries.includes(opt.value);
+                        });
+                    }
+                    
+                    // Restore selected companies
+                    if (search.formData.selectedCompanies) {
+                        selectedCompanies = [...search.formData.selectedCompanies];
+                        updateSelectedCompaniesDisplay();
+                    }
+                    
+                    // Restore selected similar titles
+                    if (search.formData.selectedSimilarTitles) {
+                        selectedSimilarTitles = [...search.formData.selectedSimilarTitles];
+                        updateSelectedTitles();
+                    }
+                    
+                    // Restore seniority levels
+                    if (search.formData.selectedSeniorityLevels) {
+                        selectedSeniorityLevels = [...search.formData.selectedSeniorityLevels];
+                        document.querySelectorAll('.seniority-chip').forEach(chip => {
+                            chip.classList.toggle('selected', selectedSeniorityLevels.includes(chip.dataset.level));
+                        });
+                    }
+                    
+                    // Restore selected signals
+                    if (search.formData.selectedSignals) {
+                        selectedSignals = [...search.formData.selectedSignals];
+                        document.querySelectorAll('.signal-checkbox').forEach(cb => {
+                            const isSelected = selectedSignals.includes(cb.value);
+                            cb.checked = isSelected;
+                            cb.closest('.signal-option').classList.toggle('selected', isSelected);
+                        });
+                    }
+                    
+                    // Restore GitHub filters
+                    if (search.formData.githubHireable !== undefined) {
+                        const githubHireable = document.getElementById('githubHireable');
+                        if (githubHireable) githubHireable.checked = search.formData.githubHireable;
+                    }
+                    if (search.formData.githubActiveContributor !== undefined) {
+                        const githubActiveContributor = document.getElementById('githubActiveContributor');
+                        if (githubActiveContributor) githubActiveContributor.checked = search.formData.githubActiveContributor;
+                    }
+                    if (search.formData.githubHasWebsite !== undefined) {
+                        const githubHasWebsite = document.getElementById('githubHasWebsite');
+                        if (githubHasWebsite) githubHasWebsite.checked = search.formData.githubHasWebsite;
+                    }
+                    
+                    // Set job title for email template
+                    currentJobTitle = search.formData.jobTitle || '';
+                }
+                
+                // Display the query
+                currentQuery = search.query; 
+                displayQuery(search.query);
+                generateEmailTemplate();
+                updateSearchTips();
+                
+                // Scroll to top of form first, then results
+                document.querySelector('.search-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
-        function deleteSavedSearch(id) {
-            savedSearches = savedSearches.filter(s => s.id !== id);
-            localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
-            renderSavedSearches();
-            updateStats();
+        async function deleteSavedSearch(id) {
+            if (!confirm('Delete this saved search?')) return;
+            
+            try {
+                if (searchesDB) {
+                    await searchesDB.delete(id);
+                    await loadSavedSearches();
+                } else {
+                    savedSearches = savedSearches.filter(s => s.id !== id && s.id !== parseInt(id));
+                    localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
+                    renderSavedSearches();
+                }
+                updateStats();
+            } catch (error) {
+                console.error('Delete search error:', error);
+                alert('Failed to delete search. Please try again.');
+            }
         }
 
         function updateStats() {
@@ -2753,6 +3919,64 @@ Shopify`
         function updateDarkModeIcon() {
             const icon = document.getElementById('darkModeIcon');
             icon.innerHTML = isDarkMode ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+
+        function showFieldHelp(field) {
+            const helpTexts = {
+                jobTitle: `<strong>Job Title Tips:</strong>
+                <ul style="margin: 8px 0 0 16px; line-height: 1.6;">
+                    <li>Use the exact title candidates would have (e.g., "Software Engineer" not "coder")</li>
+                    <li>Try variations: "Senior Software Engineer", "Staff Engineer"</li>
+                    <li>Enable "Include Similar Titles" to auto-expand with related roles</li>
+                    <li>Use the AI Suggestions button for related titles</li>
+                </ul>`,
+                seniority: `<strong>Seniority Level Tips:</strong>
+                <ul style="margin: 8px 0 0 16px; line-height: 1.6;">
+                    <li>Select multiple levels to broaden your search (e.g., Senior + Staff)</li>
+                    <li><strong>Entry/Junior:</strong> 0-2 years experience, new grads</li>
+                    <li><strong>Mid-Level:</strong> 2-5 years experience</li>
+                    <li><strong>Senior:</strong> 5-8 years experience, independent contributor</li>
+                    <li><strong>Staff:</strong> 8+ years, technical leadership</li>
+                    <li><strong>Principal:</strong> 10+ years, domain expertise</li>
+                    <li><strong>Director+:</strong> Leadership and management roles</li>
+                </ul>`
+            };
+            
+            const text = helpTexts[field] || 'Enter the relevant information for better search results.';
+            
+            // Create a temporary tooltip
+            const existingTooltip = document.querySelector('.field-help-tooltip');
+            if (existingTooltip) existingTooltip.remove();
+            
+            const tooltip = document.createElement('div');
+            tooltip.className = 'field-help-tooltip';
+            tooltip.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                    <span style="font-size: 16px;">💡</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; cursor: pointer; font-size: 18px; color: var(--text-secondary);">×</button>
+                </div>
+                ${text}
+            `;
+            tooltip.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                padding: 16px 20px;
+                max-width: 360px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+                z-index: 1001;
+                font-size: 13px;
+                color: var(--text-primary);
+                line-height: 1.5;
+            `;
+            document.body.appendChild(tooltip);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => { if (tooltip.parentElement) tooltip.remove(); }, 10000);
         }
 
         function toggleCheatsheet() {
