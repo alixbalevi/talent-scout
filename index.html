@@ -1,0 +1,2774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Scout - AI Sourcing Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Shopify Brand Colors */
+            --shopify-green: #008060;
+            --shopify-green-dark: #004C3F;
+            --shopify-green-light: #95BF47;
+            --shopify-black: #000000;
+            --shopify-white: #FFFFFF;
+            
+            /* Extended Palette */
+            --primary: var(--shopify-green);
+            --primary-dark: var(--shopify-green-dark);
+            --primary-light: #00A47C;
+            --secondary: #5C6AC4;
+            --background: #F6F6F7;
+            --surface: #FFFFFF;
+            --surface-dark: #F1F2F3;
+            --text-primary: #202223;
+            --text-secondary: #6D7175;
+            --border: #E1E3E5;
+            --success: #008060;
+            --warning: #B98900;
+            --error: #D82C0D;
+            --diversity: #9C6ADE;
+            --info: #0091E2;
+            
+            /* Platform Colors */
+            --linkedin: #0A66C2;
+            --github: #24292E;
+            --stackoverflow: #F48024;
+            --twitter: #000000;
+            --meta: #0866FF;
+            --scholar: #4285F4;
+            --dribbble: #EA4C89;
+            --behance: #1769FF;
+            --angellist: #000000;
+            --kaggle: #20BEFF;
+        }
+
+        .dark-mode {
+            --background: #0D1117;
+            --surface: #161B22;
+            --surface-dark: #21262D;
+            --text-primary: #F0F6FC;
+            --text-secondary: #8B949E;
+            --border: #30363D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: var(--shopify-black);
+            color: white;
+            padding: 20px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logo-tagline {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 20px;
+            padding-right: 20px;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--shopify-green-light);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dark-mode-toggle {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* Quick Templates */
+        .templates-section {
+            margin-bottom: 24px;
+        }
+
+        .templates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .templates-header h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .templates-grid {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .template-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .template-btn:hover {
+            border-color: var(--primary);
+            background: rgba(0, 128, 96, 0.05);
+        }
+
+        .template-btn .emoji {
+            font-size: 16px;
+        }
+
+        /* Platform Tabs */
+        .platform-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .platform-tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        .platform-tab:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-1px);
+        }
+
+        .platform-tab.active {
+            border-color: var(--primary);
+            background: rgba(0, 128, 96, 0.08);
+        }
+
+        .platform-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Multi-Platform Toggle */
+        .multi-platform-section {
+            background: linear-gradient(135deg, rgba(0, 145, 226, 0.08) 0%, rgba(0, 128, 96, 0.08) 100%);
+            border: 1px solid rgba(0, 145, 226, 0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .multi-platform-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .multi-platform-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--info);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .multi-platform-grid {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .multi-platform-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .multi-platform-chip:hover {
+            border-color: var(--info);
+        }
+
+        .multi-platform-chip.selected {
+            background: var(--info);
+            color: white;
+            border-color: var(--info);
+        }
+
+        .multi-platform-chip input {
+            display: none;
+        }
+
+        /* Search Card */
+        .search-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .search-card h2 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-label .help-icon {
+            cursor: help;
+            opacity: 0.5;
+        }
+
+        .form-input, .form-select {
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 128, 96, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Company Targeting Section */
+        .company-targeting-section {
+            background: linear-gradient(135deg, rgba(0, 128, 96, 0.05) 0%, rgba(149, 191, 71, 0.05) 100%);
+            border: 1px solid rgba(0, 128, 96, 0.2);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .company-targeting-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .company-targeting-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .company-list-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .company-list-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .company-list-card:hover {
+            border-color: var(--primary);
+        }
+
+        .company-list-card.selected {
+            border-color: var(--primary);
+            background: rgba(0, 128, 96, 0.08);
+        }
+
+        .company-list-card h5 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .company-list-card p {
+            font-size: 11px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .selected-companies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .company-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .company-chip .remove {
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .company-chip .remove:hover {
+            opacity: 1;
+        }
+
+        /* Search Quality Tips */
+        .search-tips {
+            background: linear-gradient(135deg, rgba(185, 137, 0, 0.08) 0%, rgba(255, 183, 0, 0.08) 100%);
+            border: 1px solid rgba(185, 137, 0, 0.3);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .search-tips.visible {
+            display: block;
+        }
+
+        .search-tips h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--warning);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(185, 137, 0, 0.15);
+            font-size: 13px;
+        }
+
+        .tip-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .tip-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .tip-icon.warning {
+            background: rgba(185, 137, 0, 0.2);
+            color: var(--warning);
+        }
+
+        .tip-icon.success {
+            background: rgba(0, 128, 96, 0.2);
+            color: var(--success);
+        }
+
+        .tip-icon.info {
+            background: rgba(0, 145, 226, 0.2);
+            color: var(--info);
+        }
+
+        .tip-text {
+            flex: 1;
+        }
+
+        .tip-action {
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: underline;
+            margin-left: 4px;
+        }
+
+        /* Diversity Section */
+        .diversity-section {
+            background: linear-gradient(135deg, rgba(156, 106, 222, 0.08) 0%, rgba(92, 106, 196, 0.08) 100%);
+            border: 1px solid rgba(156, 106, 222, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .diversity-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+
+        .diversity-header h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--diversity);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .diversity-badge {
+            background: var(--diversity);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .diversity-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .diversity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .diversity-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px;
+            background: var(--surface);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .diversity-option:hover {
+            border-color: var(--diversity);
+        }
+
+        .diversity-option.selected {
+            border-color: var(--diversity);
+            background: rgba(156, 106, 222, 0.1);
+        }
+
+        .diversity-option input {
+            margin-top: 2px;
+            accent-color: var(--diversity);
+        }
+
+        .diversity-option-content h5 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .diversity-option-content p {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border);
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        .toggle input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Chips/Tags */
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(0, 128, 96, 0.1);
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--primary-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .chip:hover {
+            background: rgba(0, 128, 96, 0.2);
+        }
+
+        .chip.selected {
+            background: var(--primary);
+            color: white;
+        }
+
+        .chip .remove {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            font-size: 12px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(0, 128, 96, 0.05);
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, #5C6AC4 0%, #8B5CF6 100%);
+            color: white;
+        }
+
+        .btn-ai:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(92, 106, 196, 0.4);
+        }
+
+        .btn-multi {
+            background: linear-gradient(135deg, var(--info) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        .btn-multi:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 145, 226, 0.4);
+        }
+
+        .btn-small {
+            padding: 8px 14px;
+            font-size: 12px;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .results-header h3 {
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .query-display {
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            word-break: break-all;
+            position: relative;
+        }
+
+        .query-display .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 6px 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .query-display .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .query-display .copy-btn.copied {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        /* Multi-Platform Results */
+        .multi-results {
+            margin-top: 16px;
+        }
+
+        .multi-result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: var(--surface-dark);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .multi-result-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .multi-result-platform {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Suggestions Panel */
+        .suggestions-panel {
+            background: linear-gradient(135deg, rgba(92, 106, 196, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
+            border: 1px solid rgba(92, 106, 196, 0.2);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .suggestions-panel h4 {
+            font-size: 13px;
+            color: #5C6AC4;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .suggestion-chip {
+            padding: 6px 12px;
+            background: var(--surface);
+            border: 1px solid rgba(92, 106, 196, 0.3);
+            border-radius: 16px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #5C6AC4;
+        }
+
+        .suggestion-chip:hover {
+            background: #5C6AC4;
+            color: white;
+            border-color: #5C6AC4;
+        }
+
+        /* Email Generator */
+        .email-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .email-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .email-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tone-btn {
+            padding: 8px 16px;
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .tone-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .tone-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .email-template {
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            position: relative;
+        }
+
+        .email-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        /* Boolean Cheat Sheet */
+        .cheatsheet-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .cheatsheet-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .cheatsheet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .cheatsheet-item {
+            background: var(--surface-dark);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .cheatsheet-item code {
+            display: block;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .cheatsheet-item p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Saved Searches */
+        .saved-searches {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .saved-searches h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .saved-search-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--surface-dark);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .saved-search-item:hover {
+            border-color: var(--primary);
+            background: rgba(0, 128, 96, 0.05);
+        }
+
+        .saved-search-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .saved-search-platform {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            background: var(--surface);
+        }
+
+        .saved-search-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .saved-search-delete {
+            padding: 6px 8px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .saved-search-delete:hover {
+            background: rgba(216, 44, 13, 0.1);
+            color: var(--error);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 16px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.visible .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--shopify-green) 0%, var(--shopify-green-dark) 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+        }
+
+        .modal-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .modal-header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            transition: background 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .guide-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--shopify-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .step-content .tip {
+            background: rgba(0, 128, 96, 0.08);
+            border-left: 3px solid var(--shopify-green);
+            padding: 10px 14px;
+            margin-top: 10px;
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: var(--primary-dark);
+        }
+
+        .guide-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .guide-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--surface-dark);
+            border-radius: 10px;
+        }
+
+        .guide-feature-icon {
+            font-size: 20px;
+        }
+
+        .guide-feature-text {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .modal-footer {
+            padding: 20px 28px;
+            background: var(--surface-dark);
+            border-radius: 0 0 16px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .modal-footer-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .modal-footer .btn {
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .dont-show-again {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .dont-show-again input {
+            accent-color: var(--shopify-green);
+        }
+
+        .logo-icon {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Collapsible */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.open {
+            max-height: 2000px;
+        }
+
+        .collapse-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-icon.open {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .header-stats {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid rgba(255,255,255,0.2);
+                padding-bottom: 16px;
+            }
+
+            .main-container {
+                padding: 20px;
+            }
+
+            .search-card {
+                padding: 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .results-actions {
+                width: 100%;
+            }
+
+            .results-actions .btn {
+                flex: 1;
+            }
+
+            .platform-tabs {
+                gap: 6px;
+            }
+
+            .platform-tab {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon" onclick="showGuide()" title="Click for How to Use Guide">
+                    <img src="logo.png" alt="Talent Scout Logo">
+                </div>
+                <div>
+                    <h1>Talent Scout</h1>
+                    <div class="logo-tagline">AI-Powered Candidate Sourcing</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="searchCount">0</div>
+                        <div class="stat-label">Searches</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="savedCount">0</div>
+                        <div class="stat-label">Saved</div>
+                    </div>
+                </div>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="darkModeIcon">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Quick Templates -->
+        <div class="templates-section">
+            <div class="templates-header">
+                <h3>Quick Templates</h3>
+            </div>
+            <div class="templates-grid">
+                <button class="template-btn" onclick="loadTemplate('software-engineer')">
+                    <span class="emoji">👩‍💻</span> Software Engineer
+                </button>
+                <button class="template-btn" onclick="loadTemplate('product-manager')">
+                    <span class="emoji">📊</span> Product Manager
+                </button>
+                <button class="template-btn" onclick="loadTemplate('designer')">
+                    <span class="emoji">🎨</span> Designer
+                </button>
+                <button class="template-btn" onclick="loadTemplate('data-scientist')">
+                    <span class="emoji">🔬</span> Data Scientist
+                </button>
+                <button class="template-btn" onclick="loadTemplate('engineering-manager')">
+                    <span class="emoji">👔</span> Eng Manager
+                </button>
+                <button class="template-btn" onclick="loadTemplate('devops')">
+                    <span class="emoji">☁️</span> DevOps / SRE
+                </button>
+            </div>
+        </div>
+
+        <!-- Multi-Platform Search -->
+        <div class="multi-platform-section">
+            <div class="multi-platform-header">
+                <h4>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Multi-Platform Search
+                </h4>
+                <span style="font-size: 12px; color: var(--text-secondary);">Select multiple platforms to search at once</span>
+            </div>
+            <div class="multi-platform-grid">
+                <label class="multi-platform-chip selected" onclick="toggleMultiPlatform(this, 'linkedin')">
+                    <input type="checkbox" checked value="linkedin">
+                    🔗 LinkedIn
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'github')">
+                    <input type="checkbox" value="github">
+                    🐙 GitHub
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'stackoverflow')">
+                    <input type="checkbox" value="stackoverflow">
+                    📚 Stack Overflow
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'twitter')">
+                    <input type="checkbox" value="twitter">
+                    🐦 X / Twitter
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'scholar')">
+                    <input type="checkbox" value="scholar">
+                    🎓 Google Scholar
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'dribbble')">
+                    <input type="checkbox" value="dribbble">
+                    🏀 Dribbble
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'behance')">
+                    <input type="checkbox" value="behance">
+                    🎨 Behance
+                </label>
+                <label class="multi-platform-chip" onclick="toggleMultiPlatform(this, 'kaggle')">
+                    <input type="checkbox" value="kaggle">
+                    📊 Kaggle
+                </label>
+            </div>
+        </div>
+
+        <!-- Platform Selection (Single) -->
+        <div class="platform-tabs">
+            <button class="platform-tab linkedin active" data-platform="linkedin">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </div>
+                LinkedIn
+            </button>
+            <button class="platform-tab github" data-platform="github">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#24292E">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </div>
+                GitHub
+            </button>
+            <button class="platform-tab stackoverflow" data-platform="stackoverflow">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#F48024">
+                        <path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-1.024 10.09l1.9 1.02 4.18-7.79-1.9-1.02-4.18 7.79zm-5.09 4.02l8.18 1.71.36-1.73-8.18-1.71-.36 1.73zm.45-2.22l7.89 3.31.66-1.58-7.89-3.31-.66 1.58zm1.29-2.37l6.96 5.26 1.08-1.43-6.96-5.26-1.08 1.43zM19 18H5v2h14v-2zm1-8v12H4V10H2v14h20V10h-2z"/>
+                    </svg>
+                </div>
+                Stack Overflow
+            </button>
+            <button class="platform-tab twitter" data-platform="twitter">
+                <div class="platform-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#000000">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </div>
+                X
+            </button>
+            <button class="platform-tab scholar" data-platform="scholar">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#4285F4">
+                        <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+                    </svg>
+                </div>
+                Scholar
+            </button>
+            <button class="platform-tab dribbble" data-platform="dribbble">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#EA4C89">
+                        <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z"/>
+                    </svg>
+                </div>
+                Dribbble
+            </button>
+            <button class="platform-tab behance" data-platform="behance">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#1769FF">
+                        <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
+                    </svg>
+                </div>
+                Behance
+            </button>
+            <button class="platform-tab kaggle" data-platform="kaggle">
+                <div class="platform-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#20BEFF">
+                        <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.071.312"/>
+                    </svg>
+                </div>
+                Kaggle
+            </button>
+        </div>
+
+        <!-- Search Form -->
+        <div class="search-card">
+            <h2>
+                <span id="platform-title-icon">🔍</span>
+                <span id="platform-title">Search LinkedIn Profiles</span>
+            </h2>
+
+            <div class="form-grid">
+                <!-- Job Title -->
+                <div class="form-group">
+                    <label class="form-label">
+                        Job Title / Role
+                        <span class="help-icon" title="Enter the job title you're looking for">ℹ️</span>
+                    </label>
+                    <input type="text" class="form-input" id="jobTitle" placeholder="e.g., Software Engineer, Product Manager" oninput="updateSearchTips()">
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-input" id="location" placeholder="e.g., San Francisco, Toronto, Remote" oninput="updateSearchTips()">
+                </div>
+
+                <!-- Country (LinkedIn) -->
+                <div class="form-group linkedin-field">
+                    <label class="form-label">Country</label>
+                    <select class="form-select" id="country">
+                        <option value="">All Countries</option>
+                        <option value="us">United States</option>
+                        <option value="ca" selected>Canada</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="de">Germany</option>
+                        <option value="fr">France</option>
+                        <option value="au">Australia</option>
+                        <option value="in">India</option>
+                        <option value="sg">Singapore</option>
+                        <option value="nl">Netherlands</option>
+                        <option value="ie">Ireland</option>
+                    </select>
+                </div>
+
+                <!-- Current Employer -->
+                <div class="form-group linkedin-field">
+                    <label class="form-label">Current Company</label>
+                    <input type="text" class="form-input" id="currentEmployer" placeholder="e.g., Google, Shopify, Meta">
+                </div>
+
+                <!-- Education (LinkedIn) -->
+                <div class="form-group linkedin-field">
+                    <label class="form-label">Education Level</label>
+                    <select class="form-select" id="education">
+                        <option value="">Any</option>
+                        <option value="bachelor">Bachelor's Degree</option>
+                        <option value="master">Master's Degree</option>
+                        <option value="phd">Doctoral Degree (PhD)</option>
+                    </select>
+                </div>
+
+                <!-- Skills (GitHub/Kaggle) -->
+                <div class="form-group github-field kaggle-field hidden">
+                    <label class="form-label">Programming Languages / Skills</label>
+                    <input type="text" class="form-input" id="skills" placeholder="e.g., Python, React, Kubernetes">
+                </div>
+
+                <!-- Research Area (Scholar) -->
+                <div class="form-group scholar-field hidden">
+                    <label class="form-label">Research Area / Field</label>
+                    <input type="text" class="form-input" id="researchArea" placeholder="e.g., machine learning, NLP, computer vision">
+                </div>
+
+                <!-- Design Style (Dribbble/Behance) -->
+                <div class="form-group dribbble-field behance-field hidden">
+                    <label class="form-label">Design Specialty</label>
+                    <input type="text" class="form-input" id="designStyle" placeholder="e.g., UI design, branding, illustration">
+                </div>
+
+                <!-- Tags (Stack Overflow) -->
+                <div class="form-group stackoverflow-field hidden">
+                    <label class="form-label">Technology Tags</label>
+                    <input type="text" class="form-input" id="soTags" placeholder="e.g., python, javascript, aws">
+                </div>
+
+                <!-- Bio keywords (Twitter) -->
+                <div class="form-group twitter-field hidden">
+                    <label class="form-label">Bio Keywords</label>
+                    <input type="text" class="form-input" id="bioKeywords" placeholder="e.g., engineer, developer, hiring">
+                </div>
+
+                <!-- Keywords to Include -->
+                <div class="form-group">
+                    <label class="form-label">Keywords to Include</label>
+                    <input type="text" class="form-input" id="includeKeywords" placeholder="e.g., machine learning, fintech, SaaS" oninput="updateSearchTips()">
+                </div>
+
+                <!-- Keywords to Exclude -->
+                <div class="form-group">
+                    <label class="form-label">Keywords to Exclude</label>
+                    <input type="text" class="form-input" id="excludeKeywords" placeholder="e.g., recruiter, HR, sales" oninput="updateSearchTips()">
+                </div>
+
+                <!-- Similar Roles Toggle -->
+                <div class="form-group linkedin-field">
+                    <label class="form-label">Include Similar Job Titles</label>
+                    <div class="toggle-group">
+                        <label class="toggle">
+                            <input type="checkbox" id="includeSimilar" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="font-size: 13px; color: var(--text-secondary);">Auto-expand with related titles</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Quality Tips -->
+            <div class="search-tips" id="searchTips">
+                <h4>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    Search Quality Tips
+                </h4>
+                <div id="tipsList"></div>
+            </div>
+
+            <!-- Company Targeting Section -->
+            <div class="company-targeting-section">
+                <div class="company-targeting-header" onclick="toggleCompanySection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4z"/>
+                        </svg>
+                        Target Companies
+                    </h4>
+                    <svg class="collapse-icon open" id="companyIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content open" id="companyContent">
+                    <div class="company-list-grid">
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'faang')">
+                            <h5>🏢 FAANG / Big Tech</h5>
+                            <p>Google, Meta, Amazon, Apple, Netflix, Microsoft</p>
+                        </div>
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'ecommerce')">
+                            <h5>🛒 E-commerce / Fintech</h5>
+                            <p>Stripe, Square, BigCommerce, Klarna, Affirm</p>
+                        </div>
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'highgrowth')">
+                            <h5>🚀 High-Growth Startups</h5>
+                            <p>Figma, Notion, Linear, Vercel, Supabase, Retool</p>
+                        </div>
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'canadian')">
+                            <h5>🍁 Canadian Tech</h5>
+                            <p>Wealthsimple, 1Password, Clio, Hootsuite, Cohere</p>
+                        </div>
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'consulting')">
+                            <h5>💼 Tech Consulting</h5>
+                            <p>Thoughtworks, Pivotal, Slalom, Accenture, Deloitte Digital</p>
+                        </div>
+                        <div class="company-list-card" onclick="toggleCompanyList(this, 'ai')">
+                            <h5>🤖 AI / ML Companies</h5>
+                            <p>OpenAI, Anthropic, Cohere, Scale AI, Hugging Face</p>
+                        </div>
+                    </div>
+                    <div class="selected-companies" id="selectedCompanies" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Diversity Sourcing Section -->
+            <div class="diversity-section">
+                <div class="diversity-header" onclick="toggleDiversitySection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        Diversity Sourcing
+                        <span class="diversity-badge">BETA</span>
+                    </h4>
+                    <svg class="collapse-icon" id="diversityIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="diversityContent">
+                    <p class="diversity-description">
+                        Find candidates affiliated with diversity-focused organizations, HBCUs, professional groups, and conferences.
+                    </p>
+                    <div class="diversity-grid">
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="hbcu" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>HBCUs</h5>
+                                <p>Historically Black Colleges and Universities</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="wit" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Women in Tech</h5>
+                                <p>Women Who Code, AnitaB, Grace Hopper</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="bipoc" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>BIPOC in Tech</h5>
+                                <p>/dev/color, NSBE, SHPE, Techqueria</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="lgbtq" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>LGBTQ+ in Tech</h5>
+                                <p>Lesbians Who Tech, Out in Tech, oSTEM</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="veterans" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Veterans</h5>
+                                <p>VetsinTech, Hiring Our Heroes</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="firstgen" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>First-Gen / Non-Traditional</h5>
+                                <p>Bootcamp grads, career changers</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selected Similar Titles -->
+            <div id="similarTitlesContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected Similar Titles:</label>
+                <div class="chips-container" id="selectedTitles"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="generateSearch" onclick="generateSearch()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    Generate Search
+                </button>
+                <button class="btn btn-multi" id="multiSearchBtn" onclick="openMultiPlatformSearch()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Search All Platforms
+                </button>
+                <button class="btn btn-ai" id="aiSuggest" onclick="getAISuggestions()">
+                    AI Suggestions
+                </button>
+                <button class="btn btn-secondary" onclick="clearForm()">
+                    Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section hidden" id="resultsSection">
+            <div class="results-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                    </svg>
+                    Generated Search Query
+                </h3>
+                <div class="results-actions">
+                    <button class="btn btn-secondary btn-small" onclick="saveSearch()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+                        </svg>
+                        Save
+                    </button>
+                    <button class="btn btn-primary btn-small" id="openSearchBtn" onclick="openSearch()">
+                        Open in Google
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="query-display" id="queryDisplay">
+                <button class="copy-btn" onclick="copyQuery()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                    </svg>
+                    Copy
+                </button>
+                <span id="queryText"></span>
+            </div>
+
+            <!-- Multi-Platform Results -->
+            <div class="multi-results hidden" id="multiResults">
+                <h4 style="margin: 16px 0 12px; font-size: 14px;">Open in Multiple Platforms:</h4>
+                <div id="multiResultsList"></div>
+            </div>
+
+            <!-- AI Suggestions -->
+            <div class="suggestions-panel hidden" id="suggestionsPanel">
+                <h4>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    AI-Suggested Similar Titles (click to add)
+                </h4>
+                <div class="suggestion-chips" id="suggestionChips"></div>
+            </div>
+        </div>
+
+        <!-- Email Generator -->
+        <div class="email-section hidden" id="emailSection">
+            <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Outreach Email Template
+            </h3>
+            <div class="email-controls">
+                <button class="tone-btn active" data-tone="professional" onclick="setEmailTone('professional')">Professional</button>
+                <button class="tone-btn" data-tone="casual" onclick="setEmailTone('casual')">Casual</button>
+                <button class="tone-btn" data-tone="enthusiastic" onclick="setEmailTone('enthusiastic')">Enthusiastic</button>
+                <button class="tone-btn" data-tone="concise" onclick="setEmailTone('concise')">Concise</button>
+            </div>
+            <div class="email-template" id="emailTemplate"></div>
+            <div class="email-actions">
+                <button class="btn btn-secondary btn-small" onclick="regenerateEmail()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 4v6h-6M1 20v-6h6"/>
+                        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                    </svg>
+                    Regenerate
+                </button>
+                <button class="btn btn-primary btn-small" onclick="copyEmail()">
+                    Copy Email
+                </button>
+            </div>
+        </div>
+
+        <!-- Boolean Cheat Sheet -->
+        <div class="cheatsheet-section">
+            <h3 onclick="toggleCheatsheet()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Boolean Search Cheat Sheet
+                <svg class="collapse-icon" id="cheatsheetIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                    <polyline points="6,9 12,15 18,9"/>
+                </svg>
+            </h3>
+            <div class="collapsible-content" id="cheatsheetContent">
+                <div class="cheatsheet-grid" style="margin-top: 16px;">
+                    <div class="cheatsheet-item">
+                        <code>"exact phrase"</code>
+                        <p>Search for an exact phrase, e.g., "software engineer"</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>OR</code>
+                        <p>Match either term: "engineer" OR "developer"</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>-exclude</code>
+                        <p>Exclude a term: engineer -recruiter</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>site:linkedin.com/in/</code>
+                        <p>Search only LinkedIn profiles (X-Ray search)</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>(grouping)</code>
+                        <p>Group terms: (engineer OR developer) Toronto</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>intitle:</code>
+                        <p>Search in page title: intitle:"senior engineer"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saved Searches -->
+        <div class="saved-searches" id="savedSearchesSection">
+            <h3>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+                </svg>
+                Saved Searches
+            </h3>
+            <div id="savedSearchesList">
+                <p style="color: var(--text-secondary); font-size: 14px;">No saved searches yet. Generate a search and save it!</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>Built with 💚 for Shopify Hiring Managers | Hosted on <a href="https://quick.shopify.io" target="_blank">Quick</a></p>
+        <p style="margin-top: 8px;">Need help? Reach out in <a href="https://shopify.slack.com/archives/C0962U5ENF8" target="_blank">#quick</a></p>
+    </footer>
+
+    <!-- How to Use Guide Modal -->
+    <div class="modal-overlay" id="guideModal" onclick="closeGuideOnOverlay(event)">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <img src="logo.png" alt="Talent Scout">
+                    <div>
+                        <h2>Welcome to Talent Scout!</h2>
+                        <p>Your AI-powered sourcing assistant</p>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeGuide()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose Your Platform(s)</h4>
+                        <p>Select where you want to search for candidates. Use the <strong>Multi-Platform Search</strong> section to search multiple sites at once, or click individual platform tabs for a focused search.</p>
+                        <div class="tip">💡 LinkedIn is great for most roles. Try GitHub for developers and Dribbble/Behance for designers.</div>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Enter Job Details</h4>
+                        <p>Fill in the job title, location, and any specific keywords you want to include or exclude. The more specific you are, the better your results will be.</p>
+                        <div class="tip">💡 Use the <strong>Quick Templates</strong> at the top for common roles like Software Engineer or Product Manager.</div>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Target Specific Companies</h4>
+                        <p>Expand the <strong>Target Companies</strong> section to source from specific company lists like FAANG, Canadian Tech, or AI startups. These candidates often have relevant experience.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Use Diversity Sourcing (Optional)</h4>
+                        <p>Expand the <strong>Diversity Sourcing</strong> section to find candidates from underrepresented groups. This searches for affiliations with professional organizations like Women Who Code, /dev/color, and HBCUs.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Generate & Search</h4>
+                        <p>Click <strong>Generate Search</strong> to create your boolean query, then <strong>Open in Google</strong> to see results. Use <strong>Search All Platforms</strong> to open multiple tabs at once.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Reach Out to Candidates</h4>
+                        <p>Use the auto-generated <strong>Outreach Email Template</strong> below the search results. Choose your tone (Professional, Casual, Enthusiastic, or Concise) and click <strong>Regenerate</strong> for variations.</p>
+                    </div>
+                </div>
+
+                <div class="guide-features">
+                    <div class="guide-feature">
+                        <span class="guide-feature-icon">💾</span>
+                        <span class="guide-feature-text">Save searches for later</span>
+                    </div>
+                    <div class="guide-feature">
+                        <span class="guide-feature-icon">🌙</span>
+                        <span class="guide-feature-text">Dark mode available</span>
+                    </div>
+                    <div class="guide-feature">
+                        <span class="guide-feature-icon">📋</span>
+                        <span class="guide-feature-text">Copy queries & emails</span>
+                    </div>
+                    <div class="guide-feature">
+                        <span class="guide-feature-icon">🤖</span>
+                        <span class="guide-feature-text">AI title suggestions</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label class="dont-show-again">
+                    <input type="checkbox" id="dontShowAgain">
+                    Don't show this again
+                </label>
+                <button class="btn btn-primary" onclick="closeGuide()">
+                    Get Started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentPlatform = 'linkedin';
+        let currentQuery = '';
+        let savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
+        let selectedSimilarTitles = [];
+        let searchCount = parseInt(localStorage.getItem('talentScoutSearchCount') || '0');
+        let isDarkMode = localStorage.getItem('talentScoutDarkMode') === 'true';
+        let currentEmailTone = 'professional';
+        let currentJobTitle = '';
+        let selectedCompanyLists = [];
+        let selectedCompanies = [];
+
+        // Company lists
+        const companyLists = {
+            'faang': ['Google', 'Meta', 'Amazon', 'Apple', 'Netflix', 'Microsoft', 'Alphabet'],
+            'ecommerce': ['Stripe', 'Square', 'BigCommerce', 'Klarna', 'Affirm', 'PayPal', 'Adyen', 'Checkout.com'],
+            'highgrowth': ['Figma', 'Notion', 'Linear', 'Vercel', 'Supabase', 'Retool', 'Airtable', 'Miro', 'Canva'],
+            'canadian': ['Wealthsimple', '1Password', 'Clio', 'Hootsuite', 'Cohere', 'Ada', 'Clearco', 'ApplyBoard', 'Dialogue'],
+            'consulting': ['Thoughtworks', 'Pivotal Labs', 'Slalom', 'Accenture', 'Deloitte Digital', 'McKinsey Digital'],
+            'ai': ['OpenAI', 'Anthropic', 'Cohere', 'Scale AI', 'Hugging Face', 'Stability AI', 'Midjourney', 'Runway']
+        };
+
+        // Job title synonyms database
+        const jobTitleSynonyms = {
+            'software engineer': ['software developer', 'programmer', 'full stack developer', 'backend engineer', 'frontend engineer', 'web developer', 'full-stack engineer'],
+            'product manager': ['product owner', 'pm', 'product lead', 'product director', 'technical product manager', 'senior product manager'],
+            'data scientist': ['machine learning engineer', 'ml engineer', 'data analyst', 'ai engineer', 'research scientist', 'applied scientist'],
+            'designer': ['ux designer', 'ui designer', 'product designer', 'visual designer', 'interaction designer', 'ux/ui designer', 'senior designer'],
+            'devops': ['site reliability engineer', 'sre', 'platform engineer', 'infrastructure engineer', 'cloud engineer', 'devops engineer'],
+            'engineering manager': ['engineering lead', 'tech lead', 'development manager', 'software engineering manager', 'eng manager', 'director of engineering'],
+            'data engineer': ['data platform engineer', 'analytics engineer', 'etl developer', 'big data engineer', 'senior data engineer'],
+            'security engineer': ['cybersecurity engineer', 'infosec engineer', 'application security engineer', 'security analyst', 'appsec engineer'],
+            'mobile developer': ['ios developer', 'android developer', 'mobile engineer', 'react native developer', 'flutter developer', 'swift developer'],
+            'qa engineer': ['quality assurance engineer', 'test engineer', 'sdet', 'automation engineer', 'quality engineer', 'test automation engineer']
+        };
+
+        // Diversity search terms
+        const diversityTerms = {
+            'hbcu': ['Howard University', 'Spelman College', 'Morehouse College', 'Hampton University', 'Tuskegee University', 'Florida A&M', 'HBCU'],
+            'wit': ['Women Who Code', 'AnitaB.org', 'Grace Hopper', 'Girls Who Code', 'Women in Tech', 'PyLadies'],
+            'bipoc': ['/dev/color', 'NSBE', 'SHPE', 'Techqueria', 'Black in Tech', 'ColorStack', 'Code2040'],
+            'lgbtq': ['Lesbians Who Tech', 'Out in Tech', 'oSTEM', 'Pride in Tech', 'Queer in Tech'],
+            'veterans': ['VetsinTech', 'Hiring Our Heroes', 'Operation Code', 'Military Veteran'],
+            'firstgen': ['bootcamp', 'Flatiron School', 'General Assembly', 'Hack Reactor', 'App Academy', 'career changer']
+        };
+
+        // Email templates by tone
+        const emailTemplates = {
+            professional: (jobTitle) => `Hi [Candidate Name],
+
+I came across your profile and was impressed by your background as a ${jobTitle}. I'm reaching out from Shopify — we're building commerce infrastructure that powers millions of businesses worldwide.
+
+We're currently looking for talented ${jobTitle}s to join our team, and your experience caught my attention.
+
+Would you be open to a brief conversation to learn more about what we're working on?
+
+Best regards,
+[Your Name]
+Shopify`,
+            casual: (jobTitle) => `Hey [Candidate Name]!
+
+I stumbled across your profile and had to reach out — your work as a ${jobTitle} is really impressive!
+
+We're hiring at Shopify and I think you'd be a great fit. Any chance you'd be up for a quick chat?
+
+Cheers,
+[Your Name]
+Shopify`,
+            enthusiastic: (jobTitle) => `Hi [Candidate Name]!
+
+I just came across your profile and I'm genuinely excited to reach out! Your experience as a ${jobTitle} is exactly what we're looking for at Shopify.
+
+I'd love to tell you more about the amazing projects we're working on. Would you be open to a quick call?
+
+Best,
+[Your Name]
+Shopify`,
+            concise: (jobTitle) => `Hi [Candidate Name],
+
+Saw your ${jobTitle} experience — impressive background.
+
+Shopify is hiring for this role. Interested in chatting?
+
+[Your Name]
+Shopify`
+        };
+
+        // Templates
+        const templates = {
+            'software-engineer': { jobTitle: 'Software Engineer', location: 'Toronto', includeKeywords: 'Ruby, Python, React', excludeKeywords: 'recruiter, HR' },
+            'product-manager': { jobTitle: 'Product Manager', location: 'Toronto', includeKeywords: 'SaaS, B2B, e-commerce', excludeKeywords: 'recruiter, sales' },
+            'designer': { jobTitle: 'Product Designer', location: 'Toronto', includeKeywords: 'Figma, user research, design systems', excludeKeywords: 'graphic design, print' },
+            'data-scientist': { jobTitle: 'Data Scientist', location: 'Toronto', includeKeywords: 'Python, machine learning, SQL', excludeKeywords: 'recruiter, intern' },
+            'engineering-manager': { jobTitle: 'Engineering Manager', location: 'Toronto', includeKeywords: 'leadership, agile, team', excludeKeywords: 'recruiter, consultant' },
+            'devops': { jobTitle: 'DevOps Engineer', location: 'Toronto', includeKeywords: 'Kubernetes, AWS, CI/CD', excludeKeywords: 'recruiter, junior' }
+        };
+
+        const countryCodes = { 'us': 'United States', 'ca': 'Canada', 'uk': 'United Kingdom', 'de': 'Germany', 'fr': 'France', 'au': 'Australia', 'in': 'India', 'sg': 'Singapore', 'nl': 'Netherlands', 'ie': 'Ireland' };
+
+        const platformSites = {
+            'linkedin': 'site:linkedin.com/in/',
+            'github': 'site:github.com',
+            'stackoverflow': 'site:stackoverflow.com/users/',
+            'twitter': 'site:twitter.com OR site:x.com',
+            'scholar': 'site:scholar.google.com/citations',
+            'dribbble': 'site:dribbble.com',
+            'behance': 'site:behance.net',
+            'kaggle': 'site:kaggle.com'
+        };
+
+        const platformNames = {
+            'linkedin': 'LinkedIn',
+            'github': 'GitHub', 
+            'stackoverflow': 'Stack Overflow',
+            'twitter': 'X / Twitter',
+            'scholar': 'Google Scholar',
+            'dribbble': 'Dribbble',
+            'behance': 'Behance',
+            'kaggle': 'Kaggle'
+        };
+
+        // Guide Modal Functions
+        function showGuide() {
+            document.getElementById('guideModal').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGuide() {
+            const modal = document.getElementById('guideModal');
+            const dontShowAgain = document.getElementById('dontShowAgain').checked;
+            
+            if (dontShowAgain) {
+                localStorage.setItem('talentScoutHideGuide', 'true');
+            }
+            
+            modal.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        function closeGuideOnOverlay(event) {
+            if (event.target.id === 'guideModal') {
+                closeGuide();
+            }
+        }
+
+        function checkFirstVisit() {
+            const hideGuide = localStorage.getItem('talentScoutHideGuide');
+            if (!hideGuide) {
+                showGuide();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSavedSearches();
+            setupPlatformTabs();
+            updateStats();
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                updateDarkModeIcon();
+            }
+            checkFirstVisit();
+        });
+
+        function setupPlatformTabs() {
+            document.querySelectorAll('.platform-tab').forEach(tab => {
+                tab.addEventListener('click', () => switchPlatform(tab.dataset.platform));
+            });
+        }
+
+        function switchPlatform(platform) {
+            currentPlatform = platform;
+            document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.platform === platform));
+            
+            const allPlatformFields = ['linkedin', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle'];
+            allPlatformFields.forEach(p => document.querySelectorAll(`.${p}-field`).forEach(el => el.classList.add('hidden')));
+            document.querySelectorAll(`.${platform}-field`).forEach(el => el.classList.remove('hidden'));
+
+            const titles = { 'linkedin': 'Search LinkedIn Profiles', 'github': 'Search GitHub Developers', 'stackoverflow': 'Search Stack Overflow Users', 'twitter': 'Search X / Twitter Profiles', 'scholar': 'Search Google Scholar Authors', 'dribbble': 'Search Dribbble Designers', 'behance': 'Search Behance Creatives', 'kaggle': 'Search Kaggle Data Scientists' };
+            document.getElementById('platform-title').textContent = titles[platform] || 'Search Profiles';
+
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('emailSection').classList.add('hidden');
+        }
+
+        function toggleMultiPlatform(element, platform) {
+            element.classList.toggle('selected');
+        }
+
+        function getSelectedMultiPlatforms() {
+            const selected = [];
+            document.querySelectorAll('.multi-platform-chip input:checked').forEach(input => selected.push(input.value));
+            return selected;
+        }
+
+        function toggleCompanyList(element, listName) {
+            element.classList.toggle('selected');
+            const idx = selectedCompanyLists.indexOf(listName);
+            if (idx > -1) {
+                selectedCompanyLists.splice(idx, 1);
+                selectedCompanies = selectedCompanies.filter(c => !companyLists[listName].includes(c));
+            } else {
+                selectedCompanyLists.push(listName);
+                selectedCompanies = [...new Set([...selectedCompanies, ...companyLists[listName]])];
+            }
+            updateSelectedCompaniesDisplay();
+        }
+
+        function updateSelectedCompaniesDisplay() {
+            const container = document.getElementById('selectedCompanies');
+            if (selectedCompanies.length > 0) {
+                container.style.display = 'flex';
+                container.innerHTML = '<span style="font-size: 12px; color: var(--text-secondary); width: 100%; margin-bottom: 8px;">Selected companies:</span>' + 
+                    selectedCompanies.map(c => `<span class="company-chip">${c} <span class="remove" onclick="removeCompany('${c}')">×</span></span>`).join('');
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function removeCompany(company) {
+            selectedCompanies = selectedCompanies.filter(c => c !== company);
+            updateSelectedCompaniesDisplay();
+        }
+
+        function updateSearchTips() {
+            const tips = [];
+            const jobTitle = document.getElementById('jobTitle').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const excludeKeywords = document.getElementById('excludeKeywords').value.trim();
+            const includeKeywords = document.getElementById('includeKeywords').value.trim();
+
+            if (!jobTitle) {
+                tips.push({ type: 'warning', text: 'Add a job title to get better results' });
+            }
+            if (!location && !document.getElementById('country').value) {
+                tips.push({ type: 'info', text: 'Consider adding a location to narrow results', action: 'addLocation' });
+            }
+            if (!excludeKeywords) {
+                tips.push({ type: 'info', text: 'Tip: Exclude "recruiter" and "HR" to filter out non-candidates', action: 'addExclusions' });
+            }
+            if (jobTitle && !document.getElementById('includeSimilar').checked) {
+                tips.push({ type: 'info', text: 'Enable "Similar Job Titles" to expand your search' });
+            }
+            if (selectedCompanies.length === 0 && jobTitle) {
+                tips.push({ type: 'info', text: 'Try targeting specific companies for better quality candidates' });
+            }
+            if (jobTitle && location && excludeKeywords) {
+                tips.push({ type: 'success', text: 'Your search looks well-optimized!' });
+            }
+
+            const tipsContainer = document.getElementById('searchTips');
+            const tipsList = document.getElementById('tipsList');
+
+            if (tips.length > 0) {
+                tipsList.innerHTML = tips.map(tip => `
+                    <div class="tip-item">
+                        <span class="tip-icon ${tip.type}">${tip.type === 'warning' ? '⚠️' : tip.type === 'success' ? '✓' : '💡'}</span>
+                        <span class="tip-text">${tip.text}${tip.action ? `<span class="tip-action" onclick="applyTipAction('${tip.action}')">Apply</span>` : ''}</span>
+                    </div>
+                `).join('');
+                tipsContainer.classList.add('visible');
+            } else {
+                tipsContainer.classList.remove('visible');
+            }
+        }
+
+        function applyTipAction(action) {
+            if (action === 'addLocation') {
+                document.getElementById('location').focus();
+            } else if (action === 'addExclusions') {
+                document.getElementById('excludeKeywords').value = 'recruiter, HR, talent acquisition';
+                updateSearchTips();
+            }
+        }
+
+        function loadTemplate(templateName) {
+            const template = templates[templateName];
+            if (!template) return;
+            document.getElementById('jobTitle').value = template.jobTitle || '';
+            document.getElementById('location').value = template.location || '';
+            document.getElementById('includeKeywords').value = template.includeKeywords || '';
+            document.getElementById('excludeKeywords').value = template.excludeKeywords || '';
+            updateSearchTips();
+            generateSearch();
+        }
+
+        function getSelectedDiversityTerms() {
+            const selected = [];
+            document.querySelectorAll('.diversity-checkbox:checked').forEach(checkbox => {
+                const terms = diversityTerms[checkbox.value];
+                if (terms) selected.push(...terms);
+            });
+            return selected;
+        }
+
+        function toggleDiversityOption(element) {
+            element.classList.toggle('selected');
+        }
+
+        function buildQuery(platform) {
+            const jobTitle = document.getElementById('jobTitle').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const includeKeywords = document.getElementById('includeKeywords').value.trim();
+            const excludeKeywords = document.getElementById('excludeKeywords').value.trim();
+
+            let query = platformSites[platform] || platformSites['linkedin'];
+
+            if (jobTitle) {
+                let titles = [`"${jobTitle}"`];
+                if (platform === 'linkedin' && document.getElementById('includeSimilar').checked) {
+                    const lowerTitle = jobTitle.toLowerCase();
+                    for (const [key, synonyms] of Object.entries(jobTitleSynonyms)) {
+                        if (lowerTitle.includes(key) || synonyms.some(s => lowerTitle.includes(s))) {
+                            synonyms.forEach(syn => { if (!titles.includes(`"${syn}"`)) titles.push(`"${syn}"`); });
+                            break;
+                        }
+                    }
+                }
+                selectedSimilarTitles.forEach(title => { if (!titles.includes(`"${title}"`)) titles.push(`"${title}"`); });
+                query += ' (' + titles.join(' OR ') + ')';
+            }
+
+            if (location) query += ` "${location}"`;
+
+            if (platform === 'linkedin') {
+                const country = document.getElementById('country').value;
+                if (country && countryCodes[country]) query += ` "${countryCodes[country]}"`;
+                const currentEmployer = document.getElementById('currentEmployer').value.trim();
+                if (currentEmployer) {
+                    const employers = currentEmployer.split(',').map(e => `"${e.trim()}"`).join(' OR ');
+                    query += ` (${employers})`;
+                }
+            }
+
+            // Add selected companies
+            if (selectedCompanies.length > 0) {
+                const companyQuery = selectedCompanies.map(c => `"${c}"`).join(' OR ');
+                query += ` (${companyQuery})`;
+            }
+
+            if (includeKeywords) {
+                const keywords = includeKeywords.split(',').map(k => `"${k.trim()}"`).join(' ');
+                query += ` ${keywords}`;
+            }
+
+            const diversitySelected = getSelectedDiversityTerms();
+            if (diversitySelected.length > 0) {
+                const diversityQuery = diversitySelected.map(t => `"${t}"`).join(' OR ');
+                query += ` (${diversityQuery})`;
+            }
+
+            if (excludeKeywords) {
+                const exclusions = excludeKeywords.split(',').map(k => `-"${k.trim()}"`).join(' ');
+                query += ` ${exclusions}`;
+            }
+
+            return query;
+        }
+
+        function generateSearch() {
+            currentJobTitle = document.getElementById('jobTitle').value.trim();
+            currentQuery = buildQuery(currentPlatform);
+            displayQuery(currentQuery);
+            generateEmailTemplate();
+            searchCount++;
+            localStorage.setItem('talentScoutSearchCount', searchCount.toString());
+            updateStats();
+            updateSearchTips();
+        }
+
+        function openMultiPlatformSearch() {
+            const platforms = getSelectedMultiPlatforms();
+            if (platforms.length === 0) {
+                alert('Please select at least one platform in the Multi-Platform Search section.');
+                return;
+            }
+
+            currentJobTitle = document.getElementById('jobTitle').value.trim();
+            
+            // Generate queries for all selected platforms
+            const queries = {};
+            platforms.forEach(platform => {
+                queries[platform] = buildQuery(platform);
+            });
+
+            // Display multi-results
+            currentQuery = queries[platforms[0]];
+            displayQuery(currentQuery);
+            
+            const multiResults = document.getElementById('multiResults');
+            const multiResultsList = document.getElementById('multiResultsList');
+            
+            multiResultsList.innerHTML = platforms.map(platform => `
+                <div class="multi-result-item">
+                    <div class="multi-result-info">
+                        <span style="font-size: 18px;">${getPlatformIcon(platform)}</span>
+                        <span class="multi-result-platform">${platformNames[platform]}</span>
+                    </div>
+                    <button class="btn btn-primary btn-small" onclick="openPlatformSearch('${platform}')">
+                        Open
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                            <polyline points="15,3 21,3 21,9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('');
+            
+            multiResults.classList.remove('hidden');
+            generateEmailTemplate();
+            
+            searchCount++;
+            localStorage.setItem('talentScoutSearchCount', searchCount.toString());
+            updateStats();
+
+            // Open all platforms in new tabs
+            platforms.forEach((platform, index) => {
+                setTimeout(() => {
+                    const url = `https://www.google.com/search?q=${encodeURIComponent(queries[platform])}`;
+                    window.open(url, '_blank');
+                }, index * 300);
+            });
+        }
+
+        function openPlatformSearch(platform) {
+            const query = buildQuery(platform);
+            const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.open(url, '_blank');
+        }
+
+        function displayQuery(query) {
+            document.getElementById('queryText').textContent = query;
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function generateEmailTemplate() {
+            if (!currentJobTitle) {
+                document.getElementById('emailSection').classList.add('hidden');
+                return;
+            }
+            const template = emailTemplates[currentEmailTone](currentJobTitle);
+            document.getElementById('emailTemplate').textContent = template;
+            document.getElementById('emailSection').classList.remove('hidden');
+        }
+
+        function setEmailTone(tone) {
+            currentEmailTone = tone;
+            document.querySelectorAll('.tone-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tone === tone));
+            generateEmailTemplate();
+        }
+
+        function regenerateEmail() {
+            const variations = {
+                professional: [`Dear [Candidate Name],\n\nYour profile caught my attention while researching talented ${currentJobTitle}s. At Shopify, we're constantly seeking exceptional individuals.\n\nWould you be available for a brief conversation?\n\nWarm regards,\n[Your Name]\nShopify`],
+                casual: [`Hey [Candidate Name]!\n\nJust saw your profile and thought — this person would be awesome at Shopify! Want to grab a virtual coffee?\n\n[Your Name]\nShopify`],
+                enthusiastic: [`Hi [Candidate Name]!\n\nWOW — your ${currentJobTitle} experience is incredible! I couldn't pass up the opportunity to reach out.\n\nLet's chat?\n\n[Your Name]\nShopify`],
+                concise: [`[Candidate Name],\n\nHiring ${currentJobTitle}s at Shopify. Saw your background — interested?\n\n[Your Name]`]
+            };
+            const toneVariations = variations[currentEmailTone];
+            document.getElementById('emailTemplate').textContent = toneVariations[Math.floor(Math.random() * toneVariations.length)];
+        }
+
+        function copyEmail() {
+            navigator.clipboard.writeText(document.getElementById('emailTemplate').textContent).then(() => alert('Email copied!'));
+        }
+
+        function openSearch() {
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(currentQuery)}`, '_blank');
+        }
+
+        function copyQuery() {
+            navigator.clipboard.writeText(currentQuery).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.classList.add('copied');
+                btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg> Copied!';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+                }, 2000);
+            });
+        }
+
+        function getAISuggestions() {
+            const jobTitle = document.getElementById('jobTitle').value.trim().toLowerCase();
+            if (!jobTitle) { alert('Please enter a job title first.'); return; }
+            let suggestions = [];
+            for (const [key, synonyms] of Object.entries(jobTitleSynonyms)) {
+                if (jobTitle.includes(key) || synonyms.some(s => jobTitle.includes(s))) {
+                    suggestions = [...synonyms, key];
+                    break;
+                }
+            }
+            if (suggestions.length === 0) {
+                if (jobTitle.includes('engineer')) suggestions = ['software engineer', 'senior engineer', 'staff engineer'];
+                else if (jobTitle.includes('developer')) suggestions = ['software developer', 'web developer', 'full stack developer'];
+                else if (jobTitle.includes('manager')) suggestions = ['engineering manager', 'product manager', 'project manager'];
+            }
+            suggestions = [...new Set(suggestions)].filter(s => s.toLowerCase() !== jobTitle);
+            const panel = document.getElementById('suggestionsPanel');
+            document.getElementById('suggestionChips').innerHTML = suggestions.map(s => `<button class="suggestion-chip" onclick="addSuggestion('${s}')">${s}</button>`).join('');
+            panel.classList.remove('hidden');
+        }
+
+        function addSuggestion(title) {
+            if (!selectedSimilarTitles.includes(title)) {
+                selectedSimilarTitles.push(title);
+                updateSelectedTitles();
+            }
+            generateSearch();
+        }
+
+        function updateSelectedTitles() {
+            const container = document.getElementById('similarTitlesContainer');
+            const chipsEl = document.getElementById('selectedTitles');
+            if (selectedSimilarTitles.length > 0) {
+                container.classList.remove('hidden');
+                chipsEl.innerHTML = selectedSimilarTitles.map(title => `<span class="chip selected">${title}<span class="remove" onclick="removeSimilarTitle('${title}')">×</span></span>`).join('');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function removeSimilarTitle(title) {
+            selectedSimilarTitles = selectedSimilarTitles.filter(t => t !== title);
+            updateSelectedTitles();
+            if (currentQuery) generateSearch();
+        }
+
+        function clearForm() {
+            document.querySelectorAll('.form-input, .form-select').forEach(el => {
+                if (el.tagName === 'SELECT') el.value = el.id === 'country' ? 'ca' : '';
+                else el.value = '';
+            });
+            document.getElementById('includeSimilar').checked = true;
+            document.querySelectorAll('.diversity-checkbox').forEach(cb => { cb.checked = false; cb.closest('.diversity-option').classList.remove('selected'); });
+            document.querySelectorAll('.company-list-card').forEach(c => c.classList.remove('selected'));
+            selectedCompanyLists = [];
+            selectedCompanies = [];
+            updateSelectedCompaniesDisplay();
+            selectedSimilarTitles = [];
+            updateSelectedTitles();
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('emailSection').classList.add('hidden');
+            document.getElementById('suggestionsPanel').classList.add('hidden');
+            document.getElementById('multiResults').classList.add('hidden');
+            document.getElementById('searchTips').classList.remove('visible');
+            currentQuery = '';
+            currentJobTitle = '';
+        }
+
+        function saveSearch() {
+            if (!currentQuery) return;
+            savedSearches.unshift({ id: Date.now(), platform: currentPlatform, title: document.getElementById('jobTitle').value.trim() || 'Untitled Search', query: currentQuery, timestamp: new Date().toISOString() });
+            if (savedSearches.length > 10) savedSearches = savedSearches.slice(0, 10);
+            localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
+            renderSavedSearches();
+            updateStats();
+        }
+
+        function renderSavedSearches() {
+            const container = document.getElementById('savedSearchesList');
+            if (savedSearches.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No saved searches yet.</p>';
+                return;
+            }
+            container.innerHTML = savedSearches.map(s => `
+                <div class="saved-search-item" onclick="loadSavedSearch(${s.id})">
+                    <div class="saved-search-info">
+                        <div class="saved-search-platform">${getPlatformIcon(s.platform)}</div>
+                        <span class="saved-search-text">${s.title}</span>
+                    </div>
+                    <button class="saved-search-delete" onclick="event.stopPropagation(); deleteSavedSearch(${s.id})">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function getPlatformIcon(platform) {
+            const icons = { linkedin: '🔗', github: '🐙', stackoverflow: '📚', twitter: '🐦', scholar: '🎓', dribbble: '🏀', behance: '🎨', kaggle: '📊' };
+            return icons[platform] || '🔍';
+        }
+
+        function loadSavedSearch(id) {
+            const search = savedSearches.find(s => s.id === id);
+            if (search) { switchPlatform(search.platform); currentQuery = search.query; displayQuery(search.query); }
+        }
+
+        function deleteSavedSearch(id) {
+            savedSearches = savedSearches.filter(s => s.id !== id);
+            localStorage.setItem('talentScoutSearches', JSON.stringify(savedSearches));
+            renderSavedSearches();
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('searchCount').textContent = searchCount;
+            document.getElementById('savedCount').textContent = savedSearches.length;
+        }
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            localStorage.setItem('talentScoutDarkMode', isDarkMode.toString());
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const icon = document.getElementById('darkModeIcon');
+            icon.innerHTML = isDarkMode ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+
+        function toggleCheatsheet() {
+            document.getElementById('cheatsheetContent').classList.toggle('open');
+            document.getElementById('cheatsheetIcon').classList.toggle('open');
+        }
+
+        function toggleDiversitySection() {
+            document.getElementById('diversityContent').classList.toggle('open');
+            document.getElementById('diversityIcon').classList.toggle('open');
+        }
+
+        function toggleCompanySection() {
+            document.getElementById('companyContent').classList.toggle('open');
+            document.getElementById('companyIcon').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
