@@ -2,32 +2,25 @@
 
 AI-powered sourcing platform for Shopify hiring managers. Live at [talent-scout.quick.shopify.io](https://talent-scout.quick.shopify.io/).
 
-## Deploy to Quick (from Cursor or terminal)
+---
 
-1. **Connect your repo in Quick** (one-time, at [quick.shopify.io](https://quick.shopify.io/)):
-   - Open your Talent Scout app → Settings / Deploy / Source
-   - Connect GitHub repo: `alixbalevi/talent-scout`
-   - Set branch: `main`
-   - Enable auto-deploy on push if available
+## Deploy to Quick (run after any code changes)
 
-2. **Commit and push** (triggers deploy):
+Quick does **not** use GitHub. Deploy from your machine.
 
-   ```bash
-   cd /Users/alixbalevi/ai-sourcing-platform
-   git add .
-   git commit -m "Your change description"
-   git push origin main
-   ```
+**Here is the code to deploy:**
+```bash
+cd /Users/alixbalevi/ai-sourcing-platform && quick deploy . talent-scout
+```
+Type **`y`** when asked to overwrite. Then refresh https://talent-scout.quick.shopify.io/
 
-   Or one-liner after making edits:
+**First time only:** `npm install -g @shopify/quick` if you don’t have the CLI.
 
-   ```bash
-   cd /Users/alixbalevi/ai-sourcing-platform && git add . && git commit -m "Describe your changes" && git push origin main
-   ```
+**Alternative:** Go to [quick.shopify.io](https://quick.shopify.io/) and drag-and-drop the project folder contents.
 
-3. Wait a minute, then check https://talent-scout.quick.shopify.io/
-
-## Repo
+## Repo (for backup/collab only)
 
 - **GitHub:** [github.com/alixbalevi/talent-scout](https://github.com/alixbalevi/talent-scout)
 - **Branch:** `main`
+
+Push changes to GitHub for history; run `quick deploy` when you want the live site updated.

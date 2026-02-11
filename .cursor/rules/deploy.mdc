@@ -1,0 +1,17 @@
+---
+description: Always include Talent Scout deploy command when working on this project
+globs: "**/*"
+alwaysApply: true
+---
+
+# Talent Scout — Deploy reminder
+
+When you make changes to Talent Scout (ai-sourcing-platform) or finish a task for this project, **always** end your response with the deploy instructions so the user can ship the update.
+
+Use this exact block:
+
+**Here is the code to deploy:**
+```bash
+cd /Users/alixbalevi/ai-sourcing-platform && quick deploy . talent-scout
+```
+Type **`y`** when prompted to overwrite, then refresh https://talent-scout.quick.shopify.io/

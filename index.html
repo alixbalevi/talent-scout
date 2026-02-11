@@ -92,8 +92,8 @@
         }
 
         .logo-icon {
-            width: 65px;
-            height: 65px;
+            width: 88px;
+            height: 88px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -190,9 +190,9 @@
 
         .templates-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 0;
         }
 
         .templates-header h3 {
@@ -201,36 +201,31 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin: 0;
         }
 
-        .templates-grid {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .template-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
+        .templates-dropdown {
+            min-width: 220px;
+            max-width: 320px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-primary);
-            transition: all 0.2s ease;
+            appearance: auto;
         }
 
-        .template-btn:hover {
+        .templates-dropdown:hover {
+            border-color: var(--primary-light);
+        }
+
+        .templates-dropdown:focus {
+            outline: none;
             border-color: var(--primary);
-            background: rgba(0, 128, 96, 0.05);
-        }
-
-        .template-btn .emoji {
-            font-size: 16px;
+            box-shadow: 0 0 0 2px rgba(0, 128, 96, 0.2);
         }
 
         /* Platform Tabs */
@@ -389,6 +384,165 @@
             gap: 8px;
         }
 
+        .company-ai-block {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .company-ai-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.45;
+        }
+
+        .company-ai-prompt-wrap {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .company-ai-prompt-wrap textarea {
+            flex: 1;
+            min-height: 72px;
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            resize: vertical;
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .company-ai-prompt-wrap textarea::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .company-ai-prompt-wrap textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 128, 96, 0.15);
+        }
+
+        .company-ai-results-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            margin-top: 12px;
+        }
+
+        .company-ai-results-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .company-ai-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        .company-ai-chip .add-company-btn {
+            padding: 2px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .company-ai-chip .add-company-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Tech stack hover tooltip on company chips */
+        .company-ai-chip.chip-with-tech {
+            position: relative;
+            cursor: default;
+        }
+        .company-ai-chip .chip-tech-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            margin-bottom: 6px;
+            padding: 8px 10px;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-size: 11px;
+            line-height: 1.4;
+            border-radius: 6px;
+            white-space: normal;
+            max-width: 220px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        .company-ai-chip .chip-tech-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 12px;
+            border: 5px solid transparent;
+            border-top-color: #1e293b;
+        }
+        .company-ai-chip:hover .chip-tech-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        .company-ai-chip .chip-tech-tooltip strong {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+            color: #94a3b8;
+        }
+
+        .company-list-or {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .toast-message {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 18px;
+            background: var(--text-primary);
+            color: var(--background);
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        .toast-message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .company-list-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -457,82 +611,6 @@
 
         .company-chip .remove:hover {
             opacity: 1;
-        }
-
-        /* Search Quality Tips */
-        .search-tips {
-            background: linear-gradient(135deg, rgba(185, 137, 0, 0.08) 0%, rgba(255, 183, 0, 0.08) 100%);
-            border: 1px solid rgba(185, 137, 0, 0.3);
-            border-radius: 10px;
-            padding: 14px 16px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .search-tips.visible {
-            display: block;
-        }
-
-        .search-tips h4 {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--warning);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tip-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(185, 137, 0, 0.15);
-            font-size: 13px;
-        }
-
-        .tip-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .tip-icon {
-            flex-shrink: 0;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        .tip-icon.warning {
-            background: rgba(185, 137, 0, 0.2);
-            color: var(--warning);
-        }
-
-        .tip-icon.success {
-            background: rgba(0, 128, 96, 0.2);
-            color: var(--success);
-        }
-
-        .tip-icon.info {
-            background: rgba(0, 145, 226, 0.2);
-            color: var(--info);
-        }
-
-        .tip-text {
-            flex: 1;
-        }
-
-        .tip-action {
-            color: var(--primary);
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: underline;
-            margin-left: 4px;
         }
 
         /* GitHub Filters */
@@ -721,6 +799,36 @@
             font-weight: 600;
         }
 
+        /* Find similar candidates — yellow accent (distinct from diversity) */
+        .profile-similar-section-wrap {
+            background: linear-gradient(135deg, rgba(185, 137, 0, 0.08) 0%, rgba(255, 183, 0, 0.06) 100%);
+            border: 1px solid rgba(185, 137, 0, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .profile-similar-section-wrap .diversity-header h4 {
+            color: var(--warning);
+        }
+        .profile-similar-section-wrap .diversity-header:hover h4 {
+            color: #8B6914;
+        }
+
+        /* Similar tech stack — teal accent */
+        .tech-stack-section-wrap {
+            background: linear-gradient(135deg, rgba(0, 128, 128, 0.08) 0%, rgba(0, 145, 140, 0.06) 100%);
+            border: 1px solid rgba(0, 128, 128, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .tech-stack-section-wrap .diversity-header h4 {
+            color: #0d7377;
+        }
+        .tech-stack-section-wrap .diversity-header:hover h4 {
+            color: #0a5c5f;
+        }
+
         .diversity-description {
             font-size: 12px;
             color: var(--text-secondary);
@@ -768,6 +876,144 @@
 
         .diversity-option-content p {
             font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        /* Find similar to profile */
+        .profile-similar-section {
+            background: linear-gradient(135deg, rgba(92, 106, 196, 0.08) 0%, rgba(0, 145, 226, 0.08) 100%);
+            border: 1px solid rgba(92, 106, 196, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .profile-similar-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-similar-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.45;
+        }
+
+        .profile-paste-wrap {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .profile-paste-wrap textarea {
+            flex: 1;
+            min-height: 100px;
+            padding: 12px;
+            font-size: 13px;
+            font-family: inherit;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            resize: vertical;
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .profile-paste-wrap textarea::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .profile-result-block {
+            margin-top: 16px;
+            padding: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .profile-result-block .profile-feedback {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .profile-result-block .profile-suggestions {
+            margin: 10px 0;
+        }
+
+        .profile-result-block .profile-query-wrap {
+            margin-top: 12px;
+        }
+
+        .profile-result-block .profile-query-wrap label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .profile-result-block .profile-query-text {
+            display: block;
+            margin-top: 4px;
+            padding: 8px;
+            background: var(--background);
+            border-radius: 6px;
+            font-size: 12px;
+            word-break: break-word;
+        }
+
+        .profile-result-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .profile-input-row {
+            margin-bottom: 12px;
+        }
+
+        .profile-input-row label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .profile-input-row input[type="text"],
+        .profile-input-row input[type="url"] {
+            width: 100%;
+            max-width: 480px;
+            padding: 8px 12px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface);
+            color: var(--text-primary);
+        }
+
+        .profile-upload-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .profile-upload-row input[type="file"] {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .profile-upload-row .upload-hint {
+            font-size: 12px;
             color: var(--text-secondary);
         }
 
@@ -1821,6 +2067,7 @@
     </style>
     <!-- Quick Client for Database -->
     <script src="/client/quick.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -1831,7 +2078,7 @@
                 </div>
                 <div>
                     <h1>Talent Scout</h1>
-                    <div class="logo-tagline">AI-Powered Candidate Sourcing</div>
+                    <div class="logo-tagline">Your powerful sourcing tool</div>
                 </div>
             </div>
             <div class="header-actions">
@@ -1850,6 +2097,12 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                     </svg>
                 </button>
+                <button class="dark-mode-toggle" onclick="window.location.reload()" title="Refresh page">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23,4 23,10 17,10"/>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -1859,29 +2112,16 @@
         <div class="templates-section">
             <div class="templates-header">
                 <h3>Quick Templates</h3>
-            </div>
-            <div class="templates-grid">
-                <button class="template-btn" onclick="loadTemplate('software-engineer')">
-                    <span class="emoji">👩‍💻</span> Software Engineer
-                </button>
-                <button class="template-btn" onclick="loadTemplate('product-manager')">
-                    <span class="emoji">📊</span> Product Manager
-                </button>
-                <button class="template-btn" onclick="loadTemplate('designer')">
-                    <span class="emoji">🎨</span> Designer
-                </button>
-                <button class="template-btn" onclick="loadTemplate('data-scientist')">
-                    <span class="emoji">🔬</span> Data Scientist
-                </button>
-                <button class="template-btn" onclick="loadTemplate('engineering-manager')">
-                    <span class="emoji">👔</span> Eng Manager
-                </button>
-                <button class="template-btn" onclick="loadTemplate('devops')">
-                    <span class="emoji">☁️</span> DevOps / SRE
-                </button>
-                <button class="template-btn" onclick="loadTemplate('data-engineer')">
-                    <span class="emoji">🔧</span> Data Engineer
-                </button>
+                <select class="templates-dropdown" id="quickTemplatesSelect" onchange="onTemplateSelect(this)">
+                    <option value="">Choose a role template...</option>
+                    <option value="software-engineer">👩‍💻 Software Engineer</option>
+                    <option value="product-manager">📊 Product Manager</option>
+                    <option value="designer">🎨 Designer</option>
+                    <option value="data-scientist">🔬 Data Scientist</option>
+                    <option value="engineering-manager">👔 Engineering Manager</option>
+                    <option value="devops">☁️ DevOps / SRE</option>
+                    <option value="data-engineer">🔧 Data Engineer</option>
+                </select>
             </div>
         </div>
 
@@ -2160,19 +2400,8 @@
                 </div>
             </div>
 
-            <!-- Search Quality Tips -->
-            <div class="search-tips" id="searchTips">
-                <h4>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                    Search Quality Tips
-                </h4>
-                <div id="tipsList"></div>
-            </div>
-
             <!-- Company Targeting Section -->
-            <div class="company-targeting-section">
+            <div class="company-targeting-section" id="targetCompaniesSection">
                 <div class="company-targeting-header" onclick="toggleCompanySection()">
                     <h4>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2185,6 +2414,22 @@
                     </svg>
                 </div>
                 <div class="collapsible-content open" id="companyContent">
+                    <div class="company-ai-block">
+                        <p class="company-ai-description">Describe what you're looking for — AI will suggest target companies to add to your search.</p>
+                        <div class="company-ai-prompt-wrap">
+                            <textarea id="companyAiPrompt" placeholder="e.g., Series B fintech startups in Toronto, or companies known for strong design culture, or FAANG alternatives in Europe..."></textarea>
+                            <button type="button" class="btn btn-primary" id="companyAiBtn" onclick="getAiCompanySuggestions()">
+                                <span id="companyAiBtnText">Get company suggestions</span>
+                            </button>
+                        </div>
+                        <div id="companyAiLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Finding companies...</div>
+                        <div id="companyAiResults" class="hidden">
+                            <div class="company-ai-results-label">Suggested companies — add to your search:</div>
+                            <div class="company-ai-results-chips" id="companyAiResultsChips"></div>
+                            <button type="button" class="btn" id="companyAiAddAllBtn" onclick="addAllAiCompanies()" style="margin-top: 10px; font-size: 12px;">Add all</button>
+                        </div>
+                    </div>
+                    <p class="company-list-or">Or choose from preset lists:</p>
                     <div class="company-list-grid">
                         <div class="company-list-card" onclick="toggleCompanyList(this, 'faang')">
                             <h5>🏢 FAANG / Big Tech</h5>
@@ -2224,7 +2469,6 @@
                             <polyline points="22 4 12 14.01 9 11.01"/>
                         </svg>
                         Candidate Activity Signals
-                        <span class="signals-badge">NEW</span>
                     </h4>
                     <svg class="collapse-icon" id="signalsIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
                         <polyline points="6,9 12,15 18,9"/>
@@ -2292,7 +2536,6 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                         </svg>
                         Diversity Sourcing
-                        <span class="diversity-badge">BETA</span>
                     </h4>
                     <svg class="collapse-icon" id="diversityIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
                         <polyline points="6,9 12,15 18,9"/>
@@ -2345,6 +2588,138 @@
                                 <p>Bootcamp grads, career changers</p>
                             </div>
                         </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="disability" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Disability & Neurodiversity</h5>
+                                <p>Disability:IN, Lime Connect, Neurodiversity in Tech</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="parents" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Parents & Returners</h5>
+                                <p>Path Forward, reacHIRE, Mother Coders, iRelaunch</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="immigrants" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Immigrants & Newcomers</h5>
+                                <p>TRIEC, Upwardly Global, NPower, skilled immigrants</p>
+                            </div>
+                        </label>
+                        <label class="diversity-option" onclick="toggleDiversityOption(this)">
+                            <input type="checkbox" value="indigenous" class="diversity-checkbox">
+                            <div class="diversity-option-content">
+                                <h5>Indigenous in Tech</h5>
+                                <p>AISES, Indigenous in Tech, NACME</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Find similar to a profile -->
+            <div class="diversity-section profile-similar-section-wrap">
+                <div class="diversity-header" onclick="toggleProfileSimilarSection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Find similar candidates
+                    </h4>
+                    <svg class="collapse-icon" id="profileSimilarIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="profileSimilarContent">
+                    <p class="profile-similar-tldr" style="font-weight: 600; font-size: 13px; margin-bottom: 8px; color: var(--text-primary);">Found someone great? Use their profile to find more candidates like them.</p>
+                    <p class="diversity-description" style="margin-bottom: 12px;">
+                        LinkedIn doesn’t let us read profiles from here — so we work with PDFs or pasted text. Save the profile as a PDF (Print → Save as PDF in your browser), upload it below, and we’ll suggest search terms to find similar people. You can also paste profile text or upload a resume.
+                    </p>
+                    <div class="profile-input-row">
+                        <label for="profileLinkedInUrl">LinkedIn profile URL</label>
+                        <input type="url" id="profileLinkedInUrl" placeholder="https://www.linkedin.com/in/...">
+                        <span class="upload-hint" style="display: block; margin-top: 4px;">We’ll open it in a new tab so you can save the profile as a PDF.</span>
+                    </div>
+                    <div id="profileLinkedInOnlyMessage" class="hidden" style="margin-bottom: 12px; padding: 12px; background: rgba(10, 102, 194, 0.1); border: 1px solid rgba(10, 102, 194, 0.3); border-radius: 8px; font-size: 13px; color: var(--text-primary);">
+                        We’ve opened the profile in a new tab. Save it as a PDF (Print → Save as PDF), then upload the PDF below and click <strong>Analyze & get search terms</strong>.
+                    </div>
+                    <div class="profile-upload-row">
+                        <input type="file" id="profilePdfInput" accept=".pdf,application/pdf" onchange="handleProfilePdfUpload(event)">
+                        <span class="upload-hint">Upload a PDF (profile or resume) and we’ll pull out the text for you.</span>
+                    </div>
+                    <div class="profile-paste-wrap">
+                        <textarea id="profilePasteInput" placeholder="Or paste profile or resume text here. If you upload a PDF, we’ll fill this for you."></textarea>
+                        <button type="button" class="btn btn-primary" id="profileAnalyzeBtn" onclick="analyzeProfileFromPaste()">
+                            <span id="profileAnalyzeBtnText">Analyze & get search terms</span>
+                        </button>
+                    </div>
+                    <div id="profileAnalyzeLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Analyzing profile...</div>
+                    <div id="profileResultBlock" class="hidden" style="margin-top: 12px;">
+                        <div class="profile-result-block">
+                            <div class="profile-feedback" id="profileFeedback"></div>
+                            <div class="profile-suggestions" id="profileSuggestions"></div>
+                            <div class="profile-query-wrap">
+                                <label>Search query to find similar candidates</label>
+                                <pre class="profile-query-text" id="profileQueryText"></pre>
+                            </div>
+                            <div class="profile-result-actions">
+                                <button type="button" class="btn btn-primary" onclick="applyProfileSuggestions()">Use in search</button>
+                                <button type="button" class="btn btn-secondary" onclick="copyProfileQuery(event)">Copy query</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar tech stack -->
+            <div class="diversity-section tech-stack-section-wrap">
+                <div class="diversity-header" onclick="toggleTechStackSection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                        Similar tech stack
+                    </h4>
+                    <svg class="collapse-icon" id="techStackIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="techStackContent">
+                    <p class="diversity-description" style="margin-bottom: 14px;">
+                        Find companies to add to Target Companies in two ways: by a reference company (similar tech stack) or by listing technologies you want (e.g. Ruby, Python).
+                    </p>
+                    <div class="tech-stack-block">
+                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Find similar to a company</label>
+                        <div class="company-ai-prompt-wrap">
+                            <input type="text" class="form-input" id="techStackCompanyInput" placeholder="e.g., Shopify, Stripe, Vercel..." style="flex: 1; min-width: 0;">
+                            <button type="button" class="btn btn-primary" id="techStackBtn" onclick="getTechStackCompanySuggestions()">
+                                <span id="techStackBtnText">Find similar tech stack companies</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="company-list-or" style="margin: 14px 0 8px;">Or</p>
+                    <div class="tech-stack-block">
+                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Find companies that use this tech</label>
+                        <div class="company-ai-prompt-wrap">
+                            <input type="text" class="form-input" id="techStackTechInput" placeholder="e.g., Ruby, Python, React, PostgreSQL, AWS..." style="flex: 1; min-width: 0;">
+                            <button type="button" class="btn btn-primary" id="techByTechBtn" onclick="getCompaniesByTechSuggestions()">
+                                <span id="techByTechBtnText">Find companies using this tech</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="techStackLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;"></div>
+                    <div id="techStackResults" class="hidden">
+                        <div class="company-ai-results-label" id="techStackResultsLabel">Companies — hover to see technologies. <strong>Add</strong> sends them to <strong>Target Companies</strong> (section above); they’ll appear there.</div>
+                        <div class="company-ai-results-chips" id="techStackResultsChips"></div>
+                        <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
+                            <button type="button" class="btn" id="techStackAddAllBtn" onclick="addAllTechStackCompanies()" style="font-size: 12px;">Add all</button>
+                            <button type="button" class="btn btn-secondary" id="techStackRefreshBtn" onclick="refreshTechStackSuggestions()" style="font-size: 12px;" title="Get a different set of companies (less obvious picks)">Refresh for more</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2538,27 +2913,39 @@
                 <div class="cheatsheet-grid" style="margin-top: 16px;">
                     <div class="cheatsheet-item">
                         <code>"exact phrase"</code>
-                        <p>Search for an exact phrase, e.g., "software engineer"</p>
+                        <p>Search for an exact phrase, e.g. "software engineer"</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>AND</code>
+                        <p>Must contain both terms: Python AND "machine learning"</p>
                     </div>
                     <div class="cheatsheet-item">
                         <code>OR</code>
                         <p>Match either term: "engineer" OR "developer"</p>
                     </div>
                     <div class="cheatsheet-item">
-                        <code>-exclude</code>
-                        <p>Exclude a term: engineer -recruiter</p>
-                    </div>
-                    <div class="cheatsheet-item">
-                        <code>site:linkedin.com/in/</code>
-                        <p>Search only LinkedIn profiles (X-Ray search)</p>
+                        <code>-</code> or <code>NOT</code>
+                        <p>Exclude a term: engineer -recruiter or engineer NOT recruiter</p>
                     </div>
                     <div class="cheatsheet-item">
                         <code>(grouping)</code>
-                        <p>Group terms: (engineer OR developer) Toronto</p>
+                        <p>Group terms: (engineer OR developer) AND Toronto</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>site:domain.com</code>
+                        <p>Search only that site, e.g. site:linkedin.com/in/ or site:github.com</p>
                     </div>
                     <div class="cheatsheet-item">
                         <code>intitle:</code>
-                        <p>Search in page title: intitle:"senior engineer"</p>
+                        <p>Term in page title: intitle:"senior engineer"</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>inurl:</code>
+                        <p>Term in URL: inurl:engineer</p>
+                    </div>
+                    <div class="cheatsheet-item">
+                        <code>*</code> (wildcard)
+                        <p>Match any word: "software * engineer"</p>
                     </div>
                 </div>
             </div>
@@ -2597,7 +2984,75 @@
                 <button class="modal-close" onclick="closeGuide()">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Boolean Cheat Sheet - IMPORTANT -->
+                <div class="guide-divider">
+                    <span>How it works</span>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Pick a platform</h4>
+                        <p>Choose where to search: LinkedIn, GitHub, Stack Overflow, X, Scholar, Dribbble, Behance, Kaggle, Wellfound, Substack, Dev.to, Product Hunt, Polywork, Bluesky, Quora, Speaker Deck.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Job details</h4>
+                        <p>Use <strong>Quick Templates</strong> to load a role, then add title, location, and keywords. Specific = better results.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Target Companies</h4>
+                        <p>Describe what you want and hit <strong>Get company suggestions</strong>, or use preset lists. Add companies to your search—they show up in your query.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Similar tech stack</h4>
+                        <p>Enter a company name <em>or</em> a list of tech (e.g. Ruby, React). Hover chips to see tech; Add sends them to Target Companies. <strong>Refresh for more</strong> gets a different set.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Find similar candidates</h4>
+                        <p>Paste a profile or upload a PDF, then <strong>Analyze</strong>. Use in search fills the form so you can find more people like them.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Diversity Sourcing</h4>
+                        <p>Add terms for Disability & Neurodiversity, Parents & Returners, Immigrants & Newcomers, or Indigenous in Tech.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Generate & search</h4>
+                        <p><strong>Generate Search</strong> builds your query. <strong>Open in Google</strong> (or the platform button) runs it. Save for later; switch tabs to try another platform.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>Reach out</h4>
+                        <p>Use the email template below. Pick a tone, regenerate if you want something different, then copy and personalize.</p>
+                    </div>
+                </div>
+
+                <!-- Boolean search basics -->
                 <div class="guide-boolean-section">
                     <div class="guide-boolean-header">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D82C0D" stroke-width="2">
@@ -2605,9 +3060,9 @@
                             <line x1="12" y1="8" x2="12" y2="12"/>
                             <line x1="12" y1="16" x2="12.01" y2="16"/>
                         </svg>
-                        <h4>Master Boolean Search - It's Essential!</h4>
+                        <h4>Boolean search basics</h4>
                     </div>
-                    <p class="guide-boolean-intro">Boolean operators are the foundation of effective sourcing. Without them, your searches won't find the right candidates. Learn these basics:</p>
+                    <p class="guide-boolean-intro">These operators power your search. Get to know them:</p>
                     
                     <div class="guide-boolean-grid">
                         <div class="guide-boolean-item">
@@ -2615,102 +3070,41 @@
                             <span>Search for exact words together</span>
                         </div>
                         <div class="guide-boolean-item">
-                            <code>OR</code>
-                            <span>Match either term (more results)</span>
-                        </div>
-                        <div class="guide-boolean-item">
                             <code>AND</code>
                             <span>Must contain both terms</span>
                         </div>
                         <div class="guide-boolean-item">
-                            <code>-exclude</code>
-                            <span>Remove unwanted results</span>
+                            <code>OR</code>
+                            <span>Match either term (more results)</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>-</code> or <code>NOT</code>
+                            <span>Exclude / remove unwanted results</span>
                         </div>
                         <div class="guide-boolean-item">
                             <code>(grouping)</code>
                             <span>Group terms together</span>
                         </div>
                         <div class="guide-boolean-item">
-                            <code>site:linkedin.com/in/</code>
-                            <span>X-Ray search LinkedIn</span>
+                            <code>site:domain.com</code>
+                            <span>Search only that site (e.g. LinkedIn, GitHub)</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>intitle:</code>
+                            <span>Term appears in page title</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>inurl:</code>
+                            <span>Term appears in the URL</span>
+                        </div>
+                        <div class="guide-boolean-item">
+                            <code>*</code>
+                            <span>Wildcard — matches any word</span>
                         </div>
                     </div>
 
                     <div class="guide-boolean-example">
                         <strong>Example:</strong> <code>site:linkedin.com/in/ ("Software Engineer" OR "Developer") AND Python -recruiter</code>
-                    </div>
-                </div>
-
-                <div class="guide-divider">
-                    <span>How to use this tool</span>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>Choose Your Platform</h4>
-                        <p>Select where you want to search for candidates using the platform tabs. Each platform is optimized for different types of roles.</p>
-                        <div class="tip">💡 LinkedIn is great for most roles. Try GitHub for developers, Dribbble/Behance for designers, Wellfound for startup talent, Substack/Dev.to for writers and technical bloggers, Product Hunt for makers, and Speaker Deck for conference speakers.</div>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Enter Job Details</h4>
-                        <p>Fill in the job title, location, and any specific keywords you want to include or exclude. The more specific you are, the better your results will be.</p>
-                        <div class="tip">💡 Use the <strong>Quick Templates</strong> at the top for common roles like Software Engineer or Product Manager.</div>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Target Specific Companies</h4>
-                        <p>Expand the <strong>Target Companies</strong> section to source from specific company lists like FAANG, Canadian Tech, or AI startups. These candidates often have relevant experience.</p>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h4>Use Diversity Sourcing (Optional)</h4>
-                        <p>Expand the <strong>Diversity Sourcing</strong> section to find candidates from underrepresented groups. This searches for affiliations with professional organizations like Women Who Code, /dev/color, and HBCUs.</p>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h4>Generate & Search</h4>
-                        <p>Click <strong>Generate Search</strong> to create your boolean query, then <strong>Open in Google</strong> to see results. You can switch platforms using the tabs at the top.</p>
-                    </div>
-                </div>
-
-                <div class="guide-step">
-                    <div class="step-number">6</div>
-                    <div class="step-content">
-                        <h4>Reach Out to Candidates</h4>
-                        <p>Use the auto-generated <strong>Outreach Email Template</strong> below the search results. Choose your tone (Professional, Casual, Enthusiastic, or Concise) and click <strong>Regenerate</strong> for variations.</p>
-                    </div>
-                </div>
-
-                <div class="guide-features">
-                    <div class="guide-feature">
-                        <span class="guide-feature-icon">💾</span>
-                        <span class="guide-feature-text">Save searches for later</span>
-                    </div>
-                    <div class="guide-feature">
-                        <span class="guide-feature-icon">🌙</span>
-                        <span class="guide-feature-text">Dark mode available</span>
-                    </div>
-                    <div class="guide-feature">
-                        <span class="guide-feature-icon">📋</span>
-                        <span class="guide-feature-text">Copy queries & emails</span>
-                    </div>
-                    <div class="guide-feature">
-                        <span class="guide-feature-icon">🤖</span>
-                        <span class="guide-feature-text">AI title suggestions</span>
                     </div>
                 </div>
             </div>
@@ -2754,11 +3148,13 @@
                     // Fallback to localStorage if not on Quick
                     savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
                     renderSavedSearches();
+                    updateStats();
                 }
             } catch (error) {
                 console.error('Database init error:', error);
                 savedSearches = JSON.parse(localStorage.getItem('talentScoutSearches') || '[]');
                 renderSavedSearches();
+                updateStats();
             }
         }
 
@@ -2769,8 +3165,10 @@
                     savedSearches = results.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                     renderSavedSearches();
                 }
+                updateStats();
             } catch (error) {
                 console.error('Load searches error:', error);
+                updateStats();
             }
         }
 
@@ -2834,7 +3232,11 @@
             'bipoc': ['/dev/color', 'NSBE', 'SHPE', 'Techqueria', 'Black in Tech', 'ColorStack', 'Code2040'],
             'lgbtq': ['Lesbians Who Tech', 'Out in Tech', 'oSTEM', 'Pride in Tech', 'Queer in Tech'],
             'veterans': ['VetsinTech', 'Hiring Our Heroes', 'Operation Code', 'Military Veteran'],
-            'firstgen': ['bootcamp', 'Flatiron School', 'General Assembly', 'Hack Reactor', 'App Academy', 'career changer']
+            'firstgen': ['bootcamp', 'Flatiron School', 'General Assembly', 'Hack Reactor', 'App Academy', 'career changer'],
+            'disability': ['Disability:IN', 'Lime Connect', 'Neurodiversity in Tech', 'AbilityNet', 'autism at work', 'disability inclusion'],
+            'parents': ['Path Forward', 'reacHIRE', 'Mother Coders', 'iRelaunch', 'returnship', 'career reentry'],
+            'immigrants': ['TRIEC', 'Upwardly Global', 'NPower', 'skilled immigrant', 'newcomer', 'refugee professional'],
+            'indigenous': ['AISES', 'Indigenous in Tech', 'NACME', 'American Indian Science', 'First Nations', 'Indigenous tech']
         };
 
         // Email templates by tone
@@ -3010,6 +3412,21 @@ Shopify`
 
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('emailSection').classList.add('hidden');
+
+            // If form has search terms (e.g. from "Find similar candidates"), rebuild query for this platform so the same terms work on GitHub, etc.
+            const jobTitle = document.getElementById('jobTitle').value.trim();
+            const includeKeywords = document.getElementById('includeKeywords').value.trim();
+            if (jobTitle || includeKeywords) {
+                const newQuery = buildQuery(platform);
+                if (newQuery) {
+                    currentQuery = newQuery;
+                    document.getElementById('queryText').value = currentQuery;
+                    document.getElementById('resultsSection').classList.remove('hidden');
+                    document.getElementById('emailSection').classList.remove('hidden');
+                    generateEmailTemplate();
+                    updateOpenButton();
+                }
+            }
         }
 
         function toggleCompanyList(element, listName) {
@@ -3029,11 +3446,34 @@ Shopify`
             const container = document.getElementById('selectedCompanies');
             if (selectedCompanies.length > 0) {
                 container.style.display = 'flex';
-                container.innerHTML = '<span style="font-size: 12px; color: var(--text-secondary); width: 100%; margin-bottom: 8px;">Selected companies:</span>' + 
+                container.innerHTML = '<span style="font-size: 12px; color: var(--text-secondary); width: 100%; margin-bottom: 8px;">Selected companies (used in your boolean search):</span>' + 
                     selectedCompanies.map(c => `<span class="company-chip">${c} <span class="remove" onclick="removeCompany('${c}')">×</span></span>`).join('');
             } else {
                 container.style.display = 'none';
             }
+        }
+
+        function showToast(message, durationMs) {
+            const el = document.getElementById('toast');
+            if (!el) return;
+            el.textContent = message;
+            el.classList.add('show');
+            clearTimeout(showToast._tid);
+            showToast._tid = setTimeout(() => {
+                el.classList.remove('show');
+            }, durationMs == null ? 2500 : durationMs);
+        }
+
+        function focusTargetCompaniesSection() {
+            const section = document.getElementById('targetCompaniesSection');
+            const content = document.getElementById('companyContent');
+            const icon = document.getElementById('companyIcon');
+            if (!section) return;
+            if (content && !content.classList.contains('open')) {
+                content.classList.add('open');
+                if (icon) icon.classList.add('open');
+            }
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function removeCompany(company) {
@@ -3041,55 +3481,420 @@ Shopify`
             updateSelectedCompaniesDisplay();
         }
 
-        function updateSearchTips() {
-            const tips = [];
-            const jobTitle = document.getElementById('jobTitle').value.trim();
-            const location = document.getElementById('location').value.trim();
-            const excludeKeywords = document.getElementById('excludeKeywords').value.trim();
-            const includeKeywords = document.getElementById('includeKeywords').value.trim();
+        let aiSuggestedCompanies = [];
+        let techStackSuggestedCompanies = [];  // array of { name, tech } for hover tooltips
+        let lastTechStackSearch = null;  // { mode: 'company'|'tech', query: string } for Refresh for more
+        let lastProfileAnalysis = null;
 
-            if (!jobTitle) {
-                tips.push({ type: 'warning', text: 'Add a job title to get better results' });
-            }
-            if (!location && !document.getElementById('country').value) {
-                tips.push({ type: 'info', text: 'Consider adding a location to narrow results', action: 'addLocation' });
-            }
-            if (!excludeKeywords) {
-                tips.push({ type: 'info', text: 'Tip: Exclude "recruiter" and "HR" to filter out non-candidates', action: 'addExclusions' });
-            }
-            if (jobTitle && !document.getElementById('includeSimilar').checked) {
-                tips.push({ type: 'info', text: 'Enable "Similar Job Titles" to expand your search' });
-            }
-            if (selectedCompanies.length === 0 && jobTitle) {
-                tips.push({ type: 'info', text: 'Try targeting specific companies for better quality candidates' });
-            }
-            if (jobTitle && location && excludeKeywords) {
-                tips.push({ type: 'success', text: 'Your search looks well-optimized!' });
-            }
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
 
-            const tipsContainer = document.getElementById('searchTips');
-            const tipsList = document.getElementById('tipsList');
+        async function handleProfilePdfUpload(ev) {
+            const file = ev.target.files && ev.target.files[0];
+            if (!file || file.type !== 'application/pdf') return;
+            if (typeof pdfjsLib === 'undefined') {
+                alert('PDF support is loading. Try again in a moment.');
+                ev.target.value = '';
+                return;
+            }
+            const textarea = document.getElementById('profilePasteInput');
+            textarea.placeholder = 'Extracting text from PDF...';
+            textarea.value = '';
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+                const numPages = pdf.numPages;
+                let fullText = '';
+                for (let i = 1; i <= numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageText = content.items.map(item => item.str || '').join(' ');
+                    fullText += pageText + '\n';
+                }
+                textarea.value = fullText.trim();
+                textarea.placeholder = 'Or paste profile or resume text here. If you upload a PDF, we’ll fill this for you.';
+            } catch (err) {
+                console.error(err);
+                alert('Could not read PDF. Try pasting the text instead.');
+                textarea.placeholder = 'Or paste profile or resume text here.';
+            }
+            ev.target.value = '';
+        }
 
-            if (tips.length > 0) {
-                tipsList.innerHTML = tips.map(tip => `
-                    <div class="tip-item">
-                        <span class="tip-icon ${tip.type}">${tip.type === 'warning' ? '⚠️' : tip.type === 'success' ? '✓' : '💡'}</span>
-                        <span class="tip-text">${tip.text}${tip.action ? `<span class="tip-action" onclick="applyTipAction('${tip.action}')">Apply</span>` : ''}</span>
-                    </div>
-                `).join('');
-                tipsContainer.classList.add('visible');
-            } else {
-                tipsContainer.classList.remove('visible');
+        async function analyzeProfileFromPaste() {
+            const text = document.getElementById('profilePasteInput').value.trim();
+            const linkedInUrl = document.getElementById('profileLinkedInUrl').value.trim();
+            const linkedInOnlyMsg = document.getElementById('profileLinkedInOnlyMessage');
+
+            if (!text || text.length < 20) {
+                if (linkedInUrl) {
+                    try {
+                        window.open(linkedInUrl, '_blank', 'noopener');
+                    } catch (e) {}
+                    linkedInOnlyMsg.classList.remove('hidden');
+                    document.getElementById('profilePasteInput').focus();
+                    return;
+                }
+                alert('Add a LinkedIn profile URL (we’ll open it so you can save as PDF), or upload a PDF / paste profile text.');
+                return;
+            }
+            linkedInOnlyMsg.classList.add('hidden');
+            const btn = document.getElementById('profileAnalyzeBtn');
+            const btnText = document.getElementById('profileAnalyzeBtnText');
+            const loadingEl = document.getElementById('profileAnalyzeLoading');
+            const resultEl = document.getElementById('profileResultBlock');
+            btn.disabled = true;
+            btnText.textContent = 'Analyzing...';
+            loadingEl.classList.remove('hidden');
+            resultEl.classList.add('hidden');
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI is only available when the app is deployed on Quick.');
+                }
+                const profileSource = linkedInUrl ? `LinkedIn profile (user provided URL for reference): ${linkedInUrl}\n\nProfile or resume content:\n` : 'Profile or resume content:\n';
+                const prompt = `You are a recruiting sourcer. Analyze this candidate profile (or resume) and extract search terms to find SIMILAR high-caliber candidates.
+
+${profileSource}
+${text.slice(0, 4000)}
+
+Respond in this exact format (use the labels as shown):
+JOB_TITLE: [one primary job title that fits this profile, e.g. Senior Software Engineer]
+INCLUDE_KEYWORDS: [comma-separated skills, technologies, or keywords to include in a boolean search]
+TARGET_COMPANIES: [comma-separated list of 3-6 similar companies or types, or "none"]
+FEEDBACK: [1-2 sentences on what makes this profile strong and what to look for in similar candidates]
+BOOLEAN_QUERY: [a complete boolean search query starting with site:linkedin.com/in/ to find similar profiles. Use quotes for phrases, OR/AND, exclude recruiter/HR. Keep under 400 characters.]`;
+
+                const response = await quick.ai.ask(prompt);
+                const jobTitleMatch = response.match(/JOB_TITLE:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const keywordsMatch = response.match(/INCLUDE_KEYWORDS:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const companiesMatch = response.match(/TARGET_COMPANIES:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const feedbackMatch = response.match(/FEEDBACK:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const queryMatch = response.match(/BOOLEAN_QUERY:\s*(.+?)(?=\n|$)/s);
+
+                const jobTitle = jobTitleMatch ? jobTitleMatch[1].trim() : '';
+                const includeKeywords = keywordsMatch ? keywordsMatch[1].trim() : '';
+                const targetCompaniesRaw = companiesMatch ? companiesMatch[1].trim() : '';
+                const targetCompanies = targetCompaniesRaw && targetCompaniesRaw.toLowerCase() !== 'none'
+                    ? targetCompaniesRaw.split(',').map(s => s.trim()).filter(Boolean)
+                    : [];
+                const feedback = feedbackMatch ? feedbackMatch[1].trim() : 'Profile analyzed.';
+                const query = queryMatch ? queryMatch[1].trim() : '';
+
+                lastProfileAnalysis = { jobTitle, includeKeywords, targetCompanies, feedback, query };
+
+                document.getElementById('profileFeedback').textContent = feedback;
+                document.getElementById('profileSuggestions').innerHTML =
+                    (jobTitle ? `<p><strong>Job title:</strong> ${escapeHtml(jobTitle)}</p>` : '') +
+                    (includeKeywords ? `<p><strong>Keywords:</strong> ${escapeHtml(includeKeywords)}</p>` : '') +
+                    (targetCompanies.length ? `<p><strong>Target companies:</strong> ${escapeHtml(targetCompanies.join(', '))}</p>` : '');
+                document.getElementById('profileQueryText').textContent = query || 'No query generated.';
+                resultEl.classList.remove('hidden');
+            } catch (err) {
+                alert(err.message || 'Could not analyze profile. Try again.');
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Analyze & get search terms';
+                loadingEl.classList.add('hidden');
             }
         }
 
-        function applyTipAction(action) {
-            if (action === 'addLocation') {
-                document.getElementById('location').focus();
-            } else if (action === 'addExclusions') {
-                document.getElementById('excludeKeywords').value = 'recruiter, HR, talent acquisition';
-                updateSearchTips();
+        function applyProfileSuggestions() {
+            if (!lastProfileAnalysis) return;
+            const { jobTitle, includeKeywords, targetCompanies, query } = lastProfileAnalysis;
+            if (jobTitle) document.getElementById('jobTitle').value = jobTitle;
+            if (includeKeywords) document.getElementById('includeKeywords').value = includeKeywords;
+            if (targetCompanies.length) {
+                targetCompanies.forEach(c => {
+                    if (!selectedCompanies.includes(c)) selectedCompanies.push(c);
+                });
+                updateSelectedCompaniesDisplay();
             }
+            if (query) {
+                currentPlatform = 'linkedin';
+                document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.platform === 'linkedin'));
+                const allPlatformFields = ['linkedin', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle', 'wellfound', 'substack', 'devto', 'producthunt', 'polywork', 'bluesky', 'quora', 'speakerdeck'];
+                allPlatformFields.forEach(p => document.querySelectorAll(`.${p}-field`).forEach(el => el.classList.add('hidden')));
+                document.querySelectorAll('.linkedin-field').forEach(el => el.classList.remove('hidden'));
+                document.getElementById('platform-title').textContent = 'Search LinkedIn Profiles';
+                currentQuery = query;
+                currentJobTitle = jobTitle || '';
+                displayQuery(query);
+                generateEmailTemplate();
+                document.getElementById('resultsSection').classList.remove('hidden');
+                document.getElementById('emailSection').classList.remove('hidden');
+            }
+        }
+
+        function copyProfileQuery(ev) {
+            if (!lastProfileAnalysis || !lastProfileAnalysis.query) return;
+            navigator.clipboard.writeText(lastProfileAnalysis.query).then(() => {
+                const btn = ev && ev.target ? ev.target : document.querySelector('.profile-result-actions .btn-secondary');
+                if (btn) {
+                    const orig = btn.textContent;
+                    btn.textContent = 'Copied!';
+                    setTimeout(() => { btn.textContent = orig; }, 2000);
+                }
+            });
+        }
+
+        async function getAiCompanySuggestions() {
+            const promptInput = document.getElementById('companyAiPrompt').value.trim();
+            if (!promptInput) {
+                alert('Please describe what kind of companies you\'re looking for.');
+                return;
+            }
+            const btn = document.getElementById('companyAiBtn');
+            const btnText = document.getElementById('companyAiBtnText');
+            const loadingEl = document.getElementById('companyAiLoading');
+            const resultsEl = document.getElementById('companyAiResults');
+            btn.disabled = true;
+            btnText.textContent = 'Finding...';
+            loadingEl.classList.remove('hidden');
+            resultsEl.classList.add('hidden');
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI is only available when the app is deployed on Quick.');
+                }
+                const systemPrompt = `You are a recruiting sourcer helping identify target companies for candidate sourcing.
+Given the user's description, suggest 10–15 well-known companies (or types of companies) that would be good targets.
+Return ONLY a comma-separated list of company names. No numbering, no explanation, no bullet points.
+Example format: Stripe, Square, Plaid, Brex, Ramp, Mercury, Chime`;
+                const userPrompt = `What companies should we target for this search? ${promptInput}`;
+                const fullPrompt = `${systemPrompt}\n\n${userPrompt}`;
+                const response = await quick.ai.ask(fullPrompt);
+                const names = response.split(/[,،、;|\n]/).map(s => s.trim()).filter(s => s.length > 0 && s.length < 80);
+                aiSuggestedCompanies = [...new Set(names)];
+                const chipsEl = document.getElementById('companyAiResultsChips');
+                chipsEl.innerHTML = aiSuggestedCompanies.map(c => 
+                    `<div class="company-ai-chip" data-company="${c.replace(/"/g, '&quot;')}"><span>${escapeHtml(c)}</span><button type="button" class="add-company-btn" onclick="addSingleAiCompany(this)">Add</button></div>`
+                ).join('');
+                document.getElementById('companyAiResults').classList.remove('hidden');
+            } catch (err) {
+                alert(err.message || 'Could not get AI suggestions. Try again or use the preset lists below.');
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Get company suggestions';
+                loadingEl.classList.add('hidden');
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function addSingleAiCompany(btn) {
+            const chip = btn.closest('[data-company]');
+            if (!chip) return;
+            const name = chip.getAttribute('data-company').replace(/&quot;/g, '"');
+            if (!selectedCompanies.includes(name)) {
+                selectedCompanies.push(name);
+                updateSelectedCompaniesDisplay();
+            }
+        }
+
+        function addAllAiCompanies() {
+            aiSuggestedCompanies.forEach(c => {
+                if (!selectedCompanies.includes(c)) selectedCompanies.push(c);
+            });
+            updateSelectedCompaniesDisplay();
+        }
+
+        async function getTechStackCompanySuggestions(isRefresh) {
+            const companyInput = document.getElementById('techStackCompanyInput').value.trim();
+            if (!companyInput && !isRefresh) {
+                alert('Please enter a company name to find others with a similar tech stack.');
+                return;
+            }
+            const query = companyInput || (lastTechStackSearch && lastTechStackSearch.mode === 'company' ? lastTechStackSearch.query : '');
+            if (!query) return;
+            const btn = document.getElementById('techStackBtn');
+            const btnText = document.getElementById('techStackBtnText');
+            const loadingEl = document.getElementById('techStackLoading');
+            const resultsEl = document.getElementById('techStackResults');
+            const otherBtn = document.getElementById('techByTechBtn');
+            btn.disabled = true;
+            if (otherBtn) otherBtn.disabled = true;
+            btnText.textContent = 'Finding...';
+            loadingEl.textContent = isRefresh ? 'Finding more companies (different set)...' : 'Finding companies with similar tech stack...';
+            loadingEl.classList.remove('hidden');
+            resultsEl.classList.add('hidden');
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI is only available when the app is deployed on Quick.');
+                }
+                const avoidList = (isRefresh && techStackSuggestedCompanies.length) ? techStackSuggestedCompanies.map(c => c.name).join(', ') : '';
+                const systemPrompt = `You are a recruiting sourcer. Given a company name, identify 10–15 OTHER companies that use a similar tech stack. Prioritize companies that recruiters often overlook: scale-ups, product-led tech companies, strong regional players, and great engineering cultures—NOT the usual FAANG/mega-cap list (avoid defaulting to Google, Meta, Amazon, Apple, Microsoft, Netflix unless the reference company is in that tier).
+
+Think: Canva, Atlassian, Figma, Notion, Linear, Vercel, Zapier, GitLab, HashiCorp, Datadog, Twilio, Okta, Snowflake, MongoDB, Elastic, etc. For EACH company, list key technologies (languages, frameworks, infrastructure, tools).
+
+Return one company per line. Format each line exactly as: CompanyName | Tech1, Tech2, Tech3
+Example:
+Figma | TypeScript, WebAssembly, C++, React
+Linear | TypeScript, Go, React, PostgreSQL
+Vercel | Node.js, React, Next.js, Edge
+
+No numbering, no extra explanation. Only lines in that format.`;
+                const excludeLine = avoidList ? `\n\nIMPORTANT: Return a DIFFERENT set. Do NOT include any of these (user already saw them): ${avoidList}. Suggest other companies instead.` : '';
+                const userPrompt = `Find companies with a similar tech stack to: ${query}. For each company, include the technologies they use.${excludeLine}`;
+                const response = await quick.ai.ask(`${systemPrompt}\n\n${userPrompt}`);
+                lastTechStackSearch = { mode: 'company', query };
+                techStackSuggestedCompanies = [];
+                response.split(/\n/).forEach(line => {
+                    const lineTrim = line.trim();
+                    if (!lineTrim) return;
+                    const pipeIdx = lineTrim.indexOf(' | ');
+                    if (pipeIdx > 0) {
+                        const name = lineTrim.slice(0, pipeIdx).trim();
+                        const tech = lineTrim.slice(pipeIdx + 3).trim();
+                        if (name.length > 0 && name.length < 80) techStackSuggestedCompanies.push({ name, tech });
+                    } else {
+                        const name = lineTrim.replace(/^[-*•]\s*/, '').trim();
+                        if (name.length > 0 && name.length < 80) techStackSuggestedCompanies.push({ name, tech: '' });
+                    }
+                });
+                const chipsEl = document.getElementById('techStackResultsChips');
+                chipsEl.innerHTML = techStackSuggestedCompanies.map(c => {
+                    const techHtml = c.tech ? `<span class="chip-tech-tooltip"><strong>Technologies</strong>${escapeHtml(c.tech)}</span>` : '';
+                    const chipClass = c.tech ? 'company-ai-chip chip-with-tech' : 'company-ai-chip';
+                    return `<div class="${chipClass}" data-company="${c.name.replace(/"/g, '&quot;')}"><span>${escapeHtml(c.name)}</span>${techHtml}<button type="button" class="add-company-btn" onclick="addSingleTechStackCompany(this)">Add</button></div>`;
+                }).join('');
+                document.getElementById('techStackResults').classList.remove('hidden');
+            } catch (err) {
+                alert(err.message || 'Could not get tech stack suggestions. Make sure the app is on Quick and try again.');
+            } finally {
+                btn.disabled = false;
+                if (otherBtn) otherBtn.disabled = false;
+                btnText.textContent = 'Find similar tech stack companies';
+                loadingEl.classList.add('hidden');
+            }
+        }
+
+        async function getCompaniesByTechSuggestions(isRefresh) {
+            const techInput = document.getElementById('techStackTechInput').value.trim();
+            if (!techInput && !isRefresh) {
+                alert('Please enter technologies (e.g. Ruby, Python, React) to find companies that use them.');
+                return;
+            }
+            const techList = techInput ? techInput.split(/[,،、;\n]+/).map(s => s.trim()).filter(Boolean) : (lastTechStackSearch && lastTechStackSearch.mode === 'tech' ? lastTechStackSearch.query.split(/[,،、;\n]+/).map(s => s.trim()).filter(Boolean) : []);
+            if (techList.length === 0 && !isRefresh) {
+                alert('Please enter at least one technology.');
+                return;
+            }
+            if (techList.length === 0) return;
+            const btn = document.getElementById('techByTechBtn');
+            const btnText = document.getElementById('techByTechBtnText');
+            const loadingEl = document.getElementById('techStackLoading');
+            const resultsEl = document.getElementById('techStackResults');
+            const otherBtn = document.getElementById('techStackBtn');
+            btn.disabled = true;
+            if (otherBtn) otherBtn.disabled = true;
+            btnText.textContent = 'Finding...';
+            loadingEl.textContent = isRefresh ? 'Finding more companies (different set)...' : 'Finding companies that use this tech...';
+            loadingEl.classList.remove('hidden');
+            resultsEl.classList.add('hidden');
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI is only available when the app is deployed on Quick.');
+                }
+                const techStr = techList.join(', ');
+                const avoidList = (isRefresh && techStackSuggestedCompanies.length) ? techStackSuggestedCompanies.map(c => c.name).join(', ') : '';
+                const systemPrompt = `You are a recruiting sourcer. The user wants companies that use these technologies: ${techStr}.
+
+List 10–15 companies that use these technologies. Prioritize companies recruiters often overlook: scale-ups, product-led tech, strong regional players—NOT the usual FAANG/mega-cap default (avoid defaulting to Google, Meta, Amazon, Apple, Microsoft, Netflix unless they're clearly top of mind for that stack).
+
+Think: Stripe, Shopify, Figma, Notion, Linear, Vercel, Zapier, GitLab, HashiCorp, Datadog, Twilio, Okta, MongoDB, Elastic, etc. For EACH company, list key technologies they use.
+
+Return one company per line. Format each line exactly as: CompanyName | Tech1, Tech2, Tech3
+Example:
+Vercel | Node.js, React, Next.js, AWS
+Figma | TypeScript, WebAssembly, React
+Linear | TypeScript, Go, React, PostgreSQL
+
+No numbering, no extra explanation. Only lines in that format.`;
+                const excludeLine = avoidList ? `\n\nIMPORTANT: Return a DIFFERENT set. Do NOT include any of these (user already saw them): ${avoidList}. Suggest other companies instead.` : '';
+                const userPrompt = `Find companies that use: ${techStr}. For each company, include the technologies they use.${excludeLine}`;
+                const response = await quick.ai.ask(`${systemPrompt}\n\n${userPrompt}`);
+                lastTechStackSearch = { mode: 'tech', query: techStr };
+                techStackSuggestedCompanies = [];
+                response.split(/\n/).forEach(line => {
+                    const lineTrim = line.trim();
+                    if (!lineTrim) return;
+                    const pipeIdx = lineTrim.indexOf(' | ');
+                    if (pipeIdx > 0) {
+                        const name = lineTrim.slice(0, pipeIdx).trim();
+                        const tech = lineTrim.slice(pipeIdx + 3).trim();
+                        if (name.length > 0 && name.length < 80) techStackSuggestedCompanies.push({ name, tech });
+                    } else {
+                        const name = lineTrim.replace(/^[-*•]\s*/, '').trim();
+                        if (name.length > 0 && name.length < 80) techStackSuggestedCompanies.push({ name, tech: '' });
+                    }
+                });
+                const chipsEl = document.getElementById('techStackResultsChips');
+                chipsEl.innerHTML = techStackSuggestedCompanies.map(c => {
+                    const techHtml = c.tech ? `<span class="chip-tech-tooltip"><strong>Technologies</strong>${escapeHtml(c.tech)}</span>` : '';
+                    const chipClass = c.tech ? 'company-ai-chip chip-with-tech' : 'company-ai-chip';
+                    return `<div class="${chipClass}" data-company="${c.name.replace(/"/g, '&quot;')}"><span>${escapeHtml(c.name)}</span>${techHtml}<button type="button" class="add-company-btn" onclick="addSingleTechStackCompany(this)">Add</button></div>`;
+                }).join('');
+                document.getElementById('techStackResults').classList.remove('hidden');
+            } catch (err) {
+                alert(err.message || 'Could not get suggestions. Make sure the app is on Quick and try again.');
+            } finally {
+                btn.disabled = false;
+                if (otherBtn) otherBtn.disabled = false;
+                btnText.textContent = 'Find companies using this tech';
+                loadingEl.classList.add('hidden');
+            }
+        }
+
+        function refreshTechStackSuggestions() {
+            if (!lastTechStackSearch) return;
+            if (lastTechStackSearch.mode === 'company') getTechStackCompanySuggestions(true);
+            else getCompaniesByTechSuggestions(true);
+        }
+
+        function addSingleTechStackCompany(btn) {
+            const chip = btn.closest('[data-company]');
+            if (!chip) return;
+            const name = chip.getAttribute('data-company').replace(/&quot;/g, '"');
+            if (!selectedCompanies.includes(name)) {
+                selectedCompanies.push(name);
+                updateSelectedCompaniesDisplay();
+                focusTargetCompaniesSection();
+                showToast('Added to Target Companies');
+            }
+        }
+
+        function addAllTechStackCompanies() {
+            let added = 0;
+            techStackSuggestedCompanies.forEach(c => {
+                const name = typeof c === 'string' ? c : c.name;
+                if (!selectedCompanies.includes(name)) {
+                    selectedCompanies.push(name);
+                    added++;
+                }
+            });
+            updateSelectedCompaniesDisplay();
+            if (added > 0) {
+                focusTargetCompaniesSection();
+                showToast(added === 1 ? 'Added to Target Companies' : added + ' companies added to Target Companies');
+            }
+        }
+
+        function toggleTechStackSection() {
+            document.getElementById('techStackContent').classList.toggle('open');
+            document.getElementById('techStackIcon').classList.toggle('open');
+        }
+
+        function updateSearchTips() {
+            // Search Quality Tips section removed
+        }
+
+        function onTemplateSelect(selectEl) {
+            const value = selectEl.value;
+            if (value) loadTemplate(value);
         }
 
         function loadTemplate(templateName) {
@@ -3100,6 +3905,8 @@ Shopify`
             document.getElementById('includeKeywords').value = template.includeKeywords || '';
             document.getElementById('excludeKeywords').value = template.excludeKeywords || '';
             updateSearchTips();
+            const selectEl = document.getElementById('quickTemplatesSelect');
+            if (selectEl) selectEl.value = templateName;
             
             // Use custom query if available, otherwise generate normally
             if (template.customQuery) {
@@ -3374,6 +4181,10 @@ Shopify`
                     const employers = currentEmployer.split(',').map(e => `"${e.trim()}"`).join(' OR ');
                     query += ` (${employers})`;
                 }
+                const education = document.getElementById('education').value.trim();
+                if (education === 'bachelor') query += ` ("Bachelor" OR "B.S." OR "B.A." OR "BEng" OR "undergraduate degree")`;
+                if (education === 'master') query += ` ("Master" OR "M.S." OR "M.A." OR "MBA" OR "graduate degree")`;
+                if (education === 'phd') query += ` ("PhD" OR "Ph.D." OR "doctorate")`;
             }
 
             // Add selected companies (from Target Companies)
@@ -3784,7 +4595,6 @@ Write only the email, no explanations or subject lines.`;
             document.getElementById('emailSection').classList.add('hidden');
             document.getElementById('aiEmailOptions').classList.add('hidden');
             document.getElementById('suggestionsPanel').classList.add('hidden');
-            document.getElementById('searchTips').classList.remove('visible');
             
             // Reset AI email inputs
             document.getElementById('candidateName').value = '';
@@ -3875,7 +4685,7 @@ Write only the email, no explanations or subject lines.`;
         }
 
         function getPlatformIcon(platform) {
-            const icons = { linkedin: '🔗', github: '🐙', stackoverflow: '📚', twitter: '🐦', scholar: '🎓', dribbble: '🏀', behance: '🎨', kaggle: '📊' };
+            const icons = { linkedin: '🔗', github: '🐙', stackoverflow: '📚', twitter: '🐦', scholar: '🎓', dribbble: '🏀', behance: '🎨', kaggle: '📊', wellfound: '🚀', substack: '📝', devto: '💻', producthunt: '🔶', polywork: '◇', bluesky: '🦋', quora: '❓', speakerdeck: '📽️' };
             return icons[platform] || '🔍';
         }
 
@@ -4069,10 +4879,16 @@ Write only the email, no explanations or subject lines.`;
             document.getElementById('diversityIcon').classList.toggle('open');
         }
 
+        function toggleProfileSimilarSection() {
+            document.getElementById('profileSimilarContent').classList.toggle('open');
+            document.getElementById('profileSimilarIcon').classList.toggle('open');
+        }
+
         function toggleCompanySection() {
             document.getElementById('companyContent').classList.toggle('open');
             document.getElementById('companyIcon').classList.toggle('open');
         }
     </script>
-</body>
+        <div class="toast-message" id="toast" aria-live="polite"></div>
+    </body>
 </html>
