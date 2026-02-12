@@ -184,6 +184,98 @@
         }
 
         /* Quick Templates */
+        .ai-search-section {
+            background: linear-gradient(135deg, rgba(92, 106, 196, 0.06) 0%, rgba(139, 92, 246, 0.06) 100%);
+            border: 1px solid rgba(92, 106, 196, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .ai-search-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 8px 0;
+        }
+        .ai-search-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0 0 16px 0;
+            line-height: 1.45;
+        }
+        .ai-search-input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .ai-search-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .ai-search-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px 14px;
+            font-size: 14px;
+            line-height: 1.5;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-primary);
+            resize: vertical;
+            font-family: inherit;
+        }
+        .ai-search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 128, 96, 0.15);
+        }
+        .ai-search-error {
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--error, #c53030);
+        }
+        .ai-search-context {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        @media (max-width: 640px) {
+            .ai-search-context { grid-template-columns: 1fr; }
+        }
+        .ai-search-context-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .ai-search-context-input {
+            width: 100%;
+            min-height: 56px;
+            padding: 8px 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--text-primary);
+            resize: vertical;
+            font-family: inherit;
+        }
+        .ai-search-context-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .ai-search-context-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.8;
+        }
+
         .templates-section {
             margin-bottom: 24px;
         }
@@ -231,6 +323,7 @@
         /* Platform Tabs */
         .platform-tabs {
             display: flex;
+            align-items: center;
             gap: 8px;
             margin-bottom: 16px;
             flex-wrap: wrap;
@@ -269,6 +362,36 @@
             justify-content: center;
         }
 
+        .platform-more-wrap {
+            position: relative;
+        }
+
+        .platform-more-select {
+            padding: 10px 32px 10px 14px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238B949E' stroke-width='2'%3E%3Cpolyline points='6,9 12,15 18,9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            min-width: 160px;
+            transition: border-color 0.2s ease;
+        }
+
+        .platform-more-select:hover {
+            border-color: var(--primary-light);
+        }
+
+        .platform-more-wrap.active .platform-more-select {
+            border-color: var(--primary);
+            background-color: rgba(0, 128, 96, 0.08);
+        }
+
 
         /* Search Card */
         .search-card {
@@ -282,7 +405,13 @@
 
         .search-card h2 {
             font-size: 18px;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
+        }
+        .search-card-tldr {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0 0 24px 0;
+            line-height: 1.4;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -357,6 +486,68 @@
         .form-input::placeholder {
             color: var(--text-secondary);
         }
+
+        .job-title-autocomplete-wrap {
+            position: relative;
+        }
+        .job-title-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin: 4px 0 0;
+            padding: 6px 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 50;
+            list-style: none;
+            display: none;
+        }
+        .job-title-dropdown.show {
+            display: block;
+        }
+        .job-title-dropdown li {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .job-title-dropdown li:hover,
+        .job-title-dropdown li[aria-selected="true"] {
+            background: var(--surface-dark);
+        }
+
+        .skills-autocomplete-wrap { position: relative; }
+        .skills-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin: 4px 0 0;
+            padding: 6px 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            max-height: 220px;
+            overflow-y: auto;
+            z-index: 50;
+            list-style: none;
+            display: none;
+        }
+        .skills-dropdown.show { display: block; }
+        .skills-dropdown li {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+        .skills-dropdown li:hover,
+        .skills-dropdown li[aria-selected="true"] { background: var(--surface-dark); }
 
         /* Company Targeting Section */
         .company-targeting-section {
@@ -545,10 +736,25 @@
 
         .company-list-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
             margin-bottom: 12px;
         }
+
+        .education-experience-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .education-experience-header:hover .form-label { color: var(--primary); }
+        .education-experience-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .education-experience-grid .form-label { font-size: 12px; }
 
         .company-list-card {
             background: var(--surface);
@@ -827,6 +1033,36 @@
         }
         .tech-stack-section-wrap .diversity-header:hover h4 {
             color: #0a5c5f;
+        }
+
+        /* Keywords from intake form — amber/orange accent */
+        .intake-section-wrap {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.08) 0%, rgba(234, 88, 12, 0.06) 100%);
+            border: 1px solid rgba(217, 119, 6, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .intake-section-wrap .diversity-header h4 {
+            color: #b45309;
+        }
+        .intake-section-wrap .diversity-header:hover h4 {
+            color: #92400e;
+        }
+
+        /* Find similar portfolios — violet accent */
+        .portfolio-section-wrap {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(139, 92, 246, 0.06) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .portfolio-section-wrap .diversity-header h4 {
+            color: #6d28d9;
+        }
+        .portfolio-section-wrap .diversity-header:hover h4 {
+            color: #5b21b6;
         }
 
         .diversity-description {
@@ -1381,6 +1617,10 @@
             gap: 8px;
         }
 
+        .suggestion-section {
+            margin-bottom: 14px;
+        }
+        .suggestion-section:last-child { margin-bottom: 0; }
         .suggestion-chips {
             display: flex;
             flex-wrap: wrap;
@@ -1421,6 +1661,72 @@
             align-items: center;
             gap: 10px;
         }
+
+        /* Top Candidates Section */
+        .candidates-section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+        .candidates-section.hidden { display: none; }
+        .candidates-section h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .candidates-count {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        .candidates-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .candidates-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+        .candidates-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .candidates-table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--surface-dark);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .candidates-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        .candidates-table tr:last-child td { border-bottom: none; }
+        .candidates-table tr:hover { background: rgba(0, 128, 96, 0.04); }
+        .candidates-table a { color: var(--primary); text-decoration: none; }
+        .candidates-table a:hover { text-decoration: underline; }
+        .candidate-score {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .candidate-score.high { background: rgba(0, 128, 96, 0.15); color: var(--success); }
+        .candidate-score.mid { background: rgba(92, 106, 196, 0.15); color: var(--secondary); }
+        .candidate-score.low { background: var(--surface-dark); color: var(--text-secondary); }
 
         .email-controls {
             display: flex;
@@ -2125,7 +2431,7 @@
             </div>
         </div>
 
-        <!-- Platform Selection -->
+        <!-- Platform Selection: 4 primary tabs + More dropdown -->
         <div class="platform-tabs">
             <button class="platform-tab linkedin active" data-platform="linkedin">
                 <div class="platform-icon">
@@ -2143,14 +2449,6 @@
                 </div>
                 GitHub
             </button>
-            <button class="platform-tab stackoverflow" data-platform="stackoverflow">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#F48024">
-                        <path d="M15.725 0l-1.72 1.277 6.39 8.588 1.72-1.277L15.725 0zm-1.024 10.09l1.9 1.02 4.18-7.79-1.9-1.02-4.18 7.79zm-5.09 4.02l8.18 1.71.36-1.73-8.18-1.71-.36 1.73zm.45-2.22l7.89 3.31.66-1.58-7.89-3.31-.66 1.58zm1.29-2.37l6.96 5.26 1.08-1.43-6.96-5.26-1.08 1.43zM19 18H5v2h14v-2zm1-8v12H4V10H2v14h20V10h-2z"/>
-                    </svg>
-                </div>
-                Stack Overflow
-            </button>
             <button class="platform-tab twitter" data-platform="twitter">
                 <div class="platform-icon">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#000000">
@@ -2158,30 +2456,6 @@
                     </svg>
                 </div>
                 X
-            </button>
-            <button class="platform-tab scholar" data-platform="scholar">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#4285F4">
-                        <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
-                    </svg>
-                </div>
-                Scholar
-            </button>
-            <button class="platform-tab dribbble" data-platform="dribbble">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#EA4C89">
-                        <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm10.12-10.358c-.35-.11-3.17-.953-6.384-.438 1.34 3.684 1.887 6.684 1.992 7.308 2.3-1.555 3.936-4.02 4.395-6.87zm-6.115 7.808c-.153-.9-.75-4.032-2.19-7.77l-.066.02c-5.79 2.015-7.86 6.025-8.04 6.4 1.73 1.358 3.92 2.166 6.29 2.166 1.42 0 2.77-.29 4-.814zm-11.62-2.58c.232-.4 3.045-5.055 8.332-6.765.135-.045.27-.084.405-.12-.26-.585-.54-1.167-.832-1.74C7.17 11.775 2.206 11.71 1.756 11.7l-.004.312c0 2.633.998 5.037 2.634 6.855zm-2.42-8.955c.46.008 4.683.026 9.477-1.248-1.698-3.018-3.53-5.558-3.8-5.928-2.868 1.35-5.01 3.99-5.676 7.17zM9.6 2.052c.282.38 2.145 2.914 3.822 6 3.645-1.365 5.19-3.44 5.373-3.702-1.81-1.61-4.19-2.586-6.795-2.586-.825 0-1.63.1-2.4.285zm10.335 3.483c-.218.29-1.935 2.493-5.724 4.04.24.49.47.985.68 1.486.08.18.15.36.22.53 3.41-.43 6.8.26 7.14.33-.02-2.42-.88-4.64-2.31-6.38z"/>
-                    </svg>
-                </div>
-                Dribbble
-            </button>
-            <button class="platform-tab behance" data-platform="behance">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#1769FF">
-                        <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
-                    </svg>
-                </div>
-                Behance
             </button>
             <button class="platform-tab kaggle" data-platform="kaggle">
                 <div class="platform-icon">
@@ -2191,78 +2465,92 @@
                 </div>
                 Kaggle
             </button>
-            <button class="platform-tab wellfound" data-platform="wellfound">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#0D0D0D">
+            <div class="platform-more-wrap" id="platformMoreWrap">
+                <select class="platform-more-select" id="platformMoreSelect" title="More platforms">
+                    <option value="">More platforms</option>
+                    <option value="reddit">Reddit</option>
+                    <option value="stackoverflow">Stack Overflow</option>
+                    <option value="scholar">Google Scholar</option>
+                    <option value="dribbble">Dribbble</option>
+                    <option value="behance">Behance</option>
+                    <option value="wellfound">Wellfound</option>
+                    <option value="substack">Substack</option>
+                    <option value="devto">Dev.to</option>
+                    <option value="producthunt">Product Hunt</option>
+                    <option value="polywork">Polywork</option>
+                    <option value="bluesky">Bluesky</option>
+                    <option value="quora">Quora</option>
+                    <option value="speakerdeck">Speaker Deck</option>
+                    <option value="gitlab">GitLab</option>
+                    <option value="bitbucket">Bitbucket</option>
+                    <option value="codepen">CodePen</option>
+                    <option value="stackexchange">Stack Exchange</option>
+                    <option value="hackernews">Hacker News</option>
+                    <option value="hashnode">Hashnode</option>
+                    <option value="hired">Hired</option>
+                    <option value="dice">Dice</option>
+                    <option value="indeed">Indeed</option>
+                    <option value="glassdoor">Glassdoor</option>
+                    <option value="levelsfyi">Levels.fyi</option>
+                    <option value="otta">Otta</option>
+                    <option value="indiehackers">Indie Hackers</option>
+                    <option value="meetup">Meetup</option>
+                    <option value="eventbrite">Eventbrite</option>
+                    <option value="twitch">Twitch</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="mastodon">Mastodon</option>
+                    <option value="leetcode">LeetCode</option>
+                    <option value="hackerrank">HackerRank</option>
+                    <option value="womenwhocode">Women Who Code</option>
+                    <option value="sourceforge">SourceForge</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- AI Search: describe who you're looking for (below platform tabs) -->
+        <div class="ai-search-section" id="aiSearchSection">
+            <div class="ai-search-header">
+                <h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
                         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                     </svg>
+                    Describe who you're looking for
+                </h3>
+                <p class="ai-search-description">Tell us in plain language (e.g. “Senior data scientist from Meta in the Bay Area”) and we’ll fill in the search fields for you.</p>
+            </div>
+            <div class="ai-search-input-wrap">
+                <textarea id="aiSearchInput" class="ai-search-input" placeholder="e.g., I'm looking for a senior data scientist who worked at Meta in the Bay Area, or a product designer with fintech experience in Toronto..." rows="3"></textarea>
+                <div class="ai-search-context">
+                    <div>
+                        <div class="ai-search-context-label">📋 Intake notes (optional)</div>
+                        <textarea id="aiSearchIntakeNotes" class="ai-search-context-input" placeholder="Paste intake call notes, must-haves, nice-to-haves..." rows="2"></textarea>
+                    </div>
+                    <div>
+                        <div class="ai-search-context-label">🏢 Team context (optional)</div>
+                        <textarea id="aiSearchTeamContext" class="ai-search-context-input" placeholder="Current team members, seniority, or other context..." rows="2"></textarea>
+                    </div>
                 </div>
-                Wellfound
-            </button>
-            <button class="platform-tab substack" data-platform="substack">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF6719">
-                        <path d="M22 4H2v16h20V4zM10 15v-4h4v4h4V9.01L12 5 4 9v10h6z"/>
-                    </svg>
+                <div class="ai-search-buttons">
+                    <button type="button" class="btn btn-primary" id="aiSearchBtn" onclick="fillSearchFromDescription()">
+                        <span id="aiSearchBtnText">Fill search from description</span>
+                        <span id="aiSearchBtnLoading" class="hidden">Filling search...</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="aiCandidatesBtn" onclick="generateTopCandidates()">
+                        <span id="aiCandidatesBtnText">Generate top candidates</span>
+                        <span id="aiCandidatesBtnLoading" class="hidden">Generating...</span>
+                    </button>
                 </div>
-                Substack
-            </button>
-            <button class="platform-tab devto" data-platform="devto">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A0A0A">
-                        <path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18-.2-.14-.48-.35-.64-.43-.18-.09-.35-.14-.35-.12 0 .02.18.14.4.27.22.13.48.32.58.42.1.1.19.2.19.22 0 .02-.08.1-.18.18-.1.08-.26.2-.36.28-.1.08-.18.14-.18.12 0-.02.08-.1.18-.18.1-.08.26-.2.36-.28.1-.1.19-.2.19-.22 0-.02-.08-.1-.18-.18-.1-.08-.26-.2-.36-.28-.1-.08-.17-.14-.17-.12 0 .02.08.1.18.18.1.08.26.2.36.28.1.1.19.2.19.22 0 .02-.08.1-.18.18-.1.08-.26.2-.36.28-.1.08-.18.14-.18.12 0-.02.08-.1.18-.18.1-.08.26-.2.36-.28.1-.1.19-.2.19-.22 0-.02-.08-.1-.18-.18-.1-.08-.26-.2-.36-.28-.1-.08-.17-.14-.17-.12 0 .02.08.1.18.18.1.08.26.2.36.28.1.1.19.2.19.22 0 .02-.08.1-.18.18-.1.08-.26.2-.36.28-.1.08-.18.14-.18.12 0-.02.08-.1.18-.18zM13.98 11.22v6.38h-1.5v-6.38h1.5z"/>
-                    </svg>
-                </div>
-                Dev.to
-            </button>
-            <button class="platform-tab producthunt" data-platform="producthunt">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#DA552F">
-                        <path d="M13.604 9.4h-3.405v3.2h3.405a1.6 1.6 0 100-3.2zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4h-3.405V18H7.801V6h5.803a4.398 4.398 0 110 8.4z"/>
-                    </svg>
-                </div>
-                Product Hunt
-            </button>
-            <button class="platform-tab polywork" data-platform="polywork">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#6C5CE7">
-                        <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/>
-                    </svg>
-                </div>
-                Polywork
-            </button>
-            <button class="platform-tab bluesky" data-platform="bluesky">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#0085FF">
-                        <path d="M12 10.8c-2.4-2.88-6.24-2.88-8.64 0-.96 1.14-1.44 2.58-1.44 4.02s.48 2.88 1.44 4.02c2.4 2.88 6.24 2.88 8.64 0 .96-1.14 1.44-2.58 1.44-4.02s-.48-2.88-1.44-4.02zm8.64 0c-2.4-2.88-6.24-2.88-8.64 0-.96 1.14-1.44 2.58-1.44 4.02s.48 2.88 1.44 4.02c2.4 2.88 6.24 2.88 8.64 0 .96-1.14 1.44-2.58 1.44-4.02s-.48-2.88-1.44-4.02z"/>
-                    </svg>
-                </div>
-                Bluesky
-            </button>
-            <button class="platform-tab quora" data-platform="quora">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#B92B27">
-                        <path d="M12.738 18.701c-.268-.004-.563-.046-.738-.097v2.637c.244.054.487.091.738.09 2.008 0 3.439-1.494 3.439-3.441 0-1.747-.979-2.874-2.436-3.389.542-.182.996-.57 1.273-1.067.277-.497.417-1.066.417-1.707 0-1.33-.695-2.471-2.075-3.233C12.846 6.544 11.393 6 9.756 6 8.12 6 6.656 6.544 5.362 7.558 4.067 8.572 3.42 9.9 3.42 11.544c0 1.644.647 2.972 1.942 3.986 1.294 1.014 2.758 1.558 4.394 1.558.39 0 .776-.034 1.156-.101.076.435.114.893.114 1.355 0 1.365-.261 2.533-.782 3.496-.522.963-1.25 1.72-2.184 2.272zM9.756 7.558c.798 0 1.517.21 2.157.629.64.42 1.073 1.003 1.3 1.75.227.747.341 1.558.341 2.434 0 .876-.114 1.687-.341 2.434-.227.747-.66 1.33-1.3 1.75-.64.42-1.359.629-2.157.629-.798 0-1.517-.21-2.157-.629-.64-.42-1.073-1.003-1.3-1.75-.227-.747-.341-1.558-.341-2.434 0-.876.114-1.687.341-2.434.227-.747.66-1.33 1.3-1.75.64-.42 1.359-.629 2.157-.629z"/>
-                    </svg>
-                </div>
-                Quora
-            </button>
-            <button class="platform-tab speakerdeck" data-platform="speakerdeck">
-                <div class="platform-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#009287">
-                        <path d="M3 3h18v14H3V3zm2 2v10h14V5H5zm2 2h10v6H7V7z"/>
-                    </svg>
-                </div>
-                Speaker Deck
-            </button>
+            </div>
+            <div id="aiSearchError" class="ai-search-error hidden"></div>
         </div>
 
         <!-- Search Form -->
-        <div class="search-card">
+        <div class="search-card" id="searchCard">
             <h2>
                 <span id="platform-title-icon">🔍</span>
                 <span id="platform-title">Search LinkedIn Profiles</span>
             </h2>
+            <p class="search-card-tldr">Start typing in any field to see suggestions—click one to add it to your search.</p>
 
             <div class="form-grid">
                 <!-- Job Title -->
@@ -2271,7 +2559,10 @@
                         Job Title / Role
                         <span class="help-icon" onclick="showFieldHelp('jobTitle')" title="Click for tips">ℹ️</span>
                     </label>
-                    <input type="text" class="form-input" id="jobTitle" placeholder="e.g., Software Engineer, Product Manager" oninput="updateSearchTips()">
+                    <div class="job-title-autocomplete-wrap">
+                        <input type="text" class="form-input" id="jobTitle" placeholder="e.g., Software Engineer, Product Manager" autocomplete="off" oninput="onJobTitleInput()" onfocus="onJobTitleFocus()" onkeydown="onJobTitleKeydown(event)">
+                        <ul class="job-title-dropdown" id="jobTitleDropdown" role="listbox"></ul>
+                    </div>
                 </div>
 
                 <!-- Seniority Level -->
@@ -2293,7 +2584,10 @@
                 <!-- Location -->
                 <div class="form-group">
                     <label class="form-label">Location</label>
-                    <input type="text" class="form-input" id="location" placeholder="e.g., San Francisco, Toronto, Remote" oninput="updateSearchTips()">
+                    <div class="skills-autocomplete-wrap" data-ac-field="location">
+                        <input type="text" class="form-input" id="locationInput" placeholder="e.g., San Francisco, Toronto, Remote" autocomplete="off" oninput="onAcInput('location')" onfocus="onAcFocus('location')" onkeydown="onAcKeydown('location', event)">
+                        <ul class="skills-dropdown" id="locationDropdown" role="listbox"></ul>
+                    </div>
                 </div>
 
                 <!-- Country (All Platforms) -->
@@ -2314,20 +2608,30 @@
                 </div>
 
                 <!-- Current Employer -->
-                <div class="form-group linkedin-field wellfound-field substack-field devto-field producthunt-field polywork-field bluesky-field quora-field speakerdeck-field">
+                <div class="form-group linkedin-field reddit-field wellfound-field substack-field devto-field producthunt-field polywork-field bluesky-field quora-field speakerdeck-field gitlab-field bitbucket-field codepen-field stackexchange-field hackernews-field hashnode-field hired-field dice-field indeed-field glassdoor-field levelsfyi-field otta-field indiehackers-field meetup-field eventbrite-field twitch-field youtube-field mastodon-field leetcode-field hackerrank-field womenwhocode-field sourceforge-field">
                     <label class="form-label">Current Company</label>
-                    <input type="text" class="form-input" id="currentEmployer" placeholder="e.g., Google, Shopify, Meta">
+                    <div class="skills-autocomplete-wrap" data-ac-field="currentEmployer">
+                        <input type="text" class="form-input" id="currentEmployerInput" placeholder="e.g., Google, Shopify, Meta" autocomplete="off" oninput="onAcInput('currentEmployer')" onfocus="onAcFocus('currentEmployer')" onkeydown="onAcKeydown('currentEmployer', event)">
+                        <ul class="skills-dropdown" id="currentEmployerDropdown" role="listbox"></ul>
+                    </div>
                 </div>
 
-                <!-- Education (LinkedIn) -->
-                <div class="form-group linkedin-field wellfound-field substack-field devto-field producthunt-field polywork-field bluesky-field quora-field speakerdeck-field">
-                    <label class="form-label">Education Level</label>
-                    <select class="form-select" id="education">
-                        <option value="">Any</option>
-                        <option value="bachelor">Bachelor's Degree</option>
-                        <option value="master">Master's Degree</option>
-                        <option value="phd">Doctoral Degree (PhD)</option>
-                    </select>
+                <!-- Skills and Assessments (LinkedIn) -->
+                <div class="form-group linkedin-field hidden">
+                    <label class="form-label">Skills and assessments</label>
+                    <div class="skills-autocomplete-wrap">
+                        <input type="text" class="form-input" id="linkedinSkillsInput" placeholder="e.g., Python, Leadership, Project Management, AWS" autocomplete="off" oninput="onSkillsInput()" onfocus="onSkillsFocus()" onkeydown="onSkillsKeydown(event)">
+                        <ul class="skills-dropdown" id="skillsDropdown" role="listbox"></ul>
+                    </div>
+                </div>
+
+                <!-- Qualifications (LinkedIn) -->
+                <div class="form-group linkedin-field hidden">
+                    <label class="form-label">Qualifications</label>
+                    <div class="skills-autocomplete-wrap" data-ac-field="qualifications">
+                        <input type="text" class="form-input" id="qualificationsInput" placeholder="e.g., PMP, CPA, CFA, Google Cloud certified" autocomplete="off" oninput="onAcInput('qualifications')" onfocus="onAcFocus('qualifications')" onkeydown="onAcKeydown('qualifications', event)">
+                        <ul class="skills-dropdown" id="qualificationsDropdown" role="listbox"></ul>
+                    </div>
                 </div>
 
                 <!-- Skills (GitHub/Kaggle) -->
@@ -2378,17 +2682,86 @@
                 <!-- Keywords to Include -->
                 <div class="form-group">
                     <label class="form-label">Keywords to Include</label>
-                    <input type="text" class="form-input" id="includeKeywords" placeholder="e.g., machine learning, fintech, SaaS" oninput="updateSearchTips()">
+                    <div class="skills-autocomplete-wrap" data-ac-field="includeKeywords">
+                        <input type="text" class="form-input" id="includeKeywordsInput" placeholder="e.g., machine learning, fintech, SaaS" autocomplete="off" oninput="onAcInput('includeKeywords'); updateSearchTips();" onfocus="onAcFocus('includeKeywords')" onkeydown="onAcKeydown('includeKeywords', event)">
+                        <ul class="skills-dropdown" id="includeKeywordsDropdown" role="listbox"></ul>
+                    </div>
                 </div>
 
                 <!-- Keywords to Exclude -->
                 <div class="form-group">
                     <label class="form-label">Keywords to Exclude</label>
-                    <input type="text" class="form-input" id="excludeKeywords" placeholder="e.g., recruiter, HR, sales" oninput="updateSearchTips()">
+                    <div class="skills-autocomplete-wrap" data-ac-field="excludeKeywords">
+                        <input type="text" class="form-input" id="excludeKeywordsInput" placeholder="e.g., recruiter, HR, sales" autocomplete="off" oninput="onAcInput('excludeKeywords'); updateSearchTips();" onfocus="onAcFocus('excludeKeywords')" onkeydown="onAcKeydown('excludeKeywords', event)">
+                        <ul class="skills-dropdown" id="excludeKeywordsDropdown" role="listbox"></ul>
+                    </div>
+                </div>
+
+                <!-- Experience (LinkedIn) -->
+                <div class="form-group linkedin-field hidden" id="experienceWrap">
+                    <div class="education-experience-header" onclick="toggleExperience()">
+                        <label class="form-label" style="margin-bottom: 0;">Experience</label>
+                        <svg class="collapse-icon" id="experienceIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+                    </div>
+                    <div class="collapsible-content" id="experienceContent">
+                        <div class="education-experience-grid">
+                            <div class="form-group">
+                                <label class="form-label">Years in current position</label>
+                                <input type="text" class="form-input" id="yearsCurrentPosition" placeholder="e.g., 1+, 2-5">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Years of experience</label>
+                                <input type="text" class="form-input" id="yearsExperience" placeholder="e.g., 5+, 3-7">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Years in current company</label>
+                                <input type="text" class="form-input" id="yearsCurrentCompany" placeholder="e.g., 2+, 1-4">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Industry</label>
+                                <input type="text" class="form-input" id="industries" placeholder="e.g., Technology, Retail, Finance">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education (LinkedIn) -->
+                <div class="form-group linkedin-field hidden" id="educationWrap">
+                    <div class="education-experience-header" onclick="toggleEducation()">
+                        <label class="form-label" style="margin-bottom: 0;">Education</label>
+                        <svg class="collapse-icon" id="educationIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
+                    </div>
+                    <div class="collapsible-content" id="educationContent">
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label class="form-label">Education level</label>
+                            <div class="skills-autocomplete-wrap" data-ac-field="education">
+                                <input type="text" class="form-input" id="educationInput" placeholder="e.g., Bachelor's, Master's, PhD" autocomplete="off" oninput="onAcInput('education')" onfocus="onAcFocus('education')" onkeydown="onAcKeydown('education', event)">
+                                <ul class="skills-dropdown" id="educationDropdown" role="listbox"></ul>
+                            </div>
+                        </div>
+                        <div id="selectedEducationContainer" class="hidden" style="margin-bottom: 12px;">
+                            <label class="form-label" style="margin-bottom: 8px;">Selected education:</label>
+                            <div class="chips-container" id="selectedEducationChips"></div>
+                        </div>
+                        <div class="education-experience-grid">
+                            <div class="form-group">
+                                <label class="form-label">Field of study</label>
+                                <input type="text" class="form-input" id="fieldsOfStudy" placeholder="e.g., Computer Science, Business">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Year of graduation</label>
+                                <input type="text" class="form-input" id="graduationYear" placeholder="e.g., 2015-2020, 2022+">
+                            </div>
+                            <div class="form-group" style="grid-column: 1 / -1;">
+                                <label class="form-label">Schools</label>
+                                <input type="text" class="form-input" id="schools" placeholder="e.g., University of Toronto, MIT">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Similar Roles Toggle -->
-                <div class="form-group linkedin-field wellfound-field substack-field devto-field producthunt-field polywork-field bluesky-field quora-field speakerdeck-field">
+                <div class="form-group linkedin-field reddit-field wellfound-field substack-field devto-field producthunt-field polywork-field bluesky-field quora-field speakerdeck-field gitlab-field bitbucket-field codepen-field stackexchange-field hackernews-field hashnode-field hired-field dice-field indeed-field glassdoor-field levelsfyi-field otta-field indiehackers-field meetup-field eventbrite-field twitch-field youtube-field mastodon-field leetcode-field hackerrank-field womenwhocode-field sourceforge-field">
                     <label class="form-label">Include Similar Job Titles</label>
                     <div class="toggle-group">
                         <label class="toggle">
@@ -2397,6 +2770,70 @@
                         </label>
                         <span style="font-size: 13px; color: var(--text-secondary);">Auto-expand with related titles</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Selected Similar Titles -->
+            <div id="similarTitlesContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected Similar Titles:</label>
+                <div class="chips-container" id="selectedTitles"></div>
+            </div>
+
+            <!-- Selected Skills (LinkedIn; visibility controlled in updateSelectedSkills) -->
+            <div id="similarSkillsContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected skills:</label>
+                <div class="chips-container" id="selectedSkills"></div>
+            </div>
+
+            <div id="selectedLocationsContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected locations:</label>
+                <div class="chips-container" id="selectedLocationsChips"></div>
+            </div>
+            <div id="selectedEmployersContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected current companies:</label>
+                <div class="chips-container" id="selectedEmployersChips"></div>
+            </div>
+            <div id="selectedQualificationsContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected qualifications:</label>
+                <div class="chips-container" id="selectedQualificationsChips"></div>
+            </div>
+            <div id="selectedIncludeKeywordsContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected keywords to include:</label>
+                <div class="chips-container" id="selectedIncludeKeywordsChips"></div>
+            </div>
+            <div id="selectedExcludeKeywordsContainer" class="hidden" style="margin-top: 16px;">
+                <label class="form-label" style="margin-bottom: 8px;">Selected keywords to exclude:</label>
+                <div class="chips-container" id="selectedExcludeKeywordsChips"></div>
+            </div>
+
+            <!-- AI Suggestions -->
+            <div class="ai-suggestions-block" style="margin-bottom: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <button type="button" class="btn btn-ai" id="aiSuggest" onclick="getAISuggestions()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    AI Suggestions
+                </button>
+                <span class="form-hint" style="font-size: 12px; color: var(--text-secondary);">Get suggestions for similar titles, qualifications, and skills based on your job title.</span>
+            </div>
+            <div class="suggestions-panel hidden" id="suggestionsPanel">
+                <h4>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    AI Suggestions (click to add)
+                </h4>
+                <div class="suggestion-section">
+                    <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">Similar titles</label>
+                    <div class="suggestion-chips" id="suggestionChips"></div>
+                </div>
+                <div class="suggestion-section">
+                    <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">Qualifications</label>
+                    <div class="suggestion-chips" id="suggestionQualChips"></div>
+                </div>
+                <div class="suggestion-section">
+                    <label class="form-label" style="font-size: 12px; margin-bottom: 6px;">Skills &amp; assessments</label>
+                    <div class="suggestion-chips" id="suggestionSkillChips"></div>
                 </div>
             </div>
 
@@ -2675,6 +3112,89 @@
                 </div>
             </div>
 
+            <!-- Keywords from intake form -->
+            <div class="diversity-section intake-section-wrap">
+                <div class="diversity-header" onclick="toggleIntakeSection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                        Keywords from intake form
+                    </h4>
+                    <svg class="collapse-icon" id="intakeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="intakeContent">
+                    <p class="profile-similar-tldr" style="font-weight: 600; font-size: 13px; margin-bottom: 8px; color: var(--text-primary);">Use role intakes from hiring managers to prefill your search.</p>
+                    <p class="diversity-description" style="margin-bottom: 12px;">
+                        Upload a PDF or paste intake form text (role description, requirements) and we’ll extract job title, keywords, and a boolean query.
+                    </p>
+                    <div class="profile-upload-row" style="margin-bottom: 12px;">
+                        <input type="file" id="intakePdfInput" accept=".pdf,application/pdf" onchange="handleIntakePdfUpload(event)">
+                        <span class="upload-hint">Upload an intake form PDF and we’ll pull out the text for you.</span>
+                    </div>
+                    <div class="profile-paste-wrap">
+                        <textarea id="intakePasteInput" placeholder="Paste intake form or role description here, or upload a PDF above." style="min-height: 100px;"></textarea>
+                        <button type="button" class="btn btn-primary" id="intakeExtractBtn" onclick="extractFromIntakeForm()">
+                            <span id="intakeExtractBtnText">Extract keywords & apply to search</span>
+                        </button>
+                    </div>
+                    <div id="intakeExtractLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Extracting from intake form...</div>
+                </div>
+            </div>
+
+            <!-- Find similar portfolios -->
+            <div class="diversity-section portfolio-section-wrap">
+                <div class="diversity-header" onclick="togglePortfolioSection()">
+                    <h4>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21,15 16,10 5,21"/>
+                        </svg>
+                        Find similar portfolios
+                    </h4>
+                    <svg class="collapse-icon" id="portfolioSimilarIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                        <polyline points="6,9 12,15 18,9"/>
+                    </svg>
+                </div>
+                <div class="collapsible-content" id="portfolioSimilarContent">
+                    <p class="profile-similar-tldr" style="font-weight: 600; font-size: 13px; margin-bottom: 8px; color: var(--text-primary);">Design talent often shows up in portfolios, not on LinkedIn. Share links to designers you’ve already hired and we’ll help you find more like them.</p>
+                    <p class="diversity-description" style="margin-bottom: 12px;">
+                        Add portfolio URLs—Dribbble, Behance, or personal sites—from designers you’ve hired or want to match. We’ll build a search you can run in Google to surface similar candidates.
+                    </p>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label class="form-label">Portfolio URLs (one per line)</label>
+                        <textarea id="portfolioUrlsInput" placeholder="https://dribbble.com/username&#10;https://behance.net/designer&#10;https://johndoe.com" style="min-height: 80px; width: 100%; padding: 10px 12px; font-size: 13px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text-primary); resize: vertical;"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="portfolioSimilarBtn" onclick="findSimilarPortfolios()">
+                        <span id="portfolioSimilarBtnText">Find similar portfolios</span>
+                    </button>
+                    <div id="portfolioSimilarLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;">Building your search...</div>
+                    <div id="portfolioSimilarResult" class="hidden" style="margin-top: 12px;">
+                        <div class="profile-result-block">
+                            <div class="profile-query-wrap">
+                                <label>Your Google search</label>
+                                <pre class="profile-query-text" id="portfolioSimilarQuery"></pre>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <label style="font-size: 12px; color: var(--text-secondary);">Or use Google’s “related” search to find pages similar to each URL:</label>
+                                <pre class="profile-query-text" id="portfolioRelatedQuery" style="margin-top: 4px; font-size: 12px;"></pre>
+                            </div>
+                            <div class="profile-result-actions" style="margin-top: 12px;">
+                                <button type="button" class="btn btn-primary" onclick="openPortfolioSearch('keyword')">Open in Google</button>
+                                <button type="button" class="btn btn-secondary" onclick="openPortfolioSearch('related')">Open related search in Google</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Similar tech stack -->
             <div class="diversity-section tech-stack-section-wrap">
                 <div class="diversity-header" onclick="toggleTechStackSection()">
@@ -2691,30 +3211,30 @@
                 </div>
                 <div class="collapsible-content" id="techStackContent">
                     <p class="diversity-description" style="margin-bottom: 14px;">
-                        Find companies to add to Target Companies in two ways: by a reference company (similar tech stack) or by listing technologies you want (e.g. Ruby, Python).
+                        Discover companies to add to your search in two ways: name a company you like and we’ll find others with a similar stack, or list the technologies you care about (e.g. Ruby, React).
                     </p>
                     <div class="tech-stack-block">
-                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Find similar to a company</label>
+                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Companies like this one</label>
                         <div class="company-ai-prompt-wrap">
                             <input type="text" class="form-input" id="techStackCompanyInput" placeholder="e.g., Shopify, Stripe, Vercel..." style="flex: 1; min-width: 0;">
                             <button type="button" class="btn btn-primary" id="techStackBtn" onclick="getTechStackCompanySuggestions()">
-                                <span id="techStackBtnText">Find similar tech stack companies</span>
+                                <span id="techStackBtnText">Find similar companies</span>
                             </button>
                         </div>
                     </div>
                     <p class="company-list-or" style="margin: 14px 0 8px;">Or</p>
                     <div class="tech-stack-block">
-                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Find companies that use this tech</label>
+                        <label class="form-label" style="margin-bottom: 6px; font-size: 12px;">Companies using these technologies</label>
                         <div class="company-ai-prompt-wrap">
                             <input type="text" class="form-input" id="techStackTechInput" placeholder="e.g., Ruby, Python, React, PostgreSQL, AWS..." style="flex: 1; min-width: 0;">
                             <button type="button" class="btn btn-primary" id="techByTechBtn" onclick="getCompaniesByTechSuggestions()">
-                                <span id="techByTechBtnText">Find companies using this tech</span>
+                                <span id="techByTechBtnText">Find companies</span>
                             </button>
                         </div>
                     </div>
                     <div id="techStackLoading" class="hidden" style="font-size: 13px; color: var(--text-secondary); margin-top: 8px;"></div>
                     <div id="techStackResults" class="hidden">
-                        <div class="company-ai-results-label" id="techStackResultsLabel">Companies — hover to see technologies. <strong>Add</strong> sends them to <strong>Target Companies</strong> (section above); they’ll appear there.</div>
+                        <div class="company-ai-results-label" id="techStackResultsLabel">Hover a company to see its tech. Use <strong>Add</strong> to send any of them to your Target Companies list above.</div>
                         <div class="company-ai-results-chips" id="techStackResultsChips"></div>
                         <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
                             <button type="button" class="btn" id="techStackAddAllBtn" onclick="addAllTechStackCompanies()" style="font-size: 12px;">Add all</button>
@@ -2722,12 +3242,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Selected Similar Titles -->
-            <div id="similarTitlesContainer" class="hidden" style="margin-top: 16px;">
-                <label class="form-label" style="margin-bottom: 8px;">Selected Similar Titles:</label>
-                <div class="chips-container" id="selectedTitles"></div>
             </div>
 
             <!-- Action Buttons -->
@@ -2738,9 +3252,6 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                     Generate Search
-                </button>
-                <button class="btn btn-ai" id="aiSuggest" onclick="getAISuggestions()">
-                    AI Suggestions
                 </button>
                 <button class="btn btn-secondary" onclick="clearForm()">
                     Clear
@@ -2826,17 +3337,6 @@
             </div>
         </div>
 
-        <!-- AI Suggestions -->
-        <div class="suggestions-panel hidden" id="suggestionsPanel">
-            <h4>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C6AC4" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
-                AI-Suggested Similar Titles (click to add)
-            </h4>
-            <div class="suggestion-chips" id="suggestionChips"></div>
-        </div>
-
         <!-- Email Generator -->
         <div class="email-section hidden" id="emailSection">
             <h3>
@@ -2893,6 +3393,44 @@
                 <button class="btn btn-primary btn-small" onclick="copyEmail()">
                     Copy Email
                 </button>
+            </div>
+        </div>
+
+        <!-- Top Candidates (AI-generated) -->
+        <div class="candidates-section hidden" id="candidatesSection">
+            <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                Top candidates <span id="candidatesCount" class="candidates-count"></span>
+            </h3>
+            <div class="candidates-actions">
+                <button type="button" class="btn btn-secondary btn-small" onclick="exportCandidatesCSV()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export CSV
+                </button>
+                <button type="button" class="btn btn-primary btn-small" onclick="sendCandidatesToSlack()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521 2.527 2.527 0 01-2.521-2.521 2.527 2.527 0 012.521-2.521zM18.956 8.834a2.528 2.528 0 012.522 2.521 2.528 2.528 0 01-2.522 2.521 2.527 2.527 0 01-2.521-2.521 2.527 2.527 0 012.521-2.521zM15.165 8.834a2.527 2.527 0 012.521-2.521 2.528 2.528 0 012.521 2.521v6.313A2.528 2.528 0 0117.686 24a2.528 2.528 0 01-2.521-2.522V8.834zM12.458 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 0112.458 0a2.528 2.528 0 012.521 2.522v2.52h-2.521zM12.458 6.313a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521 2.527 2.527 0 01-2.521-2.521 2.527 2.527 0 012.521-2.521zM24 18.956a2.528 2.528 0 01-2.522 2.522 2.528 2.528 0 01-2.521-2.522v-2.522h2.521A2.528 2.528 0 0124 18.956z"/></svg>
+                    Send to Slack
+                </button>
+            </div>
+            <div class="candidates-table-wrap">
+                <table class="candidates-table" id="candidatesTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Title</th>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Score</th>
+                            <th>LinkedIn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="candidatesTableBody"></tbody>
+                </table>
             </div>
         </div>
 
@@ -2992,7 +3530,7 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h4>Pick a platform</h4>
-                        <p>Choose where to search: LinkedIn, GitHub, Stack Overflow, X, Scholar, Dribbble, Behance, Kaggle, Wellfound, Substack, Dev.to, Product Hunt, Polywork, Bluesky, Quora, Speaker Deck.</p>
+                        <p>Choose where to search: LinkedIn, Reddit, GitHub, GitLab, Bitbucket, CodePen, SourceForge, Stack Overflow, Stack Exchange, Hacker News, X, Scholar, Dribbble, Behance, Kaggle, Wellfound, Substack, Dev.to, Hashnode, Product Hunt, Indie Hackers, Polywork, Bluesky, Mastodon, Quora, Speaker Deck, Hired, Dice, Indeed, Glassdoor, Levels.fyi, Otta, Meetup, Eventbrite, Twitch, YouTube, LeetCode, HackerRank, Women Who Code.</p>
                     </div>
                 </div>
 
@@ -3031,13 +3569,21 @@
                 <div class="guide-step">
                     <div class="step-number">6</div>
                     <div class="step-content">
+                        <h4>Find similar portfolios</h4>
+                        <p>For design roles: use the <strong>Find similar portfolios</strong> section (below Keywords from intake form). Paste Dribbble, Behance, or personal portfolio URLs of people you’ve hired and we’ll generate a Google search to discover similar designer profiles.</p>
+                    </div>
+                </div>
+
+                <div class="guide-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
                         <h4>Diversity Sourcing</h4>
                         <p>Add terms for Disability & Neurodiversity, Parents & Returners, Immigrants & Newcomers, or Indigenous in Tech.</p>
                     </div>
                 </div>
 
                 <div class="guide-step">
-                    <div class="step-number">7</div>
+                    <div class="step-number">8</div>
                     <div class="step-content">
                         <h4>Generate & search</h4>
                         <p><strong>Generate Search</strong> builds your query. <strong>Open in Google</strong> (or the platform button) runs it. Save for later; switch tabs to try another platform.</p>
@@ -3045,7 +3591,7 @@
                 </div>
 
                 <div class="guide-step">
-                    <div class="step-number">8</div>
+                    <div class="step-number">9</div>
                     <div class="step-content">
                         <h4>Reach out</h4>
                         <p>Use the email template below. Pick a tone, regenerate if you want something different, then copy and personalize.</p>
@@ -3129,12 +3675,43 @@
         let currentQuery = '';
         let savedSearches = [];
         let selectedSimilarTitles = [];
+        let selectedSkills = [];
+        const skillSuggestionsList = ['Python', 'JavaScript', 'TypeScript', 'React', 'Node.js', 'Ruby', 'Ruby on Rails', 'Java', 'Go', 'Kubernetes', 'AWS', 'Docker', 'SQL', 'GraphQL', 'REST API', 'Machine learning', 'Data analysis', 'Product management', 'Agile', 'Scrum', 'Figma', 'User research', 'System design', 'CI/CD', 'PostgreSQL', 'Redis', 'Elasticsearch', 'React Native', 'Vue.js', 'Leadership', 'Mentorship', 'Technical writing', 'Public speaking', 'A/B testing', 'Growth', 'E-commerce', 'SaaS', 'Fintech', 'API design', 'Microservices', 'Distributed systems', 'Security', 'DevOps', 'SRE', 'Frontend', 'Backend', 'Full stack', 'Mobile development', 'Data engineering', 'Data science', 'UX design', 'UI design', 'Design systems'].sort();
+
+        let selectedLocations = [];
+        let selectedEmployers = [];
+        let selectedEducationLevels = [];
+        let selectedQualifications = [];
+        let selectedIncludeKeywords = [];
+        let selectedExcludeKeywords = [];
+        const acSuggestions = {
+            location: ['Toronto', 'San Francisco', 'New York', 'Vancouver', 'Montreal', 'Remote', 'Austin', 'Seattle', 'London', 'Berlin', 'Amsterdam', 'Sydney', 'Singapore', 'Dubai', 'Chicago', 'Boston', 'Denver', 'Los Angeles', 'Ottawa', 'Calgary', 'Hybrid'].sort(),
+            currentEmployer: ['Google', 'Meta', 'Amazon', 'Apple', 'Microsoft', 'Shopify', 'Stripe', 'Netflix', 'Spotify', 'Slack', 'Figma', 'Notion', 'Airbnb', 'Uber', 'Lyft', 'Square', 'Salesforce', 'Adobe', 'Oracle', 'IBM', 'GitHub', 'Atlassian', 'Twilio', 'Snowflake', 'Datadog', 'Vercel', 'Linear', 'Webflow'].sort(),
+            education: ["Bachelor's Degree", "Master's Degree", 'MBA', 'PhD', 'Doctoral Degree', 'Bootcamp', 'B.S.', 'B.A.', 'M.S.', 'M.A.', 'BEng', 'MEng', 'Associate Degree'].sort(),
+            qualifications: ['PMP', 'CFA', 'PMP certified', '5+ years experience', '10+ years', 'Leadership experience', 'Team lead', 'Technical leadership', 'Cross-functional', 'Startup experience', 'FAANG', 'Scaled systems', 'Public speaking', 'Mentorship', 'Open source contributor'].sort(),
+            includeKeywords: ['machine learning', 'fintech', 'SaaS', 'B2B', 'e-commerce', 'API', 'React', 'Python', 'Ruby', 'Go', 'distributed systems', 'microservices', 'agile', 'scrum', 'product-led', 'growth', 'data-driven', 'startup', 'scale-up', 'remote-first', 'design systems', 'user research', 'A/B testing', 'experimentation'].sort(),
+            excludeKeywords: ['recruiter', 'HR', 'sales', 'agency', 'consultant', 'freelance', 'intern', 'student', 'junior', 'entry level'].sort()
+        };
+        const acFieldConfig = {
+            location: { inputId: 'locationInput', dropdownId: 'locationDropdown', containerId: 'selectedLocationsContainer', chipsId: 'selectedLocationsChips' },
+            currentEmployer: { inputId: 'currentEmployerInput', dropdownId: 'currentEmployerDropdown', containerId: 'selectedEmployersContainer', chipsId: 'selectedEmployersChips' },
+            education: { inputId: 'educationInput', dropdownId: 'educationDropdown', containerId: 'selectedEducationContainer', chipsId: 'selectedEducationChips' },
+            qualifications: { inputId: 'qualificationsInput', dropdownId: 'qualificationsDropdown', containerId: 'selectedQualificationsContainer', chipsId: 'selectedQualificationsChips' },
+            includeKeywords: { inputId: 'includeKeywordsInput', dropdownId: 'includeKeywordsDropdown', containerId: 'selectedIncludeKeywordsContainer', chipsId: 'selectedIncludeKeywordsChips' },
+            excludeKeywords: { inputId: 'excludeKeywordsInput', dropdownId: 'excludeKeywordsDropdown', containerId: 'selectedExcludeKeywordsContainer', chipsId: 'selectedExcludeKeywordsChips' }
+        };
+        function getAcSelected(field) {
+            const m = { location: selectedLocations, currentEmployer: selectedEmployers, education: selectedEducationLevels, qualifications: selectedQualifications, includeKeywords: selectedIncludeKeywords, excludeKeywords: selectedExcludeKeywords };
+            return m[field];
+        }
+        let currentAcField = null;
         let searchCount = parseInt(localStorage.getItem('talentScoutSearchCount') || '0');
         let isDarkMode = localStorage.getItem('talentScoutDarkMode') === 'true';
         let currentEmailTone = 'professional';
         let currentJobTitle = '';
         let selectedCompanyLists = [];
         let selectedCompanies = [];
+        let aiGeneratedCandidates = [];
 
         // Quick Database for shared saved searches
         let searchesDB = null;
@@ -3205,6 +3782,9 @@
 
         let selectedSeniorityLevels = ['senior'];
         let selectedSignals = [];
+
+        // Flat list of job title suggestions for autocomplete (from synonyms + templates)
+        let jobTitleSuggestionsList = [];
 
         // Job title synonyms database
         const jobTitleSynonyms = {
@@ -3309,10 +3889,20 @@ Shopify`
             }
         };
 
+        (function buildJobTitleSuggestionsList() {
+            const set = new Set();
+            const toTitle = (s) => s.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+            Object.keys(jobTitleSynonyms).forEach(k => set.add(toTitle(k)));
+            Object.values(jobTitleSynonyms).flat().forEach(v => set.add(toTitle(v)));
+            Object.values(templates).forEach(t => { if (t.jobTitle) set.add(t.jobTitle); });
+            jobTitleSuggestionsList = [...set].sort();
+        })();
+
         const countryCodes = { 'us': 'United States', 'ca': 'Canada', 'uk': 'United Kingdom', 'de': 'Germany', 'fr': 'France', 'au': 'Australia', 'in': 'India', 'sg': 'Singapore', 'nl': 'Netherlands', 'ie': 'Ireland' };
 
         const platformSites = {
             'linkedin': 'site:linkedin.com/in/',
+            'reddit': 'site:reddit.com',
             'github': 'site:github.com',
             'stackoverflow': 'site:stackoverflow.com/users/',
             'twitter': 'site:twitter.com OR site:x.com',
@@ -3327,12 +3917,35 @@ Shopify`
             'polywork': 'site:polywork.com',
             'bluesky': 'site:bsky.app',
             'quora': 'site:quora.com',
-            'speakerdeck': 'site:speakerdeck.com'
+            'speakerdeck': 'site:speakerdeck.com',
+            'gitlab': 'site:gitlab.com',
+            'bitbucket': 'site:bitbucket.org',
+            'codepen': 'site:codepen.io',
+            'stackexchange': 'site:stackexchange.com',
+            'hackernews': 'site:news.ycombinator.com',
+            'hashnode': 'site:hashnode.dev',
+            'hired': 'site:hired.com',
+            'dice': 'site:dice.com',
+            'indeed': 'site:indeed.com',
+            'glassdoor': 'site:glassdoor.com',
+            'levelsfyi': 'site:levels.fyi',
+            'otta': 'site:otta.com',
+            'indiehackers': 'site:indiehackers.com',
+            'meetup': 'site:meetup.com',
+            'eventbrite': 'site:eventbrite.com',
+            'twitch': 'site:twitch.tv',
+            'youtube': 'site:youtube.com',
+            'mastodon': 'site:mastodon.social',
+            'leetcode': 'site:leetcode.com',
+            'hackerrank': 'site:hackerrank.com',
+            'womenwhocode': 'site:womenwhocode.com',
+            'sourceforge': 'site:sourceforge.net'
         };
 
         const platformNames = {
             'linkedin': 'LinkedIn',
-            'github': 'GitHub', 
+            'reddit': 'Reddit',
+            'github': 'GitHub',
             'stackoverflow': 'Stack Overflow',
             'twitter': 'X / Twitter',
             'scholar': 'Google Scholar',
@@ -3346,8 +3959,32 @@ Shopify`
             'polywork': 'Polywork',
             'bluesky': 'Bluesky',
             'quora': 'Quora',
-            'speakerdeck': 'Speaker Deck'
+            'speakerdeck': 'Speaker Deck',
+            'gitlab': 'GitLab',
+            'bitbucket': 'Bitbucket',
+            'codepen': 'CodePen',
+            'stackexchange': 'Stack Exchange',
+            'hackernews': 'Hacker News',
+            'hashnode': 'Hashnode',
+            'hired': 'Hired',
+            'dice': 'Dice',
+            'indeed': 'Indeed',
+            'glassdoor': 'Glassdoor',
+            'levelsfyi': 'Levels.fyi',
+            'otta': 'Otta',
+            'indiehackers': 'Indie Hackers',
+            'meetup': 'Meetup',
+            'eventbrite': 'Eventbrite',
+            'twitch': 'Twitch',
+            'youtube': 'YouTube',
+            'mastodon': 'Mastodon',
+            'leetcode': 'LeetCode',
+            'hackerrank': 'HackerRank',
+            'womenwhocode': 'Women Who Code',
+            'sourceforge': 'SourceForge'
         };
+
+        const PRIMARY_PLATFORMS = ['linkedin', 'github', 'twitter', 'kaggle'];
 
         // Guide Modal Functions
         function showGuide() {
@@ -3383,6 +4020,7 @@ Shopify`
         // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
             setupPlatformTabs();
+            switchPlatform(currentPlatform);
             updateStats();
             if (isDarkMode) {
                 document.body.classList.add('dark-mode');
@@ -3391,32 +4029,51 @@ Shopify`
             checkFirstVisit();
             // Initialize database and load saved searches
             await initDatabase();
+            populateIntakeDropdown();
         });
 
         function setupPlatformTabs() {
             document.querySelectorAll('.platform-tab').forEach(tab => {
                 tab.addEventListener('click', () => switchPlatform(tab.dataset.platform));
             });
+            const moreSelect = document.getElementById('platformMoreSelect');
+            if (moreSelect) {
+                moreSelect.addEventListener('change', function() {
+                    const val = this.value;
+                    if (val) switchPlatform(val);
+                });
+            }
         }
 
         function switchPlatform(platform) {
             currentPlatform = platform;
             document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.platform === platform));
-            
-            const allPlatformFields = ['linkedin', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle', 'wellfound', 'substack', 'devto', 'producthunt', 'polywork', 'bluesky', 'quora', 'speakerdeck'];
-            allPlatformFields.forEach(p => document.querySelectorAll(`.${p}-field`).forEach(el => el.classList.add('hidden')));
-            document.querySelectorAll(`.${platform}-field`).forEach(el => el.classList.remove('hidden'));
+            const moreSelect = document.getElementById('platformMoreSelect');
+            const moreWrap = document.getElementById('platformMoreWrap');
+            if (moreSelect && moreWrap) {
+                moreSelect.value = PRIMARY_PLATFORMS.includes(platform) ? '' : platform;
+                moreWrap.classList.toggle('active', !PRIMARY_PLATFORMS.includes(platform));
+            }
 
-            const titles = { 'linkedin': 'Search LinkedIn Profiles', 'github': 'Search GitHub Developers', 'stackoverflow': 'Search Stack Overflow Users', 'twitter': 'Search X / Twitter Profiles', 'scholar': 'Search Google Scholar Authors', 'dribbble': 'Search Dribbble Designers', 'behance': 'Search Behance Creatives', 'kaggle': 'Search Kaggle Data Scientists', 'wellfound': 'Search Wellfound (AngelList) Talent', 'substack': 'Search Substack Writers', 'devto': 'Search Dev.to Developers', 'producthunt': 'Search Product Hunt Makers', 'polywork': 'Search Polywork Profiles', 'bluesky': 'Search Bluesky Profiles', 'quora': 'Search Quora Experts', 'speakerdeck': 'Search Speaker Deck Presenters' };
-            document.getElementById('platform-title').textContent = titles[platform] || 'Search Profiles';
-
+            const aiSection = document.getElementById('aiSearchSection');
+            const searchCard = document.getElementById('searchCard');
+            if (aiSection) aiSection.classList.toggle('hidden', false);
+            if (searchCard) searchCard.classList.toggle('hidden', false);
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('emailSection').classList.add('hidden');
 
+            const allPlatformFields = ['linkedin', 'reddit', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle', 'wellfound', 'substack', 'devto', 'producthunt', 'polywork', 'bluesky', 'quora', 'speakerdeck', 'gitlab', 'bitbucket', 'codepen', 'stackexchange', 'hackernews', 'hashnode', 'hired', 'dice', 'indeed', 'glassdoor', 'levelsfyi', 'otta', 'indiehackers', 'meetup', 'eventbrite', 'twitch', 'youtube', 'mastodon', 'leetcode', 'hackerrank', 'womenwhocode', 'sourceforge'];
+            allPlatformFields.forEach(p => document.querySelectorAll(`.${p}-field`).forEach(el => el.classList.add('hidden')));
+            document.querySelectorAll(`.${platform}-field`).forEach(el => el.classList.remove('hidden'));
+
+            if (platform === 'linkedin') updateSelectedSkills();
+
+            const titles = { 'linkedin': 'Search LinkedIn Profiles', 'reddit': 'Search Reddit', 'github': 'Search GitHub Developers', 'stackoverflow': 'Search Stack Overflow Users', 'twitter': 'Search X / Twitter Profiles', 'scholar': 'Search Google Scholar Authors', 'dribbble': 'Search Dribbble Designers', 'behance': 'Search Behance Creatives', 'kaggle': 'Search Kaggle Data Scientists', 'wellfound': 'Search Wellfound (AngelList) Talent', 'substack': 'Search Substack Writers', 'devto': 'Search Dev.to Developers', 'producthunt': 'Search Product Hunt Makers', 'polywork': 'Search Polywork Profiles', 'bluesky': 'Search Bluesky Profiles', 'quora': 'Search Quora Experts', 'speakerdeck': 'Search Speaker Deck Presenters', 'gitlab': 'Search GitLab', 'bitbucket': 'Search Bitbucket', 'codepen': 'Search CodePen', 'stackexchange': 'Search Stack Exchange', 'hackernews': 'Search Hacker News', 'hashnode': 'Search Hashnode', 'hired': 'Search Hired', 'dice': 'Search Dice', 'indeed': 'Search Indeed', 'glassdoor': 'Search Glassdoor', 'levelsfyi': 'Search Levels.fyi', 'otta': 'Search Otta', 'indiehackers': 'Search Indie Hackers', 'meetup': 'Search Meetup', 'eventbrite': 'Search Eventbrite', 'twitch': 'Search Twitch', 'youtube': 'Search YouTube', 'mastodon': 'Search Mastodon', 'leetcode': 'Search LeetCode', 'hackerrank': 'Search HackerRank', 'womenwhocode': 'Search Women Who Code', 'sourceforge': 'Search SourceForge' };
+            document.getElementById('platform-title').textContent = titles[platform] || 'Search Profiles';
+
             // If form has search terms (e.g. from "Find similar candidates"), rebuild query for this platform so the same terms work on GitHub, etc.
             const jobTitle = document.getElementById('jobTitle').value.trim();
-            const includeKeywords = document.getElementById('includeKeywords').value.trim();
-            if (jobTitle || includeKeywords) {
+            if (jobTitle || selectedIncludeKeywords.length > 0) {
                 const newQuery = buildQuery(platform);
                 if (newQuery) {
                     currentQuery = newQuery;
@@ -3484,6 +4141,10 @@ Shopify`
         let aiSuggestedCompanies = [];
         let techStackSuggestedCompanies = [];  // array of { name, tech } for hover tooltips
         let lastTechStackSearch = null;  // { mode: 'company'|'tech', query: string } for Refresh for more
+        let lastPortfolioKeywordQuery = '';
+        let lastPortfolioRelatedQuery = '';
+
+        const INTAKE_EXTRACTIONS_KEY = 'talentScoutIntakeExtractions';
         let lastProfileAnalysis = null;
 
         if (typeof pdfjsLib !== 'undefined') {
@@ -3518,6 +4179,38 @@ Shopify`
                 console.error(err);
                 alert('Could not read PDF. Try pasting the text instead.');
                 textarea.placeholder = 'Or paste profile or resume text here.';
+            }
+            ev.target.value = '';
+        }
+
+        async function handleIntakePdfUpload(ev) {
+            const file = ev.target.files && ev.target.files[0];
+            if (!file || file.type !== 'application/pdf') return;
+            if (typeof pdfjsLib === 'undefined') {
+                alert('PDF support is loading. Try again in a moment.');
+                ev.target.value = '';
+                return;
+            }
+            const textarea = document.getElementById('intakePasteInput');
+            textarea.placeholder = 'Extracting text from PDF...';
+            textarea.value = '';
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
+                const numPages = pdf.numPages;
+                let fullText = '';
+                for (let i = 1; i <= numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const pageText = content.items.map(item => item.str || '').join(' ');
+                    fullText += pageText + '\n';
+                }
+                textarea.value = fullText.trim();
+                textarea.placeholder = 'Paste intake form or role description here, or upload a PDF above.';
+            } catch (err) {
+                console.error(err);
+                alert('Could not read PDF. Try pasting the text instead.');
+                textarea.placeholder = 'Paste intake form or role description here, or upload a PDF above.';
             }
             ev.target.value = '';
         }
@@ -3603,7 +4296,10 @@ BOOLEAN_QUERY: [a complete boolean search query starting with site:linkedin.com/
             if (!lastProfileAnalysis) return;
             const { jobTitle, includeKeywords, targetCompanies, query } = lastProfileAnalysis;
             if (jobTitle) document.getElementById('jobTitle').value = jobTitle;
-            if (includeKeywords) document.getElementById('includeKeywords').value = includeKeywords;
+            if (includeKeywords) {
+                selectedIncludeKeywords = includeKeywords.split(',').map(s => s.trim()).filter(Boolean);
+                updateAcDisplay('includeKeywords');
+            }
             if (targetCompanies.length) {
                 targetCompanies.forEach(c => {
                     if (!selectedCompanies.includes(c)) selectedCompanies.push(c);
@@ -3613,7 +4309,7 @@ BOOLEAN_QUERY: [a complete boolean search query starting with site:linkedin.com/
             if (query) {
                 currentPlatform = 'linkedin';
                 document.querySelectorAll('.platform-tab').forEach(tab => tab.classList.toggle('active', tab.dataset.platform === 'linkedin'));
-                const allPlatformFields = ['linkedin', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle', 'wellfound', 'substack', 'devto', 'producthunt', 'polywork', 'bluesky', 'quora', 'speakerdeck'];
+                const allPlatformFields = ['linkedin', 'reddit', 'github', 'stackoverflow', 'twitter', 'scholar', 'dribbble', 'behance', 'kaggle', 'wellfound', 'substack', 'devto', 'producthunt', 'polywork', 'bluesky', 'quora', 'speakerdeck'];
                 allPlatformFields.forEach(p => document.querySelectorAll(`.${p}-field`).forEach(el => el.classList.add('hidden')));
                 document.querySelectorAll('.linkedin-field').forEach(el => el.classList.remove('hidden'));
                 document.getElementById('platform-title').textContent = 'Search LinkedIn Profiles';
@@ -3624,6 +4320,407 @@ BOOLEAN_QUERY: [a complete boolean search query starting with site:linkedin.com/
                 document.getElementById('resultsSection').classList.remove('hidden');
                 document.getElementById('emailSection').classList.remove('hidden');
             }
+        }
+
+        function getIntakeExtractions() {
+            try {
+                return JSON.parse(localStorage.getItem(INTAKE_EXTRACTIONS_KEY) || '[]');
+            } catch (_) { return []; }
+        }
+
+        function saveIntakeExtraction(extraction) {
+            const list = getIntakeExtractions();
+            const id = extraction.id || 'id_' + Date.now();
+            const withId = { ...extraction, id, createdAt: extraction.createdAt || new Date().toISOString() };
+            const idx = list.findIndex(e => e.id === id);
+            if (idx >= 0) list[idx] = withId; else list.unshift(withId);
+            localStorage.setItem(INTAKE_EXTRACTIONS_KEY, JSON.stringify(list.slice(0, 50)));
+            populateIntakeDropdown();
+        }
+
+        function populateIntakeDropdown() {
+            const list = getIntakeExtractions();
+            const sel = document.getElementById('intakeDropdown');
+            if (!sel) return;
+            const current = sel.value;
+            sel.innerHTML = '<option value="">— Choose a saved extraction —</option>' +
+                list.map(e => {
+                    const label = (e.name || e.jobTitle || 'Unnamed') + (e.createdAt ? ' (' + new Date(e.createdAt).toLocaleDateString() + ')' : '');
+                    return `<option value="${e.id}">${escapeHtml(label)}</option>`;
+                }).join('');
+            if (list.some(e => e.id === current)) sel.value = current;
+        }
+
+        function applyIntakeExtraction(value) {
+            if (!value) return;
+            const list = getIntakeExtractions();
+            const e = list.find(x => x.id === value);
+            if (!e) return;
+            if (e.jobTitle) document.getElementById('jobTitle').value = e.jobTitle;
+            if (e.includeKeywords) {
+                selectedIncludeKeywords = (e.includeKeywords || '').split(',').map(s => s.trim()).filter(Boolean);
+                updateAcDisplay('includeKeywords');
+            }
+            if (e.excludeKeywords !== undefined && e.excludeKeywords !== '') {
+                selectedExcludeKeywords = (e.excludeKeywords || '').split(',').map(s => s.trim()).filter(Boolean);
+                updateAcDisplay('excludeKeywords');
+            }
+            if (e.query) {
+                const site = platformSites[currentPlatform] || platformSites['linkedin'];
+                const fullQuery = e.query.toLowerCase().startsWith('site:') ? e.query : (site + ' ' + e.query);
+                currentQuery = fullQuery;
+                document.getElementById('queryText').value = fullQuery;
+                document.getElementById('resultsSection').classList.remove('hidden');
+                generateEmailTemplate();
+                updateOpenButton();
+            } else if (e.jobTitle || e.includeKeywords) {
+                generateSearch();
+            }
+        }
+
+        function parseList(value) {
+            if (!value || !(value = value.trim())) return [];
+            const none = /^(none|n\/a|na|no|—|–|-)$/i;
+            return value
+                .split(/[,;|\n]/)
+                .map(s => s.trim())
+                .filter(s => s && !none.test(s));
+        }
+
+        function mapSeniorityToLevels(seniorityText) {
+            if (!seniorityText) return ['senior'];
+            const lower = seniorityText.toLowerCase();
+            if (lower.includes('entry') || lower.includes('junior')) return ['entry'];
+            if (lower.includes('mid') || lower.includes('intermediate')) return ['mid'];
+            if (lower.includes('staff')) return ['staff'];
+            if (lower.includes('principal') || lower.includes('architect')) return ['principal'];
+            if (lower.includes('director') || lower.includes('vp') || lower.includes('head of')) return ['director'];
+            if (lower.includes('senior') || lower.includes('sr')) return ['senior'];
+            return ['senior'];
+        }
+
+        function getAiSearchVal(response, label) {
+            const re = new RegExp(label + ':\\s*([^\\n]+)(?=\\n[A-Z_]+:|$)', 'ims');
+            const m = response.match(re);
+            return m ? m[1].trim().replace(/\n/g, ' ').trim() : '';
+        }
+
+        async function fillSearchFromDescription() {
+            const input = document.getElementById('aiSearchInput');
+            const text = (input && input.value ? input.value : '').trim();
+            const intakeEl = document.getElementById('aiSearchIntakeNotes');
+            const teamEl = document.getElementById('aiSearchTeamContext');
+            const intakeNotes = (intakeEl && intakeEl.value ? intakeEl.value : '').trim();
+            const teamContext = (teamEl && teamEl.value ? teamEl.value : '').trim();
+            const btn = document.getElementById('aiSearchBtn');
+            const btnText = document.getElementById('aiSearchBtnText');
+            const btnLoading = document.getElementById('aiSearchBtnLoading');
+            const errEl = document.getElementById('aiSearchError');
+            if (errEl) { errEl.classList.add('hidden'); errEl.textContent = ''; }
+            if (!text) {
+                if (errEl) { errEl.textContent = 'Please describe who you\'re looking for (e.g. role, company, location).'; errEl.classList.remove('hidden'); }
+                return;
+            }
+            if (typeof quick === 'undefined' || !quick.ai) {
+                if (errEl) { errEl.textContent = 'AI search is available when the app is deployed on Quick.'; errEl.classList.remove('hidden'); }
+                return;
+            }
+            if (btn) btn.disabled = true;
+            if (btnText) btnText.classList.add('hidden');
+            if (btnLoading) btnLoading.classList.remove('hidden');
+            try {
+                const platform = currentPlatform || 'linkedin';
+                let contextBlock = '\n\nUser description:\n' + text.slice(0, 2000);
+                if (intakeNotes) contextBlock += '\n\n--- Intake notes ---\n' + intakeNotes.slice(0, 1500);
+                if (teamContext) contextBlock += '\n\n--- Team context ---\n' + teamContext.slice(0, 1500);
+                const prompt = `You are an expert recruiting sourcer building a boolean search for candidate sourcing. The user described who they want to find in plain language. Use the main description and any optional intake notes or team context below to extract every relevant detail into the structured fields.
+
+RULES:
+- Output ONLY the labels and values. No intro, no explanation. One label per line.
+- Use official company names (e.g. Meta, not Facebook).
+- For locations: include both city and region when relevant (e.g. San Francisco, Bay Area).
+- For skills and keywords: be thorough—include 6–12 terms (technologies, methods, domain).
+- For similar titles: include 4–8 job title variants people might have (e.g. "Data Scientist", "Senior Data Scientist", "ML Engineer").
+- If a field doesn't apply, write "none".
+
+Format (copy the labels exactly):
+
+JOB_TITLE: [primary job title, e.g. Senior Data Scientist]
+SIMILAR_TITLES: [comma-separated variants, e.g. Data Scientist, Senior Data Scientist, ML Engineer, Research Scientist]
+LOCATIONS: [comma-separated, e.g. San Francisco, Bay Area, Oakland, California]
+CURRENT_COMPANIES: [comma-separated, e.g. Meta, Google, Amazon]
+SENIORITY: [one of: entry, mid, senior, staff, principal, director]
+INDUSTRIES: [comma-separated, e.g. Technology, Fintech, E-commerce]
+SKILLS: [comma-separated, e.g. Python, SQL, machine learning, A/B testing, experimentation]
+QUALIFICATIONS: [comma-separated, e.g. PhD, 5+ years, PMP]
+EDUCATION_LEVELS: [comma-separated, e.g. Bachelor's, Master's, PhD]
+FIELDS_OF_STUDY: [comma-separated, e.g. Computer Science, Statistics]
+SCHOOLS: [comma-separated if mentioned, or none]
+YEARS_EXPERIENCE: [e.g. 5+, 3-7, or none]
+INCLUDE_KEYWORDS: [comma-separated, e.g. machine learning, product analytics, SaaS]
+EXCLUDE_KEYWORDS: [comma-separated, e.g. recruiter, HR, or none]
+${contextBlock}`;
+                const response = await quick.ai.ask(prompt);
+                const jobTitle = getAiSearchVal(response, 'JOB_TITLE');
+                const similarTitlesStr = getAiSearchVal(response, 'SIMILAR_TITLES');
+                const locationsStr = getAiSearchVal(response, 'LOCATIONS');
+                const companiesStr = getAiSearchVal(response, 'CURRENT_COMPANIES');
+                const seniorityStr = getAiSearchVal(response, 'SENIORITY');
+                const industriesStr = getAiSearchVal(response, 'INDUSTRIES');
+                const skillsStr = getAiSearchVal(response, 'SKILLS');
+                const qualStr = getAiSearchVal(response, 'QUALIFICATIONS');
+                const educationStr = getAiSearchVal(response, 'EDUCATION_LEVELS');
+                const fieldsStr = getAiSearchVal(response, 'FIELDS_OF_STUDY');
+                const schoolsStr = getAiSearchVal(response, 'SCHOOLS');
+                const yearsExpStr = getAiSearchVal(response, 'YEARS_EXPERIENCE');
+                const includeStr = getAiSearchVal(response, 'INCLUDE_KEYWORDS');
+                let excludeStr = getAiSearchVal(response, 'EXCLUDE_KEYWORDS');
+
+                if (jobTitle) document.getElementById('jobTitle').value = jobTitle;
+                selectedSimilarTitles = parseList(similarTitlesStr);
+                if (selectedSimilarTitles.length === 0 && jobTitle) selectedSimilarTitles = [jobTitle];
+                selectedLocations = parseList(locationsStr);
+                selectedEmployers = parseList(companiesStr);
+                selectedSeniorityLevels = mapSeniorityToLevels(seniorityStr);
+                selectedSkills = parseList(skillsStr);
+                selectedQualifications = parseList(qualStr);
+                selectedEducationLevels = parseList(educationStr);
+                selectedIncludeKeywords = parseList(includeStr);
+                selectedExcludeKeywords = parseList(excludeStr);
+
+                ['location', 'currentEmployer', 'education', 'qualifications', 'includeKeywords', 'excludeKeywords'].forEach(f => updateAcDisplay(f));
+                document.querySelectorAll('.seniority-chip').forEach(chip => {
+                    chip.classList.toggle('selected', selectedSeniorityLevels.includes(chip.dataset.level));
+                });
+                updateSelectedSkills();
+                updateSelectedTitles();
+
+                const industriesEl = document.getElementById('industries');
+                if (industriesEl && parseList(industriesStr).length) industriesEl.value = parseList(industriesStr).join(', ');
+                const fieldsEl = document.getElementById('fieldsOfStudy');
+                if (fieldsEl && parseList(fieldsStr).length) fieldsEl.value = parseList(fieldsStr).join(', ');
+                const schoolsEl = document.getElementById('schools');
+                if (schoolsEl && parseList(schoolsStr).length) schoolsEl.value = parseList(schoolsStr).join(', ');
+                const yearsExpEl = document.getElementById('yearsExperience');
+                if (yearsExpEl && yearsExpStr && !/^\s*none\s*$/i.test(yearsExpStr)) yearsExpEl.value = yearsExpStr.trim();
+
+                switchPlatform(platform);
+                generateSearch();
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (e) {
+                console.error('AI search error:', e);
+                if (errEl) {
+                    errEl.textContent = e.message || 'Something went wrong. Try a shorter description or try again.';
+                    errEl.classList.remove('hidden');
+                }
+            } finally {
+                if (btn) btn.disabled = false;
+                if (btnText) btnText.classList.remove('hidden');
+                if (btnLoading) btnLoading.classList.add('hidden');
+            }
+        }
+
+        async function generateTopCandidates() {
+            const input = document.getElementById('aiSearchInput');
+            const text = (input && input.value ? input.value : '').trim();
+            const intakeEl = document.getElementById('aiSearchIntakeNotes');
+            const teamEl = document.getElementById('aiSearchTeamContext');
+            const intakeNotes = (intakeEl && intakeEl.value ? intakeEl.value : '').trim();
+            const teamContext = (teamEl && teamEl.value ? teamEl.value : '').trim();
+            const btn = document.getElementById('aiCandidatesBtn');
+            const btnText = document.getElementById('aiCandidatesBtnText');
+            const btnLoading = document.getElementById('aiCandidatesBtnLoading');
+            const errEl = document.getElementById('aiSearchError');
+            if (errEl) { errEl.classList.add('hidden'); errEl.textContent = ''; }
+            if (!text) {
+                if (errEl) { errEl.textContent = 'Please describe who you\'re looking for first.'; errEl.classList.remove('hidden'); }
+                return;
+            }
+            if (typeof quick === 'undefined' || !quick.ai) {
+                if (errEl) { errEl.textContent = 'AI is available when the app is deployed on Quick.'; errEl.classList.remove('hidden'); }
+                return;
+            }
+            if (btn) btn.disabled = true;
+            if (btnText) btnText.classList.add('hidden');
+            if (btnLoading) btnLoading.classList.remove('hidden');
+            try {
+                let context = text.slice(0, 2000);
+                if (intakeNotes) context += '\n\n--- Intake notes ---\n' + intakeNotes.slice(0, 1500);
+                if (teamContext) context += '\n\n--- Team context ---\n' + teamContext.slice(0, 1500);
+                const systemPrompt = `You are an expert technical recruiter and talent sourcer at Shopify. Given a role description and context, generate a list of exactly 20 realistic, qualified candidate profiles that would be strong matches.
+
+For each candidate, output EXACTLY this JSON format (no markdown, no code fences, just a raw JSON array):
+[
+  {
+    "rank": 1,
+    "name": "Full Name",
+    "title": "Current Job Title",
+    "company": "Current Company",
+    "location": "City, Country",
+    "experience_years": 8,
+    "score": 94,
+    "match_reasons": ["reason 1", "reason 2", "reason 3"],
+    "key_skills": ["skill1", "skill2", "skill3", "skill4"],
+    "linkedin_url": "https://linkedin.com/in/plausible-handle",
+    "signals": "Brief 1-sentence summary of why they're a great fit",
+    "risk_flags": "Any concerns or none",
+    "reachout_angle": "Suggested personalized outreach angle"
+  }
+]
+
+Make the candidates realistic and diverse. Include a mix of senior ICs and managers, people at FAANG and startups, different locations. Score 70-98. Order by score descending. Output only the JSON array.`;
+                const response = await quick.ai.ask(systemPrompt + '\n\nRole and context:\n\n' + context);
+                let parsed = [];
+                try {
+                    const jsonMatch = response.match(/\[[\s\S]*\]/);
+                    if (jsonMatch) parsed = JSON.parse(jsonMatch[0]);
+                } catch (e) {
+                    const cleaned = response.replace(/```json?\n?/g, '').replace(/```/g, '').trim();
+                    const m = cleaned.match(/\[[\s\S]*\]/);
+                    if (m) parsed = JSON.parse(m[0]);
+                }
+                aiGeneratedCandidates = Array.isArray(parsed) ? parsed : [];
+                renderCandidatesTable();
+                document.getElementById('candidatesSection').classList.remove('hidden');
+                document.getElementById('candidatesSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (aiGeneratedCandidates.length === 0) showToast('No candidates could be parsed. Try again or add more context.');
+            } catch (e) {
+                console.error('Generate candidates error:', e);
+                if (errEl) { errEl.textContent = e.message || 'Something went wrong. Try again.'; errEl.classList.remove('hidden'); }
+            } finally {
+                if (btn) btn.disabled = false;
+                if (btnText) btnText.classList.remove('hidden');
+                if (btnLoading) btnLoading.classList.add('hidden');
+            }
+        }
+
+        function renderCandidatesTable() {
+            const tbody = document.getElementById('candidatesTableBody');
+            const countEl = document.getElementById('candidatesCount');
+            if (!tbody) return;
+            countEl.textContent = aiGeneratedCandidates.length ? `(${aiGeneratedCandidates.length})` : '';
+            tbody.innerHTML = aiGeneratedCandidates.map(c => {
+                const score = c.score != null ? Number(c.score) : 0;
+                const scoreClass = score >= 90 ? 'high' : score >= 75 ? 'mid' : 'low';
+                const link = (c.linkedin_url || '').trim();
+                return '<tr><td>' + (c.rank || '') + '</td><td>' + escapeHtml(String(c.name || '')) + '</td><td>' + escapeHtml(String(c.title || '')) + '</td><td>' + escapeHtml(String(c.company || '')) + '</td><td>' + escapeHtml(String(c.location || '')) + '</td><td><span class="candidate-score ' + scoreClass + '">' + score + '</span></td><td>' + (link ? '<a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Profile</a>' : '—') + '</td></tr>';
+            }).join('');
+        }
+
+        function exportCandidatesCSV() {
+            if (!aiGeneratedCandidates.length) {
+                showToast('No candidates to export. Generate top candidates first.');
+                return;
+            }
+            const headers = ['Rank', 'Name', 'Title', 'Company', 'Location', 'Experience (yrs)', 'Score', 'Key Skills', 'Match Reasons', 'LinkedIn', 'Signals', 'Outreach Angle'];
+            const rows = aiGeneratedCandidates.map(c => [
+                c.rank, c.name, c.title, c.company, c.location, c.experience_years, c.score,
+                (c.key_skills || []).join('; '), (c.match_reasons || []).join('; '), c.linkedin_url || '', c.signals || '', c.reachout_angle || ''
+            ]);
+            const csv = [headers, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(',')).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'talent-scout-candidates-' + Date.now() + '.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Exported ' + aiGeneratedCandidates.length + ' candidates to CSV');
+        }
+
+        function sendCandidatesToSlack() {
+            if (!aiGeneratedCandidates.length) {
+                showToast('No candidates to send. Generate top candidates first.');
+                return;
+            }
+            if (typeof quick === 'undefined' || !quick.slack) {
+                showToast('Slack is available when the app is deployed on Quick.');
+                return;
+            }
+            const slackId = (quick.id && quick.id.slackId) || (quick.identity && quick.identity.slackId) || (quick.id && quick.id.userId);
+            if (!slackId) {
+                showToast('Could not find your Slack ID. Make sure you’re signed in on Quick.');
+                return;
+            }
+            try {
+                const top5 = aiGeneratedCandidates.slice(0, 5);
+                const table = top5.map((c, i) => [i + 1, c.name || '', c.title || '', c.company || '', (c.score != null ? c.score : '')]);
+                quick.slack.sendTable(slackId, 'Talent Scout – Top ' + top5.length + ' candidates', ['#', 'Name', 'Title', 'Company', 'Score'], table);
+                showToast('Sent top ' + top5.length + ' to your Slack DMs!');
+            } catch (e) {
+                showToast('Failed to send to Slack: ' + (e.message || e));
+            }
+        }
+
+        async function extractFromIntakeForm() {
+            const text = document.getElementById('intakePasteInput').value.trim();
+            if (!text || text.length < 30) {
+                alert('Paste intake form or role description text (at least a few sentences) to extract keywords.');
+                return;
+            }
+            const btn = document.getElementById('intakeExtractBtn');
+            const btnText = document.getElementById('intakeExtractBtnText');
+            const loadingEl = document.getElementById('intakeExtractLoading');
+            btn.disabled = true;
+            btnText.textContent = 'Extracting...';
+            loadingEl.classList.remove('hidden');
+            try {
+                if (typeof quick === 'undefined' || !quick.ai) {
+                    throw new Error('AI is only available when the app is deployed on Quick.');
+                }
+                const aiPrompt = `You are a recruiting sourcer. Below is text from a hiring intake form or role description. Extract search-ready fields for a boolean candidate search.
+
+Respond in this exact format (use the labels as shown):
+JOB_TITLE: [primary job title, e.g. Senior Software Engineer]
+INCLUDE_KEYWORDS: [comma-separated skills, technologies, keywords to include]
+EXCLUDE_KEYWORDS: [comma-separated terms to exclude, e.g. recruiter, HR, or "none"]
+BOOLEAN_QUERY: [a short boolean search snippet: key phrases in quotes, OR/AND, relevant tech. No site: operator. Under 300 characters.]
+
+Intake form / role description:
+${text.slice(0, 3500)}`;
+
+                const response = await quick.ai.ask(aiPrompt);
+                const jobTitleMatch = response.match(/JOB_TITLE:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const includeMatch = response.match(/INCLUDE_KEYWORDS:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const excludeMatch = response.match(/EXCLUDE_KEYWORDS:\s*(.+?)(?=\n[A-Z_]+:|$)/s);
+                const queryMatch = response.match(/BOOLEAN_QUERY:\s*(.+?)(?=\n|$)/s);
+
+                const jobTitle = jobTitleMatch ? jobTitleMatch[1].trim() : '';
+                const includeKeywords = includeMatch ? includeMatch[1].trim() : '';
+                let excludeKeywords = excludeMatch ? excludeMatch[1].trim() : '';
+                if (excludeKeywords.toLowerCase() === 'none') excludeKeywords = '';
+                const query = queryMatch ? queryMatch[1].trim() : '';
+
+                document.getElementById('jobTitle').value = jobTitle;
+                selectedIncludeKeywords = includeKeywords ? includeKeywords.split(',').map(s => s.trim()).filter(Boolean) : [];
+                selectedExcludeKeywords = excludeKeywords ? excludeKeywords.split(',').map(s => s.trim()).filter(Boolean) : [];
+                updateAcDisplay('includeKeywords');
+                updateAcDisplay('excludeKeywords');
+                if (jobTitle || selectedIncludeKeywords.length) generateSearch();
+                if (query) {
+                    currentQuery = (platformSites[currentPlatform] || platformSites['linkedin']) + ' ' + query;
+                    document.getElementById('queryText').value = currentQuery;
+                    document.getElementById('resultsSection').classList.remove('hidden');
+                    generateEmailTemplate();
+                    updateOpenButton();
+                }
+
+                const name = window.prompt('Save this extraction for later? Enter a name (e.g. "Backend Engineer - Q1") or Cancel to skip.', jobTitle || 'Intake extraction');
+                if (name != null && name.trim()) {
+                    saveIntakeExtraction({ id: 'id_' + Date.now(), name: name.trim(), jobTitle, includeKeywords, excludeKeywords, query, createdAt: new Date().toISOString() });
+                }
+            } catch (err) {
+                alert(err.message || 'Could not extract from intake. Try again.');
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Extract keywords & apply to search';
+                loadingEl.classList.add('hidden');
+            }
+        }
+
+        function toggleIntakeSection() {
+            document.getElementById('intakeContent').classList.toggle('open');
+            document.getElementById('intakeIcon').classList.toggle('open');
         }
 
         function copyProfileQuery(ev) {
@@ -3767,7 +4864,7 @@ No numbering, no extra explanation. Only lines in that format.`;
             } finally {
                 btn.disabled = false;
                 if (otherBtn) otherBtn.disabled = false;
-                btnText.textContent = 'Find similar tech stack companies';
+                btnText.textContent = 'Find similar companies';
                 loadingEl.classList.add('hidden');
             }
         }
@@ -3844,7 +4941,7 @@ No numbering, no extra explanation. Only lines in that format.`;
             } finally {
                 btn.disabled = false;
                 if (otherBtn) otherBtn.disabled = false;
-                btnText.textContent = 'Find companies using this tech';
+                btnText.textContent = 'Find companies';
                 loadingEl.classList.add('hidden');
             }
         }
@@ -3888,6 +4985,72 @@ No numbering, no extra explanation. Only lines in that format.`;
             document.getElementById('techStackIcon').classList.toggle('open');
         }
 
+        function togglePortfolioSection() {
+            document.getElementById('portfolioSimilarContent').classList.toggle('open');
+            document.getElementById('portfolioSimilarIcon').classList.toggle('open');
+        }
+
+        function toggleExperience() {
+            document.getElementById('experienceContent').classList.toggle('open');
+            document.getElementById('experienceIcon').classList.toggle('open');
+        }
+        function toggleEducation() {
+            document.getElementById('educationContent').classList.toggle('open');
+            document.getElementById('educationIcon').classList.toggle('open');
+        }
+
+        async function findSimilarPortfolios() {
+            const raw = document.getElementById('portfolioUrlsInput').value.trim();
+            const urls = raw.split(/\n/).map(s => s.trim()).filter(s => s.length > 0 && /^https?:\/\//i.test(s));
+            if (urls.length === 0) {
+                alert('Please paste at least one portfolio URL (e.g. Dribbble, Behance, or a personal site).');
+                return;
+            }
+            const btn = document.getElementById('portfolioSimilarBtn');
+            const btnText = document.getElementById('portfolioSimilarBtnText');
+            const loadingEl = document.getElementById('portfolioSimilarLoading');
+            const resultEl = document.getElementById('portfolioSimilarResult');
+            btn.disabled = true;
+            btnText.textContent = 'Finding...';
+            loadingEl.classList.remove('hidden');
+            resultEl.classList.add('hidden');
+            try {
+                const urlList = urls.join('\n');
+                const prompt = `You are helping recruiters find designer portfolios similar to people they've already hired.
+
+Portfolio URLs of designers we hired (we cannot fetch page content; use domain and path hints only):
+${urlList}
+
+From these URLs, infer the type of designers (e.g. product design, brand, motion, UI/UX) and portfolio platforms (Dribbble, Behance, etc.). Generate a single Google boolean search query to find similar designer portfolios. Use site: operators where useful (e.g. site:dribbble.com site:behance.net) and keywords for roles/skills. Keep the query concise and pasteable.
+
+Reply with ONLY the search query, no explanation or quotes.`;
+                const response = await quick.ai.ask(prompt);
+                const keywordQuery = (response || '').trim().replace(/^["']|["']$/g, '');
+                lastPortfolioKeywordQuery = keywordQuery;
+
+                const relatedParts = urls.map(u => `related:${u}`).filter(Boolean);
+                lastPortfolioRelatedQuery = relatedParts.join(' OR ');
+
+                document.getElementById('portfolioSimilarQuery').textContent = keywordQuery || '(no query generated)';
+                document.getElementById('portfolioRelatedQuery').textContent = lastPortfolioRelatedQuery || '';
+                resultEl.classList.remove('hidden');
+            } catch (e) {
+                console.error(e);
+                alert('Could not generate portfolio search. Check the console or try again.');
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Find similar portfolios';
+                loadingEl.classList.add('hidden');
+            }
+        }
+
+        function openPortfolioSearch(type) {
+            const query = type === 'related' ? lastPortfolioRelatedQuery : lastPortfolioKeywordQuery;
+            if (!query) return;
+            const encoded = encodeURIComponent(query);
+            window.open('https://www.google.com/search?q=' + encoded, '_blank', 'noopener');
+        }
+
         function updateSearchTips() {
             // Search Quality Tips section removed
         }
@@ -3901,9 +5064,10 @@ No numbering, no extra explanation. Only lines in that format.`;
             const template = templates[templateName];
             if (!template) return;
             document.getElementById('jobTitle').value = template.jobTitle || '';
-            document.getElementById('location').value = template.location || '';
-            document.getElementById('includeKeywords').value = template.includeKeywords || '';
-            document.getElementById('excludeKeywords').value = template.excludeKeywords || '';
+            selectedLocations = template.location ? [template.location] : [];
+            selectedIncludeKeywords = template.includeKeywords ? template.includeKeywords.split(',').map(s => s.trim()).filter(Boolean) : [];
+            selectedExcludeKeywords = template.excludeKeywords ? template.excludeKeywords.split(',').map(s => s.trim()).filter(Boolean) : [];
+            ['location', 'includeKeywords', 'excludeKeywords'].forEach(f => updateAcDisplay(f));
             updateSearchTips();
             const selectEl = document.getElementById('quickTemplatesSelect');
             if (selectEl) selectEl.value = templateName;
@@ -4075,24 +5239,26 @@ No numbering, no extra explanation. Only lines in that format.`;
 
         function buildQuery(platform) {
             const jobTitle = document.getElementById('jobTitle').value.trim();
-            const location = document.getElementById('location').value.trim();
-            const includeKeywords = document.getElementById('includeKeywords').value.trim();
-            const excludeKeywords = document.getElementById('excludeKeywords').value.trim();
             const skills = document.getElementById('skills').value.trim();
 
             // Special handling for GitHub to find developer profiles like Octohunt
             if (platform === 'github') {
+                const location = selectedLocations.length > 0 ? selectedLocations.join(' ') : '';
+                const includeKeywords = selectedIncludeKeywords.length > 0 ? selectedIncludeKeywords.join(',') : '';
+                const excludeKeywords = selectedExcludeKeywords.length > 0 ? selectedExcludeKeywords.join(',') : '';
                 return buildGitHubQuery(jobTitle, location, skills, includeKeywords, excludeKeywords);
             }
 
             let query = platformSites[platform] || platformSites['linkedin'];
 
-            if (jobTitle) {
+            // Use job title input and/or selected titles from dropdown (multiple titles always included)
+            if (jobTitle || selectedSimilarTitles.length > 0) {
                 let titles = [];
-                const baseTitle = jobTitle;
-                
-                // Apply seniority level prefixes
-                if (selectedSeniorityLevels.length > 0) {
+                const baseTitle = jobTitle || selectedSimilarTitles[0] || '';
+
+                if (jobTitle) {
+                    // Apply seniority level prefixes to the typed title
+                    if (selectedSeniorityLevels.length > 0) {
                     selectedSeniorityLevels.forEach(level => {
                         const prefixes = seniorityPrefixes[level] || [];
                         // Add the base title with seniority prefixes
@@ -4152,6 +5318,9 @@ No numbering, no extra explanation. Only lines in that format.`;
                         });
                     }
                 }
+                }
+
+                // Always add every title from the dropdown (selected chips) — works with or without "Include similar"
                 selectedSimilarTitles.forEach(title => { if (!titles.includes(`"${title}"`)) titles.push(`"${title}"`); });
                 
                 // Deduplicate titles
@@ -4159,7 +5328,10 @@ No numbering, no extra explanation. Only lines in that format.`;
                 query += ' (' + titles.join(' OR ') + ')';
             }
 
-            if (location) query += ` "${location}"`;
+            if (selectedLocations.length > 0) {
+                const locTerms = selectedLocations.map(l => `"${l}"`).join(' OR ');
+                query += ` (${locTerms})`;
+            }
 
             // Handle multiple countries from multi-select dropdown (all platforms)
             const countrySelect = document.getElementById('country');
@@ -4175,16 +5347,59 @@ No numbering, no extra explanation. Only lines in that format.`;
                 }
             }
 
-            if (platform === 'linkedin') {
-                const currentEmployer = document.getElementById('currentEmployer').value.trim();
-                if (currentEmployer) {
-                    const employers = currentEmployer.split(',').map(e => `"${e.trim()}"`).join(' OR ');
+            if (platform === 'linkedin' || platform === 'reddit') {
+                if (selectedEmployers.length > 0) {
+                    const employers = selectedEmployers.map(e => `"${e}"`).join(' OR ');
                     query += ` (${employers})`;
                 }
-                const education = document.getElementById('education').value.trim();
-                if (education === 'bachelor') query += ` ("Bachelor" OR "B.S." OR "B.A." OR "BEng" OR "undergraduate degree")`;
-                if (education === 'master') query += ` ("Master" OR "M.S." OR "M.A." OR "MBA" OR "graduate degree")`;
-                if (education === 'phd') query += ` ("PhD" OR "Ph.D." OR "doctorate")`;
+                if (selectedEducationLevels.length > 0) {
+                    const eduSet = new Set();
+                    selectedEducationLevels.forEach(ed => {
+                        const lower = (ed || '').toLowerCase();
+                        if (lower.includes('bachelor') || lower.includes('b.s.') || lower.includes('b.a.') || lower.includes('beng')) {
+                            ['Bachelor', 'B.S.', 'B.A.', 'BEng', 'undergraduate degree'].forEach(t => eduSet.add(t));
+                        } else if (lower.includes('master') || lower.includes('m.s.') || lower.includes('m.a.') || lower.includes('mba')) {
+                            ['Master', 'M.S.', 'M.A.', 'MBA', 'graduate degree'].forEach(t => eduSet.add(t));
+                        } else if (lower.includes('phd') || lower.includes('doctor')) {
+                            ['PhD', 'Ph.D.', 'doctorate'].forEach(t => eduSet.add(t));
+                        } else eduSet.add(ed);
+                    });
+                    if (eduSet.size) query += ' (' + [...eduSet].map(t => `"${t}"`).join(' OR ') + ')';
+                }
+            }
+
+            // LinkedIn Recruiter–style fields (skills, qualifications, education & experience)
+            if (platform === 'linkedin') {
+                if (selectedSkills.length > 0) {
+                    const terms = selectedSkills.map(k => `"${k}"`).join(' ');
+                    query += ` ${terms}`;
+                }
+                if (selectedQualifications.length > 0) {
+                    selectedQualifications.forEach(q => { query += ` "${q}"`; });
+                }
+                const yearsPosition = document.getElementById('yearsCurrentPosition') && document.getElementById('yearsCurrentPosition').value.trim();
+                if (yearsPosition) query += ` "${yearsPosition} years"`;
+                const yearsExp = document.getElementById('yearsExperience') && document.getElementById('yearsExperience').value.trim();
+                if (yearsExp) query += ` "${yearsExp} years"`;
+                const yearsCompany = document.getElementById('yearsCurrentCompany') && document.getElementById('yearsCurrentCompany').value.trim();
+                if (yearsCompany) query += ` "${yearsCompany} years"`;
+                const industriesEl = document.getElementById('industries');
+                if (industriesEl && industriesEl.value.trim()) {
+                    const terms = industriesEl.value.trim().split(/[,;]/).map(t => `"${t.trim()}"`).filter(Boolean);
+                    if (terms.length) query += ' (' + terms.join(' OR ') + ')';
+                }
+                const schoolsEl = document.getElementById('schools');
+                if (schoolsEl && schoolsEl.value.trim()) {
+                    const terms = schoolsEl.value.trim().split(/[,;]/).map(t => `"${t.trim()}"`).filter(Boolean);
+                    if (terms.length) query += ' (' + terms.join(' OR ') + ')';
+                }
+                const fieldsEl = document.getElementById('fieldsOfStudy');
+                if (fieldsEl && fieldsEl.value.trim()) {
+                    const terms = fieldsEl.value.trim().split(/[,;]/).map(t => `"${t.trim()}"`).filter(Boolean);
+                    if (terms.length) query += ' (' + terms.join(' OR ') + ')';
+                }
+                const gradYearEl = document.getElementById('graduationYear');
+                if (gradYearEl && gradYearEl.value.trim()) query += ` "${gradYearEl.value.trim()}"`;
             }
 
             // Add selected companies (from Target Companies)
@@ -4193,8 +5408,8 @@ No numbering, no extra explanation. Only lines in that format.`;
                 query += ` (${companyQuery})`;
             }
 
-            if (includeKeywords) {
-                const keywords = includeKeywords.split(',').map(k => `"${k.trim()}"`).join(' ');
+            if (selectedIncludeKeywords.length > 0) {
+                const keywords = selectedIncludeKeywords.map(k => `"${k}"`).join(' ');
                 query += ` ${keywords}`;
             }
 
@@ -4211,8 +5426,8 @@ No numbering, no extra explanation. Only lines in that format.`;
                 query += ` (${diversityQuery})`;
             }
 
-            if (excludeKeywords) {
-                const exclusions = excludeKeywords.split(',').map(k => `-"${k.trim()}"`).join(' ');
+            if (selectedExcludeKeywords.length > 0) {
+                const exclusions = selectedExcludeKeywords.map(k => `-"${k}"`).join(' ');
                 query += ` ${exclusions}`;
             }
 
@@ -4499,9 +5714,178 @@ Write only the email, no explanations or subject lines.`;
             });
         }
 
-        function getAISuggestions() {
-            const jobTitle = document.getElementById('jobTitle').value.trim().toLowerCase();
+        function onJobTitleInput() {
+            updateSearchTips();
+            const val = document.getElementById('jobTitle').value.trim().toLowerCase();
+            const dropdown = document.getElementById('jobTitleDropdown');
+            if (!val) {
+                dropdown.classList.remove('show');
+                return;
+            }
+            const filtered = jobTitleSuggestionsList.filter(t => t.toLowerCase().includes(val)).slice(0, 12);
+            dropdown.innerHTML = filtered.map(t => `<li role="option" tabindex="-1" data-title="${t.replace(/"/g, '&quot;')}">${escapeHtml(t)}</li>`).join('');
+            if (filtered.length) {
+                dropdown.classList.add('show');
+                dropdown.querySelectorAll('li').forEach((li, i) => {
+                    li.addEventListener('click', () => selectJobTitleSuggestion(li.getAttribute('data-title').replace(/&quot;/g, '"')));
+                });
+            } else {
+                dropdown.classList.remove('show');
+            }
+        }
+
+        function onJobTitleFocus() {
+            const val = document.getElementById('jobTitle').value.trim().toLowerCase();
+            if (val) onJobTitleInput();
+        }
+
+        function onJobTitleKeydown(e) {
+            const dropdown = document.getElementById('jobTitleDropdown');
+            if (!dropdown.classList.contains('show')) return;
+            const items = dropdown.querySelectorAll('li');
+            if (e.key === 'Escape') { dropdown.classList.remove('show'); return; }
+            if (e.key === 'ArrowDown' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) + 1 : 0;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'ArrowUp' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) - 1 : items.length - 1;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const first = items[0];
+                if (cur) selectJobTitleSuggestion(cur.getAttribute('data-title').replace(/&quot;/g, '"'));
+                else if (first) selectJobTitleSuggestion(first.getAttribute('data-title').replace(/&quot;/g, '"'));
+                else {
+                    const raw = document.getElementById('jobTitle').value.trim();
+                    if (raw) selectJobTitleSuggestion(raw);
+                }
+            }
+        }
+
+        function selectJobTitleSuggestion(title) {
+            if (!selectedSimilarTitles.includes(title)) {
+                selectedSimilarTitles.push(title);
+                updateSelectedTitles();
+            }
+            document.getElementById('jobTitle').value = title;
+            document.getElementById('jobTitleDropdown').classList.remove('show');
+            if (currentQuery) generateSearch();
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrap = document.querySelector('.job-title-autocomplete-wrap');
+            if (wrap && !wrap.contains(e.target)) document.getElementById('jobTitleDropdown').classList.remove('show');
+        });
+
+        function escapeAttr(str) {
+            return (str || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        }
+
+        function renderSuggestionChips(containerId, items, type) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            if (!items || items.length === 0) {
+                el.innerHTML = '<span style="color: var(--text-secondary); font-size: 12px;">None suggested.</span>';
+                return;
+            }
+            const typeAttr = type === 'title' ? 'title' : type === 'qual' ? 'qual' : 'skill';
+            el.innerHTML = items.map(s => {
+                const val = (s || '').trim();
+                if (!val) return '';
+                const safe = escapeAttr(val);
+                return `<button type="button" class="suggestion-chip" data-suggestion-type="${typeAttr}" data-value="${safe}">${escapeHtml(val)}</button>`;
+            }).join('');
+            el.querySelectorAll('.suggestion-chip').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const value = (this.getAttribute('data-value') || '').replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<');
+                    addSuggestionFromEl(value, this.getAttribute('data-suggestion-type'));
+                });
+            });
+        }
+
+        function addSuggestionFromEl(value, type) {
+            if (!value) return;
+            if (type === 'title') {
+                if (!selectedSimilarTitles.includes(value)) {
+                    selectedSimilarTitles.push(value);
+                    updateSelectedTitles();
+                }
+            } else if (type === 'qual') {
+                if (!selectedQualifications.includes(value)) {
+                    selectedQualifications.push(value);
+                    updateAcDisplay('qualifications');
+                }
+            } else if (type === 'skill') {
+                if (!selectedSkills.includes(value)) {
+                    selectedSkills.push(value);
+                    updateSelectedSkills();
+                }
+            }
+            if (currentQuery) generateSearch();
+        }
+
+        async function getAISuggestions() {
+            const jobTitleInput = document.getElementById('jobTitle').value.trim();
+            const jobTitle = jobTitleInput.toLowerCase();
             if (!jobTitle) { alert('Please enter a job title first.'); return; }
+            const btn = document.getElementById('aiSuggest');
+            const panel = document.getElementById('suggestionsPanel');
+            if (btn) { btn.classList.add('loading'); btn.disabled = true; }
+
+            let titleSuggestions = [];
+            let qualSuggestions = [];
+            let skillSuggestions = [];
+
+            if (typeof quick !== 'undefined' && quick.ai) {
+                try {
+                    const prompt = `You are a recruiting sourcer. For the job title "${jobTitleInput}", suggest search terms in three categories. Reply in this exact format (comma-separated, no numbering):
+SIMILAR_TITLES: [5-8 alternative or related job titles people might have]
+QUALIFICATIONS: [5-8 certifications, credentials, or qualifications e.g. PMP, CPA, AWS Certified, years experience]
+SKILLS: [5-10 skills or assessment areas e.g. Python, Leadership, System design, Agile]
+
+Job title: ${jobTitleInput}`;
+                    const response = await quick.ai.ask(prompt);
+                    const titleMatch = response.match(/SIMILAR_TITLES?:\s*([^\n]+)/i);
+                    const qualMatch = response.match(/QUALIFICATIONS?:\s*([^\n]+)/i);
+                    const skillMatch = response.match(/SKILLS?:\s*([^\n]+)/i);
+                    if (titleMatch) titleSuggestions = titleMatch[1].split(',').map(s => s.trim()).filter(Boolean);
+                    if (qualMatch) qualSuggestions = qualMatch[1].split(',').map(s => s.trim()).filter(Boolean);
+                    if (skillMatch) skillSuggestions = skillMatch[1].split(',').map(s => s.trim()).filter(Boolean);
+                } catch (e) {
+                    console.error('AI suggestions error:', e);
+                    titleSuggestions = getFallbackTitleSuggestions(jobTitle);
+                    qualSuggestions = getFallbackQualSuggestions(jobTitle);
+                    skillSuggestions = getFallbackSkillSuggestions(jobTitle);
+                }
+            } else {
+                titleSuggestions = getFallbackTitleSuggestions(jobTitle);
+                qualSuggestions = getFallbackQualSuggestions(jobTitle);
+                skillSuggestions = getFallbackSkillSuggestions(jobTitle);
+            }
+
+            titleSuggestions = [...new Set(titleSuggestions)].filter(s => s.toLowerCase() !== jobTitle);
+            qualSuggestions = [...new Set(qualSuggestions)];
+            skillSuggestions = [...new Set(skillSuggestions)];
+
+            renderSuggestionChips('suggestionChips', titleSuggestions, 'title');
+            renderSuggestionChips('suggestionQualChips', qualSuggestions, 'qual');
+            renderSuggestionChips('suggestionSkillChips', skillSuggestions, 'skill');
+
+            panel.classList.remove('hidden');
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (btn) { btn.classList.remove('loading'); btn.disabled = false; }
+        }
+
+        function getFallbackTitleSuggestions(jobTitle) {
             let suggestions = [];
             for (const [key, synonyms] of Object.entries(jobTitleSynonyms)) {
                 if (jobTitle.includes(key) || synonyms.some(s => jobTitle.includes(s))) {
@@ -4518,15 +5902,27 @@ Write only the email, no explanations or subject lines.`;
                 else if (jobTitle.includes('analyst')) suggestions = ['business analyst', 'data analyst', 'product analyst', 'systems analyst'];
                 else suggestions = ['senior ' + jobTitle, 'lead ' + jobTitle, 'staff ' + jobTitle, 'principal ' + jobTitle];
             }
-            suggestions = [...new Set(suggestions)].filter(s => s.toLowerCase() !== jobTitle);
-            const panel = document.getElementById('suggestionsPanel');
-            if (suggestions.length > 0) {
-                document.getElementById('suggestionChips').innerHTML = suggestions.map(s => `<button class="suggestion-chip" onclick="addSuggestion('${s}')">${s}</button>`).join('');
-            } else {
-                document.getElementById('suggestionChips').innerHTML = '<span style="color: var(--text-secondary); font-size: 13px;">No suggestions available for this title.</span>';
-            }
-            panel.classList.remove('hidden');
-            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return [...new Set(suggestions)].filter(s => s.toLowerCase() !== jobTitle);
+        }
+
+        function getFallbackQualSuggestions(jobTitle) {
+            const all = acSuggestions.qualifications || [];
+            const roleBased = [];
+            if (jobTitle.includes('engineer') || jobTitle.includes('developer')) roleBased.push('PMP', 'Technical leadership', '5+ years experience', 'Scaled systems', 'Open source contributor');
+            else if (jobTitle.includes('manager')) roleBased.push('PMP', 'PMP certified', 'Leadership experience', 'Cross-functional', '10+ years');
+            else if (jobTitle.includes('design')) roleBased.push('Leadership experience', 'Cross-functional', 'Public speaking', 'Design systems');
+            else if (jobTitle.includes('data')) roleBased.push('5+ years experience', 'Technical leadership', 'Data analysis', 'Public speaking');
+            return [...new Set([...roleBased, ...all.slice(0, 6)])].slice(0, 10);
+        }
+
+        function getFallbackSkillSuggestions(jobTitle) {
+            const all = skillSuggestionsList || [];
+            const roleBased = [];
+            if (jobTitle.includes('engineer') || jobTitle.includes('developer')) roleBased.push('Python', 'System design', 'API design', 'Microservices', 'Leadership', 'Agile');
+            else if (jobTitle.includes('manager')) roleBased.push('Agile', 'Scrum', 'Product management', 'Leadership', 'Cross-functional', 'Mentorship');
+            else if (jobTitle.includes('design')) roleBased.push('Figma', 'User research', 'Design systems', 'UX design', 'UI design');
+            else if (jobTitle.includes('data')) roleBased.push('Python', 'SQL', 'Data analysis', 'A/B testing', 'Machine learning');
+            return [...new Set([...roleBased, ...all.slice(0, 8)])].slice(0, 12);
         }
 
         function addSuggestion(title) {
@@ -4542,7 +5938,10 @@ Write only the email, no explanations or subject lines.`;
             const chipsEl = document.getElementById('selectedTitles');
             if (selectedSimilarTitles.length > 0) {
                 container.classList.remove('hidden');
-                chipsEl.innerHTML = selectedSimilarTitles.map(title => `<span class="chip selected">${title}<span class="remove" onclick="removeSimilarTitle('${title}')">×</span></span>`).join('');
+                chipsEl.innerHTML = selectedSimilarTitles.map(title => {
+                    const safeAttr = (title || '').replace(/"/g, '&quot;');
+                    return `<span class="chip selected">${escapeHtml(title)}<span class="remove" onclick="removeSimilarTitleFromEl(this)" data-title="${safeAttr}">×</span></span>`;
+                }).join('');
             } else {
                 container.classList.add('hidden');
             }
@@ -4552,6 +5951,204 @@ Write only the email, no explanations or subject lines.`;
             selectedSimilarTitles = selectedSimilarTitles.filter(t => t !== title);
             updateSelectedTitles();
             if (currentQuery) generateSearch();
+        }
+
+        function removeSimilarTitleFromEl(el) {
+            const title = el.getAttribute('data-title');
+            if (title != null) removeSimilarTitle(title);
+        }
+
+        function onSkillsInput() {
+            const val = document.getElementById('linkedinSkillsInput').value.trim().toLowerCase();
+            const dropdown = document.getElementById('skillsDropdown');
+            if (!val) {
+                dropdown.classList.remove('show');
+                return;
+            }
+            const filtered = skillSuggestionsList.filter(s => s.toLowerCase().includes(val)).slice(0, 12);
+            dropdown.innerHTML = filtered.map(s => `<li role="option" tabindex="-1" data-skill="${(s || '').replace(/"/g, '&quot;')}">${escapeHtml(s)}</li>`).join('');
+            if (filtered.length) {
+                dropdown.classList.add('show');
+                dropdown.querySelectorAll('li').forEach(li => {
+                    li.addEventListener('click', () => selectSkillSuggestion(li.getAttribute('data-skill').replace(/&quot;/g, '"')));
+                });
+            } else {
+                dropdown.classList.remove('show');
+            }
+        }
+
+        function onSkillsFocus() {
+            const val = document.getElementById('linkedinSkillsInput').value.trim().toLowerCase();
+            if (val) onSkillsInput();
+        }
+
+        function onSkillsKeydown(e) {
+            const dropdown = document.getElementById('skillsDropdown');
+            if (!dropdown.classList.contains('show')) return;
+            const items = dropdown.querySelectorAll('li');
+            if (e.key === 'Escape') { dropdown.classList.remove('show'); return; }
+            if (e.key === 'ArrowDown' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) + 1 : 0;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'ArrowUp' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) - 1 : items.length - 1;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const first = items[0];
+                if (cur) selectSkillSuggestion(cur.getAttribute('data-skill').replace(/&quot;/g, '"'));
+                else if (first) selectSkillSuggestion(first.getAttribute('data-skill').replace(/&quot;/g, '"'));
+                else {
+                    const raw = document.getElementById('linkedinSkillsInput').value.trim();
+                    if (raw) selectSkillSuggestion(raw);
+                }
+            }
+        }
+
+        function selectSkillSuggestion(skill) {
+            if (!skill) return;
+            if (!selectedSkills.includes(skill)) {
+                selectedSkills.push(skill);
+                updateSelectedSkills();
+            }
+            document.getElementById('linkedinSkillsInput').value = '';
+            document.getElementById('skillsDropdown').classList.remove('show');
+            if (currentQuery) generateSearch();
+        }
+
+        function updateSelectedSkills() {
+            const container = document.getElementById('similarSkillsContainer');
+            const chipsEl = document.getElementById('selectedSkills');
+            if (selectedSkills.length > 0 && currentPlatform === 'linkedin') {
+                container.classList.remove('hidden');
+                chipsEl.innerHTML = selectedSkills.map(skill => {
+                    const safeAttr = (skill || '').replace(/"/g, '&quot;');
+                    return `<span class="chip selected">${escapeHtml(skill)}<span class="remove" onclick="removeSkillFromEl(this)" data-skill="${safeAttr}">×</span></span>`;
+                }).join('');
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+
+        function removeSkill(skill) {
+            selectedSkills = selectedSkills.filter(s => s !== skill);
+            updateSelectedSkills();
+            if (currentQuery) generateSearch();
+        }
+
+        function removeSkillFromEl(el) {
+            const skill = el.getAttribute('data-skill');
+            if (skill != null) removeSkill(skill);
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrap = document.querySelector('.skills-autocomplete-wrap');
+            if (wrap && !wrap.contains(e.target)) document.getElementById('skillsDropdown').classList.remove('show');
+            document.querySelectorAll('[id$="Dropdown"]').forEach(el => { if (el.id !== 'jobTitleDropdown' && el.id !== 'skillsDropdown') el.classList.remove('show'); });
+        });
+
+        function onAcInput(field) {
+            currentAcField = field;
+            const cfg = acFieldConfig[field];
+            const list = acSuggestions[field] || [];
+            const val = document.getElementById(cfg.inputId).value.trim().toLowerCase();
+            const dropdown = document.getElementById(cfg.dropdownId);
+            if (!val) { dropdown.classList.remove('show'); return; }
+            const filtered = list.filter(s => (s || '').toLowerCase().includes(val)).slice(0, 12);
+            const attr = field === 'excludeKeywords' ? 'data-ac-val' : 'data-ac-val';
+            dropdown.innerHTML = filtered.map(s => `<li role="option" tabindex="-1" data-ac-val="${(s || '').replace(/"/g, '&quot;')}">${escapeHtml(s)}</li>`).join('');
+            if (filtered.length) {
+                dropdown.classList.add('show');
+                dropdown.querySelectorAll('li').forEach(li => {
+                    li.addEventListener('click', () => selectAcSuggestion(field, (li.getAttribute('data-ac-val') || '').replace(/&quot;/g, '"')));
+                });
+            } else dropdown.classList.remove('show');
+        }
+
+        function onAcFocus(field) {
+            currentAcField = field;
+            const cfg = acFieldConfig[field];
+            const val = document.getElementById(cfg.inputId).value.trim().toLowerCase();
+            if (val) onAcInput(field);
+        }
+
+        function onAcKeydown(field, e) {
+            const cfg = acFieldConfig[field];
+            const dropdown = document.getElementById(cfg.dropdownId);
+            if (!dropdown.classList.contains('show')) return;
+            const items = dropdown.querySelectorAll('li');
+            if (e.key === 'Escape') { dropdown.classList.remove('show'); return; }
+            if (e.key === 'ArrowDown' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) + 1 : 0;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'ArrowUp' && items.length) {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const idx = cur ? [...items].indexOf(cur) - 1 : items.length - 1;
+                items.forEach((el, i) => el.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+                if (items[idx]) items[idx].focus();
+            }
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const cur = dropdown.querySelector('li[aria-selected="true"]');
+                const first = items[0];
+                if (cur) selectAcSuggestion(field, (cur.getAttribute('data-ac-val') || '').replace(/&quot;/g, '"'));
+                else if (first) selectAcSuggestion(field, (first.getAttribute('data-ac-val') || '').replace(/&quot;/g, '"'));
+                else {
+                    const input = document.getElementById(cfg.inputId);
+                    const raw = input.value.trim();
+                    if (raw) selectAcSuggestion(field, raw);
+                }
+            }
+        }
+
+        function selectAcSuggestion(field, value) {
+            if (!value) return;
+            const arr = getAcSelected(field);
+            if (!arr.includes(value)) { arr.push(value); updateAcDisplay(field); }
+            const cfg = acFieldConfig[field];
+            document.getElementById(cfg.inputId).value = '';
+            document.getElementById(cfg.dropdownId).classList.remove('show');
+            if (currentQuery) generateSearch();
+        }
+
+        function updateAcDisplay(field) {
+            const cfg = acFieldConfig[field];
+            const arr = getAcSelected(field);
+            const container = document.getElementById(cfg.containerId);
+            const chipsEl = document.getElementById(cfg.chipsId);
+            if (arr.length > 0) {
+                container.classList.remove('hidden');
+                chipsEl.innerHTML = arr.map(val => {
+                    const safe = (val || '').replace(/"/g, '&quot;');
+                    return `<span class="chip selected">${escapeHtml(val)}<span class="remove" onclick="removeAcValueFromEl('${field}', this)" data-ac-val="${safe}">×</span></span>`;
+                }).join('');
+            } else container.classList.add('hidden');
+        }
+
+        function removeAcValue(field, value) {
+            const arr = getAcSelected(field);
+            const idx = arr.indexOf(value);
+            if (idx !== -1) { arr.splice(idx, 1); updateAcDisplay(field); }
+            if (currentQuery) generateSearch();
+        }
+
+        function removeAcValueFromEl(field, el) {
+            const val = (el.getAttribute('data-ac-val') || '').replace(/&quot;/g, '"');
+            removeAcValue(field, val);
         }
 
         function clearForm() {
@@ -4591,6 +6188,15 @@ Write only the email, no explanations or subject lines.`;
             updateSelectedCompaniesDisplay();
             selectedSimilarTitles = [];
             updateSelectedTitles();
+            selectedSkills = [];
+            updateSelectedSkills();
+            selectedLocations = [];
+            selectedEmployers = [];
+            selectedEducationLevels = [];
+            selectedQualifications = [];
+            selectedIncludeKeywords = [];
+            selectedExcludeKeywords = [];
+            ['location', 'currentEmployer', 'education', 'qualifications', 'includeKeywords', 'excludeKeywords'].forEach(f => updateAcDisplay(f));
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('emailSection').classList.add('hidden');
             document.getElementById('aiEmailOptions').classList.add('hidden');
@@ -4620,15 +6226,16 @@ Write only the email, no explanations or subject lines.`;
                 // Save all form fields for restoration
                 formData: {
                     jobTitle: document.getElementById('jobTitle').value.trim(),
-                    location: document.getElementById('location').value.trim(),
+                    selectedLocations: [...selectedLocations],
                     selectedCountries: Array.from(document.getElementById('country').selectedOptions).map(opt => opt.value),
-                    currentEmployer: document.getElementById('currentEmployer').value.trim(),
-                    education: document.getElementById('education').value.trim(),
+                    selectedEmployers: [...selectedEmployers],
+                    selectedEducationLevels: [...selectedEducationLevels],
+                    selectedQualifications: [...selectedQualifications],
+                    selectedIncludeKeywords: [...selectedIncludeKeywords],
+                    selectedExcludeKeywords: [...selectedExcludeKeywords],
                     skills: document.getElementById('skills').value.trim(),
                     tags: document.getElementById('tags').value.trim(),
                     bio: document.getElementById('bio').value.trim(),
-                    includeKeywords: document.getElementById('includeKeywords').value.trim(),
-                    excludeKeywords: document.getElementById('excludeKeywords').value.trim(),
                     includeSimilar: document.getElementById('includeSimilar').checked,
                     selectedCompanies: [...selectedCompanies],
                     selectedSimilarTitles: [...selectedSimilarTitles],
@@ -4685,7 +6292,7 @@ Write only the email, no explanations or subject lines.`;
         }
 
         function getPlatformIcon(platform) {
-            const icons = { linkedin: '🔗', github: '🐙', stackoverflow: '📚', twitter: '🐦', scholar: '🎓', dribbble: '🏀', behance: '🎨', kaggle: '📊', wellfound: '🚀', substack: '📝', devto: '💻', producthunt: '🔶', polywork: '◇', bluesky: '🦋', quora: '❓', speakerdeck: '📽️' };
+            const icons = { linkedin: '🔗', reddit: '🤖', github: '🐙', stackoverflow: '📚', twitter: '🐦', scholar: '🎓', dribbble: '🏀', behance: '🎨', kaggle: '📊', wellfound: '🚀', substack: '📝', devto: '💻', producthunt: '🔶', polywork: '◇', bluesky: '🦋', quora: '❓', speakerdeck: '📽️', gitlab: '🦊', bitbucket: '🪣', codepen: '🖊️', stackexchange: '📋', hackernews: '🟠', hashnode: '📘', hired: '💼', dice: '🎲', indeed: '📄', glassdoor: '🚪', levelsfyi: '📊', otta: '○', indiehackers: '🛠️', meetup: '👥', eventbrite: '🎫', twitch: '🎮', youtube: '▶️', mastodon: '🐘', leetcode: '📝', hackerrank: '✔️', womenwhocode: '👩‍💻', sourceforge: '🔧' };
             return icons[platform] || '🔍';
         }
 
@@ -4698,14 +6305,16 @@ Write only the email, no explanations or subject lines.`;
                 // Restore form fields if we have them
                 if (search.formData) {
                     document.getElementById('jobTitle').value = search.formData.jobTitle || '';
-                    document.getElementById('location').value = search.formData.location || '';
-                    document.getElementById('currentEmployer').value = search.formData.currentEmployer || '';
-                    document.getElementById('education').value = search.formData.education || '';
+                    selectedLocations = Array.isArray(search.formData.selectedLocations) ? [...search.formData.selectedLocations] : (search.formData.location ? [search.formData.location] : []);
+                    selectedEmployers = Array.isArray(search.formData.selectedEmployers) ? [...search.formData.selectedEmployers] : (search.formData.currentEmployer ? [search.formData.currentEmployer] : []);
+                    selectedEducationLevels = Array.isArray(search.formData.selectedEducationLevels) ? [...search.formData.selectedEducationLevels] : (search.formData.education ? [search.formData.education] : []);
+                    selectedQualifications = Array.isArray(search.formData.selectedQualifications) ? [...search.formData.selectedQualifications] : [];
+                    selectedIncludeKeywords = Array.isArray(search.formData.selectedIncludeKeywords) ? [...search.formData.selectedIncludeKeywords] : (search.formData.includeKeywords ? search.formData.includeKeywords.split(',').map(s => s.trim()).filter(Boolean) : []);
+                    selectedExcludeKeywords = Array.isArray(search.formData.selectedExcludeKeywords) ? [...search.formData.selectedExcludeKeywords] : (search.formData.excludeKeywords ? search.formData.excludeKeywords.split(',').map(s => s.trim()).filter(Boolean) : []);
+                    ['location', 'currentEmployer', 'education', 'qualifications', 'includeKeywords', 'excludeKeywords'].forEach(f => updateAcDisplay(f));
                     document.getElementById('skills').value = search.formData.skills || '';
                     document.getElementById('tags').value = search.formData.tags || '';
                     document.getElementById('bio').value = search.formData.bio || '';
-                    document.getElementById('includeKeywords').value = search.formData.includeKeywords || '';
-                    document.getElementById('excludeKeywords').value = search.formData.excludeKeywords || '';
                     document.getElementById('includeSimilar').checked = search.formData.includeSimilar !== false;
                     
                     // Restore selected countries
